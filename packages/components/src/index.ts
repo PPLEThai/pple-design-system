@@ -123,6 +123,7 @@ export { Toaster } from "./components/ui/sonner";
 export { showToast, toast, type ShowToastOptions, type ToastVariant } from "./components/ui/toast";
 export { Skeleton } from "./components/ui/skeleton";
 export { Progress } from "./components/ui/progress";
+export { Spinner, spinnerVariants, type SpinnerProps } from "./components/ui/spinner";
 export {
   Breadcrumb,
   BreadcrumbEllipsis,

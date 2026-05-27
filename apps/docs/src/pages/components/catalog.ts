@@ -51,6 +51,7 @@ export const componentCatalog: ComponentGroup[] = [
       { slug: "alert", label: "Alert", summary: "ข้อความสถานะคงที่" },
       { slug: "badge", label: "Badge", summary: "ป้ายสถานะขนาดเล็ก" },
       { slug: "progress", label: "Progress", summary: "แถบแสดงความคืบหน้า" },
+      { slug: "spinner", label: "Spinner", summary: "ตัวหมุนแสดงสถานะกำลังโหลด" },
       { slug: "skeleton", label: "Skeleton", summary: "พื้นที่โหลดข้อมูล" },
       { slug: "sonner", label: "Toast (Sonner)", summary: "แจ้งเตือนชั่วคราว" },
     ],

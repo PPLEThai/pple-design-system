@@ -19,6 +19,7 @@ import {
 import { Logo } from "./components/logo";
 import { getNavbarVariant, Navbar } from "./components/navbar";
 import { Stack } from "./components/layout/stack";
+import { Spinner } from "./components/ui/spinner";
 
 describe("@pplethai/components", () => {
   it("renders Button", () => {
@@ -83,6 +84,24 @@ describe("@pplethai/components", () => {
     );
     expect(screen.getByRole("heading", { name: /design system/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /tokens/i })).toHaveAttribute("aria-current", "page");
+  });
+
+  it("renders Spinner as indeterminate by default", () => {
+    render(<Spinner data-testid="spinner" />);
+    const spinner = screen.getByTestId("spinner");
+    expect(spinner).toHaveAttribute("role", "status");
+    expect(spinner).toHaveAttribute("aria-label", "Loading");
+    expect(spinner).not.toHaveAttribute("aria-valuenow");
+    expect(spinner.querySelector("svg")?.className.baseVal).toContain("animate-spin");
+  });
+
+  it("renders Spinner as determinate when value is provided", () => {
+    render(<Spinner data-testid="spinner" value={42} label="Uploading" />);
+    const spinner = screen.getByTestId("spinner");
+    expect(spinner).toHaveAttribute("aria-valuenow", "42");
+    expect(spinner).toHaveAttribute("aria-valuemax", "100");
+    expect(spinner).toHaveAttribute("aria-label", "Uploading");
+    expect(spinner.querySelector("svg")?.className.baseVal).not.toContain("animate-spin");
   });
 
   it("renders Stack layout", () => {
