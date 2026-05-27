@@ -1,6 +1,6 @@
 {
   "name": "@pplethai/components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "People's Party design system — React components built on shadcn/ui",
   "license": "MIT",
   "repository": {
