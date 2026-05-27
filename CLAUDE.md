@@ -71,5 +71,5 @@ Vite + React Router v7 SPA. Imports `@pplethai/components` via `workspace:*` (us
 
 ## Publishing & CI
 
-- Releases use [Changesets](https://github.com/changesets/changesets). Requires `NPM_TOKEN` in GitHub secrets.
+- Releases use [Changesets](https://github.com/changesets/changesets) with [npm trusted publishing](https://docs.npmjs.com/trusted-publishers/) from `release.yml` (OIDC; configure the trusted publisher on npm for `PPLEThai/pple-design-system` / `release.yml`).
 - Docs are deployed to Cloudflare Pages via a manual GitHub Actions workflow (`CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_PAGES_PROJECT_NAME` secrets required).

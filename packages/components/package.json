@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "People's Party design system — React components built on shadcn/ui",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PPLEThai/pple-design-system.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "type": "module",
   "sideEffects": [
     "**/*.css"

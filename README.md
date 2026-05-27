@@ -48,7 +48,20 @@ Headings use **Anakotmai** (medium only) from the party CDN. Body uses **IBM Ple
 
 ## Publishing
 
-Uses [Changesets](https://github.com/changesets/changesets). Configure `NPM_TOKEN` in GitHub secrets for releases.
+Uses [Changesets](https://github.com/changesets/changesets). Releases run from [`.github/workflows/release.yml`](./.github/workflows/release.yml) via [npm trusted publishing](https://docs.npmjs.com/trusted-publishers/) (GitHub OIDC — no `NPM_TOKEN` secret).
+
+### One-time npm setup
+
+On [npm → @pplethai/components → Settings → Trusted publishing](https://www.npmjs.com/package/@pplethai/components/settings), add a **GitHub Actions** trusted publisher:
+
+| Field | Value |
+|-------|-------|
+| Repository owner | `PPLEThai` |
+| Repository name | `pple-design-system` |
+| Workflow filename | `release.yml` |
+| Environment | *(leave empty unless you add a GitHub Environment)* |
+
+The workflow filename must match exactly (including `.yml`). After the first successful OIDC publish, you can remove the `NPM_TOKEN` repository secret if it is still configured.
 
 ### Docs site (Cloudflare Pages)
 
