@@ -1,5 +1,7 @@
 # People's Party Design Systems
 
+**Documentation:** [https://components.pplethai.org/](https://components.pplethai.org/)
+
 Monorepo for **@pplethai/components** — the People's Party React design system built on shadcn/ui.
 
 ## Packages
