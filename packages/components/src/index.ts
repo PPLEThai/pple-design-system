@@ -125,6 +125,12 @@ export { Skeleton } from "./components/ui/skeleton";
 export { Progress } from "./components/ui/progress";
 export { Spinner, spinnerVariants, type SpinnerProps } from "./components/ui/spinner";
 export {
+  Stepper,
+  StepperItem,
+  type StepperItemProps,
+  type StepperProps,
+} from "./components/ui/stepper";
+export {
   Breadcrumb,
   BreadcrumbEllipsis,
   BreadcrumbItem,

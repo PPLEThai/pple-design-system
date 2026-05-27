@@ -15,8 +15,8 @@ A complete, self-contained reference for AI agents working with the People's Par
 5. [Icon, Logo, Navbar](#5-icon-logo-navbar)
 6. [Form inputs](#6-form-inputs) — Button, Input, Label, Textarea, Checkbox, RadioGroup, Switch, Select, MultiSelect, Autocomplete, Slider
 7. [Overlays](#7-overlays) — Dialog, Sheet, Popover, DropdownMenu
-8. [Navigation](#8-navigation) — Tabs, Accordion, Breadcrumb, NavigationMenu
-9. [Feedback](#9-feedback) — Alert, Badge, Progress, Skeleton, Toast (Sonner)
+8. [Navigation](#8-navigation) — Tabs, Accordion, Breadcrumb, NavigationMenu, Stepper
+9. [Feedback](#9-feedback) — Alert, Badge, Progress, Spinner, Skeleton, Toast (Sonner)
 10. [Data display](#10-data-display) — Card, Separator
 11. [Forms with react-hook-form + zod](#11-forms-with-react-hook-form--zod)
 12. [Design tokens](#12-design-tokens)
@@ -730,6 +730,89 @@ import {
 
 For simple navbars use `Navbar` (§5.3). NavigationMenu is for desktop mega-menus.
 
+### 8.5 Stepper
+
+Step indicator for multi-step forms / wizards. Compound API — render one `<StepperItem>` per step. `value` is the **0-indexed current step**; earlier indices render as completed (checkmark + primary fill), the matching index is current, later indices are upcoming (muted).
+
+```tsx
+import { Stepper, StepperItem } from "@pplethai/components";
+
+// Horizontal (default)
+<Stepper value={1}>
+  <StepperItem title="Account" description="Email & password" />
+  <StepperItem title="Profile" description="Name & avatar" />
+  <StepperItem title="Confirm" />
+</Stepper>
+
+// Vertical
+<Stepper value={0} orientation="vertical">
+  <StepperItem title="Step one" description="…" />
+  <StepperItem title="Step two" />
+</Stepper>
+
+// All steps completed — set value to step count
+<Stepper value={3}>
+  <StepperItem title="A" />
+  <StepperItem title="B" />
+  <StepperItem title="C" />
+</Stepper>
+```
+
+| `Stepper` prop | Type | Default |
+|---|---|---|
+| `value` | `number` (0-indexed current step) | — (required) |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
+
+| `StepperItem` prop | Type |
+|---|---|
+| `title` | `ReactNode` |
+| `description?` | `ReactNode` |
+
+The current step receives `aria-current="step"`. Stepper is **presentational** — wire next/back buttons and step state in your own component.
+
+**Multi-step form pattern:**
+
+```tsx
+import { useState } from "react";
+import {
+  Button, Card, CardContent, Inline, Stack, Stepper, StepperItem,
+} from "@pplethai/components";
+
+const STEPS = [
+  { title: "Account", description: "Email & password" },
+  { title: "Profile", description: "Name & avatar" },
+  { title: "Confirm" },
+];
+
+function MultiStepForm() {
+  const [step, setStep] = useState(0);
+  const isLast = step === STEPS.length - 1;
+
+  return (
+    <Stack gap="lg">
+      <Stepper value={step}>
+        {STEPS.map((s) => (
+          <StepperItem key={s.title} title={s.title} description={s.description} />
+        ))}
+      </Stepper>
+      <Card><CardContent className="pt-6">{/* fields per step */}</CardContent></Card>
+      <Inline justify="between">
+        <Button
+          variant="outline"
+          onClick={() => setStep((s) => Math.max(0, s - 1))}
+          disabled={step === 0}
+        >
+          Back
+        </Button>
+        <Button onClick={() => setStep((s) => s + 1)}>
+          {isLast ? "Finish" : "Next"}
+        </Button>
+      </Inline>
+    </Stack>
+  );
+}
+```
+
 ---
 
 ## 9. Feedback
@@ -786,7 +869,36 @@ import { Progress } from "@pplethai/components";
 
 When `value < max` or value omitted, the bar runs an animated shimmer (auto-disabled under `prefers-reduced-motion`).
 
-### 9.4 Skeleton
+### 9.4 Spinner
+
+Circular loader. Omit `value` for an infinite spin (indeterminate); pass `value` (0..`max`) for a determinate arc.
+
+```tsx
+import { Spinner } from "@pplethai/components";
+
+<Spinner />                              {/* indeterminate, default size */}
+<Spinner size="lg" />                    {/* indeterminate, large */}
+<Spinner value={66} />                   {/* determinate (arc proportional to value) */}
+<Spinner className="text-secondary" />   {/* recolor via text-* (uses currentColor) */}
+
+// In a button while submitting
+<Button disabled>
+  <Spinner size="sm" className="text-primary-foreground" />
+  Saving…
+</Button>
+```
+
+| Prop | Type | Default | Notes |
+|---|---|---|---|
+| `value` | `number \| null` | `undefined` | Omit → indeterminate spin; `0..max` → determinate arc |
+| `max` | `number` | `100` | Maximum when determinate |
+| `size` | `"sm" \| "default" \| "lg" \| "xl"` | `"default"` | 16 / 24 / 32 / 48 px |
+| `strokeWidth` | `number` | `2.5` | Stroke thickness inside a 24×24 viewBox |
+| `label` | `string` | `"Loading"` | `aria-label` for screen readers |
+
+Indeterminate uses Tailwind's `animate-spin` (respects `prefers-reduced-motion`). Determinate switches `role` to `progressbar` with `aria-valuemin/max/now`; indeterminate uses `role="status"` + `aria-live="polite"`. Color inherits `currentColor` — tint with `text-*` classes.
+
+### 9.5 Skeleton
 
 ```tsx
 import { Skeleton } from "@pplethai/components";
@@ -798,7 +910,7 @@ import { Skeleton } from "@pplethai/components";
 
 Style with Tailwind to match the real content's shape.
 
-### 9.5 Toast (Sonner)
+### 9.6 Toast (Sonner)
 
 **Step 1 — once, at app root:**
 
@@ -1308,6 +1420,8 @@ Badge, badgeVariants, type BadgeProps
 Toaster, showToast, toast, type ShowToastOptions, type ToastVariant
 Skeleton
 Progress
+Spinner, spinnerVariants, type SpinnerProps
+Stepper, StepperItem, type StepperProps, type StepperItemProps
 Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink,
   BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator
 NavigationMenu, NavigationMenuContent, NavigationMenuIndicator,

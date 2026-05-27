@@ -43,6 +43,7 @@ export const componentCatalog: ComponentGroup[] = [
       { slug: "breadcrumb", label: "Breadcrumb", summary: "เส้นทางตำแหน่งปัจจุบัน" },
       { slug: "navigation-menu", label: "NavigationMenu", summary: "เมนูนำทางพร้อมแผงเนื้อหา" },
       { slug: "navbar", label: "Navbar", summary: "แถบนำทางพร้อมเมนูมือถือ" },
+      { slug: "stepper", label: "Stepper", summary: "ตัวบอกขั้นตอนสำหรับฟอร์มหลายขั้น" },
     ],
   },
   {

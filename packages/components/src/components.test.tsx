@@ -20,6 +20,7 @@ import { Logo } from "./components/logo";
 import { getNavbarVariant, Navbar } from "./components/navbar";
 import { Stack } from "./components/layout/stack";
 import { Spinner } from "./components/ui/spinner";
+import { Stepper, StepperItem } from "./components/ui/stepper";
 
 describe("@pplethai/components", () => {
   it("renders Button", () => {
@@ -102,6 +103,43 @@ describe("@pplethai/components", () => {
     expect(spinner).toHaveAttribute("aria-valuemax", "100");
     expect(spinner).toHaveAttribute("aria-label", "Uploading");
     expect(spinner.querySelector("svg")?.className.baseVal).not.toContain("animate-spin");
+  });
+
+  it("renders Stepper with completed, current, and upcoming states", () => {
+    render(
+      <Stepper value={1} aria-label="signup">
+        <StepperItem title="Account" />
+        <StepperItem title="Profile" />
+        <StepperItem title="Confirm" />
+      </Stepper>,
+    );
+
+    const list = screen.getByRole("list", { name: /signup/i });
+    expect(list).toHaveAttribute("data-orientation", "horizontal");
+
+    const items = screen.getAllByRole("listitem");
+    expect(items).toHaveLength(3);
+    expect(items[0]).not.toHaveAttribute("aria-current");
+    expect(items[1]).toHaveAttribute("aria-current", "step");
+    expect(items[2]).not.toHaveAttribute("aria-current");
+
+    expect(screen.getByText("Account")).toBeInTheDocument();
+    expect(screen.getByText("Profile")).toBeInTheDocument();
+    expect(screen.getByText("Confirm")).toBeInTheDocument();
+  });
+
+  it("renders vertical Stepper", () => {
+    render(
+      <Stepper value={0} orientation="vertical" aria-label="wizard">
+        <StepperItem title="One" description="desc" />
+        <StepperItem title="Two" />
+      </Stepper>,
+    );
+    expect(screen.getByRole("list", { name: /wizard/i })).toHaveAttribute(
+      "data-orientation",
+      "vertical",
+    );
+    expect(screen.getByText("desc")).toBeInTheDocument();
   });
 
   it("renders Stack layout", () => {
