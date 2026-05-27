@@ -1,10 +1,11 @@
-import { Container, Navbar, Separator, type NavbarItem } from "@pplethai/components";
+import { Container, Navbar, Separator, Stack, type NavbarItem } from "@pplethai/components";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 
 const navItems: NavbarItem[] = [
   { href: "/", label: "หน้าแรก", end: true },
   { href: "/tokens", label: "โทเคน" },
   { href: "/components", label: "คอมโพเนนต์" },
+  { href: "/patterns", label: "แพทเทิร์น" },
   { href: "/forms", label: "ฟอร์ม" },
   { href: "/layout", label: "เลย์เอาต์" },
   { href: "/icons", label: "ไอคอน" },
@@ -15,7 +16,7 @@ export function Layout() {
   const { pathname } = useLocation();
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Stack gap="none" className="min-h-screen bg-background text-foreground">
       <Navbar
         title="ระบบดีไซน์ พรรคประชาชน"
         items={navItems}
@@ -31,17 +32,19 @@ export function Layout() {
           </NavLink>
         )}
       />
-      <main className="max-md:pt-12 md:pt-0">
+      <Stack as="main" gap="none" className="flex-1 max-md:pt-12 md:pt-0">
         <Container className="py-10">
           <Outlet />
         </Container>
-      </main>
-      <footer>
-        <Container className="py-6 text-sm text-muted-foreground">
-          <Separator className="mb-4" />
-          <p>@pplethai/components — เอกสารระบบดีไซน์พรรคประชาชน</p>
+      </Stack>
+      <Stack as="footer" gap="none" className="text-sm text-muted-foreground">
+        <Container className="py-6">
+          <Stack gap="md">
+            <Separator />
+            <p>@pplethai/components — เอกสารระบบดีไซน์พรรคประชาชน</p>
+          </Stack>
         </Container>
-      </footer>
-    </div>
+      </Stack>
+    </Stack>
   );
 }

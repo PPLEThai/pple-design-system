@@ -13,11 +13,11 @@ export { Icon, iconVariants, type IconProps } from "./components/icon";
 export { Logo, logoVariants, type LogoProps } from "./components/logo";
 export {
   Navbar,
-  navLinkClassName,
   type NavbarItem,
   type NavbarLinkRenderProps,
   type NavbarProps,
 } from "./components/navbar";
+export { navLinkClassName } from "./components/nav-link-class-name";
 
 // Layout primitives
 export { Stack, type StackProps } from "./components/layout/stack";
@@ -116,7 +116,8 @@ export {
 } from "./components/ui/accordion";
 export { Alert, AlertDescription, AlertTitle, alertVariants } from "./components/ui/alert";
 export { Badge, badgeVariants, type BadgeProps } from "./components/ui/badge";
-export { Toaster, showToast, type ShowToastOptions, type ToastVariant } from "./components/ui/sonner";
+export { Toaster } from "./components/ui/sonner";
+export { showToast, toast, type ShowToastOptions, type ToastVariant } from "./components/ui/toast";
 export { Skeleton } from "./components/ui/skeleton";
 export { Progress } from "./components/ui/progress";
 export {
@@ -138,5 +139,3 @@ export {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "./components/ui/navigation-menu";
-
-export { toast } from "./components/ui/sonner";

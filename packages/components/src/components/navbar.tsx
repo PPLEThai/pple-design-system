@@ -5,6 +5,7 @@ import { Container } from "./layout/container";
 import { Inline } from "./layout/inline";
 import { Stack } from "./layout/stack";
 import { Logo } from "./logo";
+import { navLinkClassName } from "./nav-link-class-name";
 
 export type NavbarItem = {
   href: string;
@@ -12,15 +13,6 @@ export type NavbarItem = {
   /** When true, only mark active on exact href match (e.g. home "/"). */
   end?: boolean;
 };
-
-export function navLinkClassName(isActive: boolean) {
-  return cn(
-    "font-heading rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
-    isActive
-      ? "bg-gradient-primary text-primary-foreground shadow-sm"
-      : "hover:bg-white/10",
-  );
-}
 
 function isNavbarItemActive(item: NavbarItem, pathname: string): boolean {
   if (item.end) {

@@ -1,4 +1,5 @@
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Stack } from "@pplethai/components";
+import { CodeBlock } from "../components/CodeBlock";
 
 export function HomePage() {
   return (
@@ -19,12 +20,10 @@ export function HomePage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <pre className="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-            {`pnpm add @pplethai/components react react-dom react-hook-form zod
+          <CodeBlock>{`pnpm add @pplethai/components react react-dom react-hook-form zod
 
 // ใน entry ของแอป:
-import "@pplethai/components/styles.css";`}
-          </pre>
+import "@pplethai/components/styles.css";`}</CodeBlock>
         </CardContent>
       </Card>
 

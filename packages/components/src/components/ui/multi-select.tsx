@@ -29,6 +29,7 @@ export function MultiSelect({
   id,
   disabled,
 }: MultiSelectProps) {
+  const listboxId = React.useId();
   const [open, setOpen] = React.useState(false);
 
   const selectedOptions = options.filter((option) => value.includes(option.value));
@@ -53,6 +54,7 @@ export function MultiSelect({
           id={id}
           type="button"
           role="combobox"
+          aria-controls={listboxId}
           aria-expanded={open}
           disabled={disabled}
           className={cn(dropdownFieldStyles.trigger, className)}
@@ -80,7 +82,12 @@ export function MultiSelect({
         </button>
       </PopoverTrigger>
       <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0" align="start">
-        <div className="max-h-60 overflow-y-auto p-1" role="listbox" aria-multiselectable>
+        <div
+          id={listboxId}
+          className="max-h-60 overflow-y-auto p-1"
+          role="listbox"
+          aria-multiselectable
+        >
           {options.map((option) => {
             const isSelected = value.includes(option.value);
             return (

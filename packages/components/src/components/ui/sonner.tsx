@@ -7,7 +7,7 @@ import {
   X,
 } from "lucide-react";
 import * as React from "react";
-import { Toaster as Sonner, toast as sonnerToast } from "sonner";
+import { Toaster as Sonner } from "sonner";
 import { Icon } from "../icon";
 import { cn } from "../../lib/utils";
 
@@ -61,32 +61,4 @@ const Toaster = ({ className, ...props }: ToasterProps) => {
   );
 };
 
-export type ToastVariant = "default" | "success" | "error" | "warning" | "info" | "loading";
-
-export interface ShowToastOptions {
-  title: string;
-  description?: string;
-  variant?: ToastVariant;
-}
-
-/** Trigger a toast using the design-system variant styles. */
-export function showToast({ title, description, variant = "default" }: ShowToastOptions) {
-  const options = description ? { description } : undefined;
-
-  switch (variant) {
-    case "success":
-      return sonnerToast.success(title, options);
-    case "error":
-      return sonnerToast.error(title, options);
-    case "warning":
-      return sonnerToast.warning(title, options);
-    case "info":
-      return sonnerToast.info(title, options);
-    case "loading":
-      return sonnerToast.loading(title, options);
-    default:
-      return sonnerToast(title, options);
-  }
-}
-
-export { Toaster, sonnerToast as toast };
+export { Toaster };

@@ -63,6 +63,7 @@ export function TokensPage() {
             { name: "Primary", className: "bg-gradient-primary" },
             { name: "Secondary", className: "bg-gradient-secondary" },
             { name: "Brand", className: "bg-gradient-brand" },
+            { name: "Destructive", className: "bg-gradient-destructive" },
           ].map((gradient) => (
             <div key={gradient.name} className="overflow-hidden rounded-lg border">
               <div className={`h-20 ${gradient.className}`} />

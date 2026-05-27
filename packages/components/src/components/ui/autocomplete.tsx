@@ -49,6 +49,7 @@ export function Autocomplete(props: AutocompleteProps) {
   const isMultiple = props.multiple === true;
   const value = props.value;
 
+  const listboxId = React.useId();
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState("");
 
@@ -105,6 +106,7 @@ export function Autocomplete(props: AutocompleteProps) {
           disabled={disabled}
           className={className}
           open={open}
+          listboxId={listboxId}
           placeholder={placeholder}
           selectedOptions={selectedOptions}
           onRemove={removeValue}
@@ -122,6 +124,7 @@ export function Autocomplete(props: AutocompleteProps) {
             />
           </div>
           <OptionList
+            listboxId={listboxId}
             options={filteredOptions}
             emptyMessage={emptyMessage}
             isMultiple
@@ -140,6 +143,7 @@ export function Autocomplete(props: AutocompleteProps) {
           <Input
             id={id}
             role="combobox"
+            aria-controls={listboxId}
             aria-expanded={open}
             aria-autocomplete="list"
             disabled={disabled}
@@ -164,6 +168,7 @@ export function Autocomplete(props: AutocompleteProps) {
         onOpenAutoFocus={(event) => event.preventDefault()}
       >
         <OptionList
+          listboxId={listboxId}
           options={filteredOptions}
           emptyMessage={emptyMessage}
           isMultiple={false}
@@ -180,6 +185,7 @@ function PopoverTriggerButton({
   disabled,
   className,
   open,
+  listboxId,
   placeholder,
   selectedOptions,
   onRemove,
@@ -188,6 +194,7 @@ function PopoverTriggerButton({
   disabled?: boolean;
   className?: string;
   open: boolean;
+  listboxId: string;
   placeholder: string;
   selectedOptions: AutocompleteOption[];
   onRemove: (value: string, event: React.MouseEvent) => void;
@@ -198,6 +205,7 @@ function PopoverTriggerButton({
         id={id}
         type="button"
         role="combobox"
+        aria-controls={listboxId}
         aria-expanded={open}
         disabled={disabled}
         className={cn(dropdownFieldStyles.trigger, className)}
@@ -228,12 +236,14 @@ function PopoverTriggerButton({
 }
 
 function OptionList({
+  listboxId,
   options,
   emptyMessage,
   isMultiple,
   value,
   onSelect,
 }: {
+  listboxId: string;
   options: AutocompleteOption[];
   emptyMessage: string;
   isMultiple: boolean;
@@ -242,6 +252,7 @@ function OptionList({
 }) {
   return (
     <div
+      id={listboxId}
       className="max-h-60 overflow-y-auto p-1"
       role="listbox"
       aria-multiselectable={isMultiple}
