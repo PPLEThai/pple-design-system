@@ -1,5 +1,0 @@
----
-"@pplethai/components": patch
----
-
-bump
