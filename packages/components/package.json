@@ -23,6 +23,7 @@
       "require": "./dist/index.cjs"
     },
     "./form": {
+      "development": "./src/form/index.ts",
       "types": "./dist/form.d.ts",
       "import": "./dist/form.js",
       "require": "./dist/form.cjs"
