@@ -106,6 +106,12 @@ function MyLayout() {
           default: '"เมนูหลัก"',
           description: "aria-label ของ <nav>",
         },
+        {
+          prop: "variant",
+          type: '"light" | "dark"',
+          description:
+            'สไตล์แถบนำทาง — light = พื้นขาว padding กะทัดรัด, dark = gradient น้ำเงิน padding สูงขึ้น; ถ้าระบุจะ override การตรวจ mini-app จาก user agent',
+        },
       ]}
       extraPropTables={[
         {

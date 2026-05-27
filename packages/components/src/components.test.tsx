@@ -17,7 +17,7 @@ import {
   DialogTrigger,
 } from "./components/ui/dialog";
 import { Logo } from "./components/logo";
-import { Navbar } from "./components/navbar";
+import { getNavbarVariant, Navbar } from "./components/navbar";
 import { Stack } from "./components/layout/stack";
 
 describe("@pplethai/components", () => {
@@ -61,6 +61,13 @@ describe("@pplethai/components", () => {
     expect(logo).toBeInTheDocument();
     expect(logo.tagName.toLowerCase()).toBe("svg");
     expect(screen.getByText("People's Party")).toBeInTheDocument();
+  });
+
+  it("getNavbarVariant prefers explicit variant over mini-app UA", () => {
+    const miniAppUa = "PPLETodayApp/1.0.0 MiniApp";
+    expect(getNavbarVariant({ userAgent: miniAppUa })).toBe("light");
+    expect(getNavbarVariant({ userAgent: miniAppUa, variant: "dark" })).toBe("dark");
+    expect(getNavbarVariant({ userAgent: "Mozilla/5.0", variant: "light" })).toBe("light");
   });
 
   it("renders Navbar", () => {

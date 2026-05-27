@@ -3,17 +3,14 @@ import * as React from "react";
 import { cn } from "../../lib/utils";
 
 export const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 pb-px pt-[3px] text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "inline-flex items-center rounded-full px-2.5 pb-px pt-[3px] text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {
     variants: {
       variant: {
-        default:
-          "border-transparent bg-gradient-primary text-primary-foreground",
-        secondary:
-          "border-transparent bg-gradient-secondary text-secondary-foreground",
-        destructive:
-          "border-transparent bg-gradient-destructive text-destructive-foreground",
-        outline: "border-secondary bg-background text-secondary",
+        default: "bg-gradient-primary text-primary-foreground",
+        secondary: "bg-gradient-secondary text-secondary-foreground",
+        destructive: "bg-gradient-destructive text-destructive-foreground",
+        outline: "border border-secondary bg-background text-secondary",
       },
     },
     defaultVariants: {

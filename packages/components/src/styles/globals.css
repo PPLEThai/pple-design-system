@@ -207,12 +207,13 @@
     }
   }
 
+  /* Negative offset erases from path start → end (left → right), matching the draw. */
   @keyframes checkbox-check-erase {
     from {
       stroke-dashoffset: 0;
     }
     to {
-      stroke-dashoffset: 1;
+      stroke-dashoffset: -1;
     }
   }
 
@@ -240,19 +241,19 @@
   }
 
   .checkbox-animate-check {
-    animation: checkbox-bg-check 0.56s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: checkbox-bg-check 0.56s linear forwards;
   }
 
   .checkbox-animate-check .checkbox-check-path {
-    animation: checkbox-check-draw 0.56s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: checkbox-check-draw 0.56s linear forwards;
   }
 
   .checkbox-animate-uncheck {
-    animation: checkbox-bg-uncheck 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: checkbox-bg-uncheck 0.5s linear forwards;
   }
 
   .checkbox-animate-uncheck .checkbox-check-path {
-    animation: checkbox-check-erase 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: checkbox-check-erase 0.5s linear forwards;
   }
 
   .checkbox-root:not(.checkbox-settled):not(.checkbox-animate-check):not(.checkbox-animate-uncheck)

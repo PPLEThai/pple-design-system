@@ -95,7 +95,7 @@ export function PatternsPage() {
                   <Stack gap="md" className="max-w-sm">
                     <div>
                       <Label htmlFor="tw-name">ชื่อแสดง</Label>
-                      <Input id="tw-name" className="mt-1" defaultValue="ปิยรัฐ" />
+                      <Input id="tw-name" className="mt-1" defaultValue="สมชาย" />
                     </div>
                     <div>
                       <Label htmlFor="tw-bio">เกี่ยวกับฉัน</Label>

@@ -7,6 +7,28 @@ import { Stack } from "./layout/stack";
 import { Logo } from "./logo";
 import { navLinkClassName } from "./nav-link-class-name";
 
+const MINI_APP_UA_PATTERN = /PPLETodayApp\/(\d.\d.\d) MiniApp/;
+
+export type NavbarVariant = "light" | "dark";
+
+export function isInMiniAppUserAgent(userAgent: string): boolean {
+  return MINI_APP_UA_PATTERN.test(userAgent);
+}
+
+/** Resolves navbar surface: explicit `variant` wins over mini-app UA detection. */
+export function getNavbarVariant(options?: {
+  variant?: NavbarVariant;
+  userAgent?: string;
+}): NavbarVariant {
+  if (options?.variant !== undefined) {
+    return options.variant;
+  }
+  const ua =
+    options?.userAgent ??
+    (typeof navigator !== "undefined" ? navigator.userAgent : "");
+  return isInMiniAppUserAgent(ua) ? "light" : "dark";
+}
+
 export type NavbarItem = {
   href: string;
   label: string;
@@ -40,6 +62,12 @@ export interface NavbarProps extends React.HTMLAttributes<HTMLElement> {
   logo?: React.ReactNode;
   mobileMenuAriaLabel?: { open: string; close: string };
   navAriaLabel?: string;
+  /**
+   * Light = white background, compact vertical padding.
+   * Dark = brand gradient background, taller vertical padding.
+   * When set, overrides mini-app user-agent detection.
+   */
+  variant?: NavbarVariant;
 }
 
 export function Navbar({
@@ -50,14 +78,21 @@ export function Navbar({
   logo = <Logo size="sm" className="shrink-0 text-primary" />,
   mobileMenuAriaLabel = { open: "เปิดเมนู", close: "ปิดเมนู" },
   navAriaLabel = "เมนูหลัก",
+  variant: variantProp,
   className,
   ...props
 }: NavbarProps) {
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const [resolvedVariant] = React.useState(() => getNavbarVariant({ variant: variantProp }));
 
   React.useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
+
+  const isLight = resolvedVariant === "light";
+
+  const navLinkClass = (isActive: boolean) =>
+    navLinkClassName(isActive, isLight ? "light" : "dark");
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -81,21 +116,24 @@ export function Navbar({
     linkRenderer({
       item,
       className: (isActive) =>
-        mobile
-          ? cn("block max-md:py-1 md:py-2", navLinkClassName(isActive))
-          : navLinkClassName(isActive),
+        mobile ? cn("block max-md:py-1 md:py-2", navLinkClass(isActive)) : navLinkClass(isActive),
       onNavigate: closeMenu,
     });
 
   return (
     <header
       className={cn(
-        "z-50 border-b bg-gradient-secondary text-secondary-foreground max-md:fixed max-md:inset-x-0 max-md:top-0 md:static",
+        "z-50 border-b max-md:fixed max-md:inset-x-0 max-md:top-0 md:static",
+        isLight
+          ? "border-border bg-background text-foreground"
+          : "bg-gradient-secondary text-secondary-foreground",
         className,
       )}
       {...props}
     >
-      <Container className="max-md:py-2 md:py-4">
+      <Container
+        className={isLight ? "max-md:py-2 md:py-4" : "max-md:py-4 md:py-6"}
+      >
         <Inline justify="between" align="center" className="w-full">
           <Stack gap="xs" className="min-w-0 flex-row items-center md:gap-2">
             {logo}
@@ -105,7 +143,12 @@ export function Navbar({
           </Stack>
           <button
             type="button"
-            className="inline-flex shrink-0 items-center justify-center rounded-md p-0 text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 md:hidden"
+            className={cn(
+              "inline-flex shrink-0 items-center justify-center rounded-md p-0 focus-visible:outline-none focus-visible:ring-2 md:hidden",
+              isLight
+                ? "text-foreground hover:bg-muted focus-visible:ring-ring"
+                : "text-white hover:bg-white/10 focus-visible:ring-white/50",
+            )}
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
@@ -131,7 +174,10 @@ export function Navbar({
         aria-label={navAriaLabel}
         aria-hidden={!menuOpen}
         className={cn(
-          "absolute left-0 right-0 top-full grid border-t border-white/10 bg-gradient-secondary shadow-lg transition-[grid-template-rows] duration-300 ease-in-out md:hidden",
+          "absolute left-0 right-0 top-full grid border-t shadow-lg transition-[grid-template-rows] duration-300 ease-in-out md:hidden",
+          isLight
+            ? "border-border bg-background"
+            : "border-white/10 bg-gradient-secondary",
           menuOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
         )}
       >

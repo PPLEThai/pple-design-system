@@ -1,4 +1,19 @@
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Stack } from "@pplethai/components";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  cn,
+  Inline,
+  Input,
+  Label,
+  Logo,
+  Stack,
+} from "@pplethai/components";
+import { Lock } from "lucide-react";
 import { CodeBlock } from "../components/CodeBlock";
 
 export function HomePage() {
@@ -30,13 +45,64 @@ import "@pplethai/components/styles.css";`}</CodeBlock>
       <Card>
         <CardHeader>
           <CardTitle>ตัวอย่างสั้นๆ</CardTitle>
+          <CardDescription>
+            การ์ดอยู่กลางจอบนพื้นไล่สีแบรนด์ — สำหรับหน้า login/signup
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <Stack gap="md">
-            <Button>ปุ่มหลัก</Button>
-            <Button variant="secondary">ปุ่มรอง</Button>
-            <Button variant="outline">ปุ่มขอบ</Button>
-          </Stack>
+          <div className={cn("overflow-hidden rounded-md border bg-gradient-brand p-8")}>
+            <Card className="mx-auto max-w-sm">
+              <CardHeader>
+                <Inline gap="sm" align="center" className="mb-2">
+                  <Logo size="sm" className="text-primary" />
+                  <CardTitle className="text-base">เข้าสู่ระบบ</CardTitle>
+                </Inline>
+                <CardDescription>ใช้บัญชีของคุณเพื่อเข้าใช้งาน</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Stack gap="md">
+                  <div>
+                    <Label htmlFor="home-auth-email">อีเมล</Label>
+                    <Input id="home-auth-email" type="email" className="mt-1" />
+                  </div>
+                  <div>
+                    <Label htmlFor="home-auth-pwd">รหัสผ่าน</Label>
+                    <Input id="home-auth-pwd" type="password" className="mt-1" />
+                  </div>
+                </Stack>
+              </CardContent>
+              <CardFooter className="flex-col items-stretch gap-2">
+                <Button className="w-full">
+                  <Lock />
+                  เข้าสู่ระบบ
+                </Button>
+                <p className="text-center text-xs text-muted-foreground">
+                  ยังไม่มีบัญชี?{" "}
+                  <a href="/signup" className="text-primary hover:underline">
+                    สมัครสมาชิก
+                  </a>
+                </p>
+              </CardFooter>
+            </Card>
+          </div>
+          <CodeBlock className="mt-4">{`<div className="min-h-screen bg-gradient-brand">
+  <Container size="sm" className="flex min-h-screen items-center justify-center">
+    <Card className="w-full max-w-sm">
+      <CardHeader>
+        <Inline gap="sm" align="center">
+          <Logo size="sm" />
+          <CardTitle>เข้าสู่ระบบ</CardTitle>
+        </Inline>
+      </CardHeader>
+      <CardContent>
+        <Stack gap="md">{/* form */}</Stack>
+      </CardContent>
+      <CardFooter className="flex-col gap-2">
+        <Button className="w-full"><Lock />เข้าสู่ระบบ</Button>
+      </CardFooter>
+    </Card>
+  </Container>
+</div>`}</CodeBlock>
         </CardContent>
       </Card>
     </Stack>

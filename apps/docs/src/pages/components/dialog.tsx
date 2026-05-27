@@ -32,11 +32,11 @@ export default function DialogPage() {
             <Stack gap="md">
               <div>
                 <Label htmlFor="d-name">ชื่อ</Label>
-                <Input id="d-name" defaultValue="ปิยรัฐ" className="mt-1" />
+                <Input id="d-name" defaultValue="สมชาย" className="mt-1" />
               </div>
               <div>
                 <Label htmlFor="d-username">ชื่อผู้ใช้</Label>
-                <Input id="d-username" defaultValue="@piyarat" className="mt-1" />
+                <Input id="d-username" defaultValue="@somchai" className="mt-1" />
               </div>
             </Stack>
             <DialogFooter>

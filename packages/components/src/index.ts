@@ -13,9 +13,12 @@ export { Icon, iconVariants, type IconProps } from "./components/icon";
 export { Logo, logoVariants, type LogoProps } from "./components/logo";
 export {
   Navbar,
+  getNavbarVariant,
+  isInMiniAppUserAgent,
   type NavbarItem,
   type NavbarLinkRenderProps,
   type NavbarProps,
+  type NavbarVariant,
 } from "./components/navbar";
 export { navLinkClassName } from "./components/nav-link-class-name";
 
