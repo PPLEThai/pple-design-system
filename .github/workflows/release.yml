@@ -28,14 +28,36 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - name: Debug release context
+        run: |
+          echo "node=$(node -v)"
+          echo "npm=$(npm -v) ($(command -v npm))"
+          echo "pnpm=$(pnpm -v)"
+          echo "oidc=$([ -n "$ACTIONS_ID_TOKEN_REQUEST_URL" ] && echo yes || echo no)"
+          echo "npm_token_set=$([ -n "$NPM_TOKEN" ] && echo yes || echo no)"
+          echo "local_version=$(jq -r .version packages/components/package.json)"
+          echo "changeset_files:"
+          ls -la .changeset/
+          echo "pending_changesets=$(find .changeset -maxdepth 1 -name '*.md' ! -name 'README.md' | wc -l)"
+
       - name: Create Release Pull Request or Publish
+        id: changesets
         uses: changesets/action@v1
         with:
           version: pnpm changeset version
-          publish: pnpm --filter @pplethai/components build && pnpm changeset publish
+          # Use a pnpm script so `&&` runs in a shell (changesets/action uses exec without shell).
+          publish: pnpm run ci:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Empty string prevents changesets/action from writing an npm token to .npmrc
           # so npm can authenticate via GitHub OIDC (trusted publishing).
           NPM_TOKEN: ""
           NPM_CONFIG_PROVENANCE: "true"
+
+      - name: Debug changesets outputs
+        if: always()
+        run: |
+          echo "hasChangesets=${{ steps.changesets.outputs.hasChangesets }}"
+          echo "published=${{ steps.changesets.outputs.published }}"
+          echo "publishedPackages=${{ steps.changesets.outputs.publishedPackages }}"
+          echo "pullRequestNumber=${{ steps.changesets.outputs.pullRequestNumber }}"
