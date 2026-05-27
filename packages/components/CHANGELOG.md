@@ -1,5 +1,11 @@
 # @pplethai/components
 
+## 1.0.2
+
+### Patch Changes
+
+- 9b66033: bump
+
 ## 1.0.1
 
 ### Patch Changes
