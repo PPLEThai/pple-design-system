@@ -72,4 +72,4 @@ Vite + React Router v7 SPA. Imports `@pplethai/components` via `workspace:*` (us
 ## Publishing & CI
 
 - Releases use [Changesets](https://github.com/changesets/changesets). Requires `NPM_TOKEN` in GitHub secrets.
-- Docs are deployed to Cloudflare Pages via a manual GitHub Actions workflow (`CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` secrets required).
+- Docs are deployed to Cloudflare Pages via a manual GitHub Actions workflow (`CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_PAGES_PROJECT_NAME` secrets required).

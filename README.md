@@ -56,8 +56,9 @@ Run **Deploy Docs to Cloudflare Pages** from the Actions tab (manual workflow). 
 
 - `CLOUDFLARE_API_TOKEN` — API token with **Cloudflare Pages — Edit** permission
 - `CLOUDFLARE_ACCOUNT_ID` — your Cloudflare account ID
+- `CLOUDFLARE_PAGES_PROJECT_NAME` — Cloudflare Pages project name (e.g. `pple-design-systems-docs`)
 
-Create a Pages project (default name `pple-design-systems-docs`, or pass a different name when triggering the workflow).
+Create a Pages project with the same name as `CLOUDFLARE_PAGES_PROJECT_NAME` before deploying.
 
 ## License
 
