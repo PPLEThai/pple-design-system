@@ -1,5 +1,13 @@
 # @pplethai/components
 
+## 1.0.1
+
+### Patch Changes
+
+- d3bc245: fix badge border
+- d3bc245: fix navbar in mini-app
+- d3bc245: fix checkbox animation
+
 ## 1.0.0
 
 ### Major Changes
