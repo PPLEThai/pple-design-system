@@ -1,0 +1,18 @@
+@import "@fontsource/ibm-plex-sans-thai-looped/400.css";
+@import "@fontsource/ibm-plex-sans-thai-looped/600.css";
+
+/* People's Party CI — Anakotmai medium only */
+@font-face {
+  font-family: "Anakotmai";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    url("https://storage.googleapis.com/pple-media/fonts/anakotmai-medium.woff2") format("woff2"),
+    url("https://storage.googleapis.com/pple-media/fonts/anakotmai-medium.woff") format("woff");
+}
+
+:root {
+  --font-heading: "Anakotmai", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans Thai Looped", system-ui, sans-serif;
+}

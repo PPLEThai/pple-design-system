@@ -1,0 +1,26 @@
+{
+  "name": "pple-design-systems",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc -b",
+    "test": "pnpm --filter @pplethai/components test",
+    "build": "pnpm --filter @pplethai/components build && pnpm --filter docs build",
+    "dev": "pnpm --filter @pplethai/components build && pnpm --filter docs dev",
+    "changeset": "changeset"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.10",
+    "@eslint/js": "^9.17.0",
+    "eslint": "^9.17.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.2"
+  },
+  "packageManager": "pnpm@9.15.1"
+}

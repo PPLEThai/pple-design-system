@@ -1,0 +1,405 @@
+@import "./fonts.css";
+@import "sonner/dist/styles.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 13%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 13%;
+    --primary: 22 100% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 204 100% 14%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 27%;
+    --destructive: 16 100% 38%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 22 100% 54%;
+    --radius: 0.5rem;
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(28 100% 62%) 0%,
+      hsl(22 100% 54%) 42%,
+      hsl(16 100% 36%) 100%
+    );
+    --gradient-primary-button: linear-gradient(
+      135deg,
+      hsl(30 100% 66%) 0%,
+      hsl(22 100% 54%) 40%,
+      hsl(14 100% 32%) 100%
+    );
+    --gradient-secondary: linear-gradient(
+      135deg,
+      hsl(204 100% 6%) 0%,
+      hsl(204 100% 14%) 45%,
+      hsl(204 90% 28%) 100%
+    );
+    --gradient-secondary-button: linear-gradient(
+      135deg,
+      hsl(204 100% 10%) 0%,
+      hsl(204 100% 20%) 38%,
+      hsl(204 95% 44%) 100%
+    );
+    --gradient-brand: linear-gradient(135deg, hsl(204 100% 14%) 0%, hsl(22 100% 54%) 100%);
+    --gradient-destructive: linear-gradient(
+      135deg,
+      hsl(12 100% 46%) 0%,
+      hsl(16 100% 38%) 48%,
+      hsl(16 100% 30%) 100%
+    );
+  }
+
+  .dark {
+    --background: 204 100% 14%;
+    --foreground: 0 0% 98%;
+    --card: 204 80% 18%;
+    --card-foreground: 0 0% 98%;
+    --popover: 204 80% 18%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 22 100% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 204 60% 25%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 204 40% 22%;
+    --muted-foreground: 0 0% 70%;
+    --destructive: 16 100% 38%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 204 40% 28%;
+    --input: 204 40% 28%;
+    --ring: 22 100% 54%;
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(28 100% 58%) 0%,
+      hsl(22 100% 54%) 42%,
+      hsl(16 100% 34%) 100%
+    );
+    --gradient-primary-button: linear-gradient(
+      135deg,
+      hsl(30 100% 62%) 0%,
+      hsl(22 100% 54%) 40%,
+      hsl(14 100% 30%) 100%
+    );
+    --gradient-secondary: linear-gradient(
+      135deg,
+      hsl(204 100% 6%) 0%,
+      hsl(204 80% 20%) 45%,
+      hsl(204 75% 32%) 100%
+    );
+    --gradient-secondary-button: linear-gradient(
+      135deg,
+      hsl(204 100% 8%) 0%,
+      hsl(204 85% 26%) 38%,
+      hsl(204 80% 46%) 100%
+    );
+    --gradient-brand: linear-gradient(135deg, hsl(204 60% 25%) 0%, hsl(22 100% 54%) 100%);
+    --gradient-destructive: linear-gradient(
+      135deg,
+      hsl(12 100% 44%) 0%,
+      hsl(16 100% 38%) 48%,
+      hsl(16 100% 28%) 100%
+    );
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background font-body text-foreground leading-body text-base;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-medium;
+  }
+}
+
+@layer components {
+  /* Close button: top-right (Sonner defaults to top-left) */
+  [data-sonner-toaster][dir="ltr"] {
+    --toast-close-button-start: unset;
+    --toast-close-button-end: 0;
+    --toast-close-button-transform: translate(35%, -35%);
+  }
+
+  [data-sonner-toaster][dir="rtl"] {
+    --toast-close-button-start: 0;
+    --toast-close-button-end: unset;
+    --toast-close-button-transform: translate(-35%, -35%);
+  }
+
+  [data-sonner-toast][data-styled="true"] {
+    font-family: var(--font-body);
+    border-left-width: 4px;
+    border-left-color: hsl(var(--muted-foreground));
+  }
+
+  [data-sonner-toast][data-styled="true"][data-type="success"],
+  [data-sonner-toast][data-styled="true"][data-type="loading"] {
+    border-left-color: hsl(var(--primary));
+  }
+
+  [data-sonner-toast][data-styled="true"][data-type="error"] {
+    border-left-color: hsl(var(--destructive));
+  }
+
+  [data-sonner-toast][data-styled="true"][data-type="warning"] {
+    border-left-color: hsl(var(--primary));
+  }
+
+  [data-sonner-toast][data-styled="true"][data-type="info"] {
+    border-left-color: hsl(var(--secondary));
+  }
+
+  [data-sonner-toast][data-styled="true"]:hover {
+    box-shadow:
+      0 10px 24px hsl(0 0% 0% / 0.1),
+      0 4px 12px hsl(0 0% 0% / 0.06);
+  }
+
+  [data-sonner-toast] [data-icon] {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  [data-sonner-toast] [data-icon] svg {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  [data-sonner-toast] [data-close-button] {
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: calc(var(--radius) - 2px);
+    border: 1px solid hsl(var(--border));
+    background: hsl(var(--background));
+    color: hsl(var(--muted-foreground));
+  }
+
+  [data-sonner-toast]:hover [data-close-button]:hover {
+    background: hsl(var(--muted));
+    border-color: hsl(var(--border));
+    color: hsl(var(--foreground));
+  }
+
+  @keyframes checkbox-check-draw {
+    0% {
+      stroke-dashoffset: 1;
+    }
+    55% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes checkbox-check-erase {
+    from {
+      stroke-dashoffset: 0;
+    }
+    to {
+      stroke-dashoffset: 1;
+    }
+  }
+
+  @keyframes checkbox-bg-check {
+    0%,
+    55% {
+      background-color: hsl(var(--background));
+      color: hsl(var(--primary));
+    }
+    100% {
+      background-color: hsl(var(--primary));
+      color: hsl(var(--primary-foreground));
+    }
+  }
+
+  @keyframes checkbox-bg-uncheck {
+    from {
+      background-color: hsl(var(--primary));
+      color: hsl(var(--primary-foreground));
+    }
+    to {
+      background-color: hsl(var(--background));
+      color: hsl(var(--primary));
+    }
+  }
+
+  .checkbox-animate-check {
+    animation: checkbox-bg-check 0.56s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .checkbox-animate-check .checkbox-check-path {
+    animation: checkbox-check-draw 0.56s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .checkbox-animate-uncheck {
+    animation: checkbox-bg-uncheck 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .checkbox-animate-uncheck .checkbox-check-path {
+    animation: checkbox-check-erase 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .checkbox-root:not(.checkbox-settled):not(.checkbox-animate-check):not(.checkbox-animate-uncheck)
+    .checkbox-check-path {
+    stroke-dashoffset: 1;
+  }
+
+  .checkbox-root.checkbox-settled {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .checkbox-root.checkbox-settled .checkbox-check-path {
+    stroke-dashoffset: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .checkbox-animate-check,
+    .checkbox-animate-uncheck,
+    .checkbox-animate-check .checkbox-check-path,
+    .checkbox-animate-uncheck .checkbox-check-path {
+      animation-duration: 0.01ms;
+    }
+  }
+
+  /* Radio: dot slides left ↔ center inside masked circle; exit completes before enter. */
+  @keyframes radio-dot-enter {
+    from {
+      transform: translateX(-15px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes radio-dot-exit {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-15px);
+    }
+  }
+
+  .radio-animate-enter .radio-dot {
+    animation: radio-dot-enter 0.28s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .radio-animate-exit .radio-dot {
+    animation: radio-dot-exit 0.28s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .radio-root:not(.radio-settled):not(.radio-animate-enter):not(.radio-animate-exit) .radio-dot {
+    transform: translateX(-11px);
+  }
+
+  .radio-root.radio-settled .radio-dot {
+    transform: translateX(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .radio-animate-enter .radio-dot,
+    .radio-animate-exit .radio-dot {
+      animation-duration: 0.01ms;
+    }
+  }
+}
+
+@layer utilities {
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-primary-button {
+    background-image: var(--gradient-primary-button);
+  }
+
+  .bg-gradient-secondary {
+    background-image: var(--gradient-secondary);
+  }
+
+  .bg-gradient-secondary-button {
+    background-image: var(--gradient-secondary-button);
+  }
+
+  .bg-gradient-brand {
+    background-image: var(--gradient-brand);
+  }
+
+  .bg-gradient-destructive {
+    background-image: var(--gradient-destructive);
+  }
+
+  .gradient-hover-animate {
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    transition: background-position 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .gradient-hover-animate:hover:not(:disabled) {
+    background-position: 100% 50%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-hover-animate {
+      transition: none;
+    }
+
+    .gradient-hover-animate:hover:not(:disabled) {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes progress-shimmer-highlight {
+    0% {
+      background-position:
+        -200% 0,
+        0 0;
+    }
+
+    100% {
+      background-position:
+        200% 0,
+        0 0;
+    }
+  }
+
+  .progress-shimmer {
+    background-image:
+      linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 0.45) 50%, transparent 100%),
+      var(--gradient-primary);
+    background-size:
+      50% 100%,
+      100% 100%;
+    background-repeat: no-repeat;
+    animation: progress-shimmer-highlight 2.5s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .progress-shimmer {
+      animation: none;
+      background-size:
+        100% 100%,
+        100% 100%;
+      background-position:
+        0 0,
+        0 0;
+    }
+  }
+}
