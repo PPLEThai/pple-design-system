@@ -9,7 +9,7 @@
     "build": "pnpm --filter @pplethai/components build && pnpm --filter docs build",
     "dev": "pnpm --filter @pplethai/components build && pnpm --filter docs dev",
     "changeset": "changeset",
-    "ci:publish": "echo '::group::build @pplethai/components' && pnpm --filter @pplethai/components build && echo '::endgroup::' && echo '::group::changeset publish' && pnpm changeset publish && echo '::endgroup::'"
+    "ci:publish": "pnpm --filter @pplethai/components build && pnpm changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.10",
