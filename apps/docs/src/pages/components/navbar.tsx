@@ -1,4 +1,5 @@
-import { Navbar, type NavbarItem } from "@pplethai/components";
+import { Button, Inline, Navbar, type NavbarItem } from "@pplethai/components";
+import { Bell, LogIn } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { ComponentPage } from "../../components/ComponentPage";
 
@@ -103,10 +104,55 @@ function MyLayout() {
   pathname={typeof window !== "undefined" ? window.location.pathname : ""}
 />`,
         },
+        {
+          title: "แทรกคอมโพเนนต์ทางขวา (children)",
+          description:
+            "ส่ง children เพื่อแสดงคอนเทนต์ใด ๆ ทางขวาของลิงก์บนเดสก์ท็อป — บนมือถือจะแสดงด้านบนของเมนูดรอปดาวน์",
+          demo: (
+            <div className="overflow-hidden rounded-md border">
+              <Navbar
+                title="พร้อม actions"
+                items={demoItems}
+                pathname="/components"
+              >
+                <Inline gap="xs" align="center">
+                  <Button variant="ghost" size="icon" aria-label="แจ้งเตือน">
+                    <Bell />
+                  </Button>
+                  <Button variant="outline" size="sm">
+                    <LogIn />
+                    เข้าสู่ระบบ
+                  </Button>
+                </Inline>
+              </Navbar>
+            </div>
+          ),
+          code: `<Navbar
+  title="พร้อม actions"
+  items={navItems}
+  pathname={pathname}
+>
+  <Inline gap="xs" align="center">
+    <Button variant="ghost" size="icon" aria-label="แจ้งเตือน">
+      <Bell />
+    </Button>
+    <Button variant="outline" size="sm">
+      <LogIn />
+      เข้าสู่ระบบ
+    </Button>
+  </Inline>
+</Navbar>`,
+        },
       ]}
       props={[
         { prop: "title", type: "string", required: true, description: "ชื่อระบบที่แสดงข้างโลโก้ (คลิกได้ร่วมกับโลโก้เมื่อเปิด home link)" },
         { prop: "items", type: "NavbarItem[]", required: true, description: "รายการลิงก์ในเมนู" },
+        {
+          prop: "children",
+          type: "ReactNode",
+          description:
+            "คอมโพเนนต์ใด ๆ ที่จะแสดงทางขวาของลิงก์บนเดสก์ท็อป และด้านบนของดรอปดาวน์บนมือถือ (เช่น ปุ่ม login, ตัวแสดงแจ้งเตือน, ตัวสลับธีม) — เมื่อ navbar เป็น dark variant children จะถูกห่อด้วย .dark scope ให้ token สีตรงกับพื้นหลังเข้มอัตโนมัติ",
+        },
         {
           prop: "home",
           type: "NavbarHome | false",

@@ -69,6 +69,11 @@ export interface NavbarProps extends React.HTMLAttributes<HTMLElement> {
   title: string;
   items: NavbarItem[];
   /**
+   * Arbitrary content rendered to the right of the links on desktop,
+   * and at the top of the mobile dropdown panel (above the items).
+   */
+  children?: React.ReactNode;
+  /**
    * Logo + title link target. Defaults to `{ href: "/", end: true }`.
    * Pass `false` to render a non-interactive brand area.
    */
@@ -112,6 +117,7 @@ export function Navbar({
   navAriaLabel = "เมนูหลัก",
   variant: variantProp,
   className,
+  children,
   ...props
 }: NavbarProps) {
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -231,13 +237,18 @@ export function Navbar({
               <Menu className="h-7 w-7" aria-hidden />
             )}
           </button>
-          <nav className="hidden md:block" aria-label={navAriaLabel}>
-            <Inline gap="sm">
-              {items.map((item) => (
-                <React.Fragment key={item.href}>{renderNavItem(item, false)}</React.Fragment>
-              ))}
-            </Inline>
-          </nav>
+          <Inline gap="md" align="center" className="hidden md:flex">
+            <nav aria-label={navAriaLabel}>
+              <Inline gap="sm">
+                {items.map((item) => (
+                  <React.Fragment key={item.href}>{renderNavItem(item, false)}</React.Fragment>
+                ))}
+              </Inline>
+            </nav>
+            {children ? (
+              <div className={cn("contents", !isLight && "dark")}>{children}</div>
+            ) : null}
+          </Inline>
         </Inline>
       </Container>
       <nav
@@ -253,8 +264,11 @@ export function Navbar({
         )}
       >
         <div className="overflow-hidden">
-          <Container className="max-md:pb-2 max-md:pt-1 md:pb-4 md:pt-2">
+          <Container className="max-md:py-4 md:pb-4 md:pt-2">
             <Stack gap="xs">
+              {children ? (
+                <div className={cn(!isLight && "dark")}>{children}</div>
+              ) : null}
               {items.map((item) => (
                 <React.Fragment key={item.href}>{renderNavItem(item, true)}</React.Fragment>
               ))}

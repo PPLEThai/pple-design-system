@@ -20,7 +20,9 @@ export const buttonVariants = cva(
         ),
         outline: cn(
           "border border-secondary bg-background text-secondary",
+          "dark:border-foreground dark:bg-transparent dark:text-foreground",
           "hover:border-transparent hover:bg-gradient-secondary-button hover:text-secondary-foreground hover:shadow-md",
+          "dark:hover:border-transparent dark:hover:text-secondary-foreground",
           gradientButton,
           "active:brightness-95",
         ),
@@ -29,7 +31,10 @@ export const buttonVariants = cva(
           gradientButton,
           "active:brightness-95",
         ),
-        ghost: "transition-colors hover:bg-secondary/10 hover:text-secondary",
+        ghost: cn(
+          "transition-colors hover:bg-secondary/10 hover:text-secondary",
+          "dark:hover:bg-foreground/10 dark:hover:text-foreground",
+        ),
         link: "text-primary underline-offset-4 transition-colors hover:underline",
       },
       size: {

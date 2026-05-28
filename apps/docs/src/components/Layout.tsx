@@ -11,6 +11,7 @@ import * as React from "react";
 
 const footerLinkClass = "text-primary hover:underline";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { GitHubStar } from "./GitHubStar";
 
 const navItems: NavbarItem[] = [
   { href: "/", label: "หน้าแรก", end: true },
@@ -53,7 +54,9 @@ export function Layout() {
             {item.label}
           </NavLink>
         )}
-      />
+      >
+        <GitHubStar />
+      </Navbar>
       <Stack
         as="main"
         gap="none"

@@ -269,10 +269,25 @@ function AppLayout() {
 | `renderHomeLink` | `(props: NavbarHomeLinkRenderProps) => ReactNode` | — | Custom home/brand link renderer (router) |
 | `renderLink` | `(props: NavbarLinkRenderProps) => ReactNode` | — | Custom menu link renderer (router) |
 | `logo` | `ReactNode` | — | Defaults to `<Logo size="sm" className="text-primary" />` |
+| `children` | `ReactNode` | — | Arbitrary content rendered to the right of the links on desktop; rendered at the top of the mobile dropdown panel (above the items). Use for login buttons, notification bells, theme toggles, etc. When the navbar variant is `dark`, children are wrapped in a `.dark` scope so design tokens (`bg-primary`, `text-foreground`, `border-border`, etc.) automatically flip to their dark-mode values. |
 | `mobileMenuAriaLabel` | `{ open: string; close: string }` | — | Defaults to Thai labels |
 | `navAriaLabel` | `string` | — | Defaults to `"เมนูหลัก"` |
 
 `navLinkClassName(isActive)` is also exported for custom integrations.
+
+**Trailing slot example** — login button to the right of nav links:
+
+```tsx
+import { Navbar, Button, Inline } from "@pplethai/components";
+import { Bell, LogIn } from "lucide-react";
+
+<Navbar title="ระบบ" items={items} pathname={pathname}>
+  <Inline gap="xs" align="center">
+    <Button variant="ghost" size="icon" aria-label="แจ้งเตือน"><Bell /></Button>
+    <Button variant="outline" size="sm"><LogIn />เข้าสู่ระบบ</Button>
+  </Inline>
+</Navbar>
+```
 
 ---
 

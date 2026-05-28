@@ -33,9 +33,9 @@
     );
     --gradient-primary-button: linear-gradient(
       135deg,
-      hsl(30 100% 66%) 0%,
+      hsl(32 100% 72%) 0%,
       hsl(22 100% 54%) 40%,
-      hsl(14 100% 32%) 100%
+      hsl(14 100% 24%) 100%
     );
     --gradient-secondary: linear-gradient(
       135deg,
@@ -84,9 +84,9 @@
     );
     --gradient-primary-button: linear-gradient(
       135deg,
-      hsl(30 100% 62%) 0%,
+      hsl(32 100% 70%) 0%,
       hsl(22 100% 54%) 40%,
-      hsl(14 100% 30%) 100%
+      hsl(14 100% 22%) 100%
     );
     --gradient-secondary: linear-gradient(
       135deg,
@@ -349,12 +349,13 @@
 
   .gradient-hover-animate {
     background-size: 200% 200%;
-    background-position: 0% 50%;
+    background-position: -1px center;
+    background-repeat: no-repeat;
     transition: background-position 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .gradient-hover-animate:hover:not(:disabled) {
-    background-position: 100% 50%;
+    background-position: calc(100% + 1px) center;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -363,7 +364,7 @@
     }
 
     .gradient-hover-animate:hover:not(:disabled) {
-      background-position: 0% 50%;
+      background-position: -1px center;
     }
   }
 
