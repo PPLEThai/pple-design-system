@@ -2,9 +2,37 @@ import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 import { dropdownFieldStyles } from "../../lib/dropdown-field-styles";
+import {
+  composePointerDownOutsideOnCombobox,
+  shouldIgnoreSpuriousSelectValueChange,
+} from "../../lib/radix-outside-pointer";
 import { cn } from "../../lib/utils";
 
-export const Select = SelectPrimitive.Root;
+export const Select = ({
+  onValueChange,
+  value,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root>) => {
+  const handleValueChange = React.useCallback(
+    (nextValue: string) => {
+      if (shouldIgnoreSpuriousSelectValueChange(nextValue, value)) {
+        return;
+      }
+      onValueChange?.(nextValue);
+    },
+    [onValueChange, value],
+  );
+
+  return (
+    <SelectPrimitive.Root
+      value={value}
+      onValueChange={onValueChange ? handleValueChange : undefined}
+      {...props}
+    />
+  );
+};
+Select.displayName = SelectPrimitive.Root.displayName;
+
 export const SelectGroup = SelectPrimitive.Group;
 export const SelectValue = SelectPrimitive.Value;
 
@@ -59,7 +87,7 @@ SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayNam
 export const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
->(({ className, children, position = "popper", ...props }, ref) => (
+>(({ className, children, position = "popper", onPointerDownOutside, ...props }, ref) => (
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content
       ref={ref}
@@ -70,6 +98,7 @@ export const SelectContent = React.forwardRef<
         className,
       )}
       position={position}
+      onPointerDownOutside={composePointerDownOutsideOnCombobox(onPointerDownOutside)}
       {...props}
     >
       <SelectScrollUpButton />

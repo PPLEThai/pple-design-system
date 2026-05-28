@@ -73,7 +73,10 @@ export function FormSelectField<T extends FieldValues>({
       render={({ field }) => (
         <FormItem>
           <FormLabel>{label}</FormLabel>
-          <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <Select
+            value={field.value === undefined || field.value === null ? "" : String(field.value)}
+            onValueChange={field.onChange}
+          >
             <FormControl>
               <SelectTrigger>
                 <SelectValue placeholder={placeholder} />
