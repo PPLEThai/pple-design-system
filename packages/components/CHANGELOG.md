@@ -1,5 +1,20 @@
 # @pplethai/components
 
+## 1.2.0
+
+### Minor Changes
+
+- 12015f6: Navbar now accepts `children` as a trailing slot — rendered to the right of the links on desktop and at the top of the mobile dropdown panel. Useful for login buttons, notification bells, theme toggles, etc. When the navbar is in `dark` variant, children are wrapped in a `.dark` scope so design tokens automatically flip to dark-mode values.
+
+### Patch Changes
+
+- 12015f6: Fix `Button` rendering:
+  - `variant="outline"`: border and text now use the foreground token in dark mode so the button is visible on dark navy surfaces (previously navy-on-navy).
+  - `variant="ghost"`: hover background and text now use the foreground token in dark mode so hover stays legible against the dark surface (previously navy text blended into the dark background).
+  - Gradient hover animation (`.gradient-hover-animate`): overshoot `background-position` by 1px on both rest (`-1px center`) and hover end (`calc(100% + 1px) center`) so the 200% gradient image extends past the container edges throughout the animation. Eliminates a subpixel sliver where the surface beneath would bleed through (showed up as a stray white edge on destructive buttons and a white outline on the right of outline buttons).
+
+- 12015f6: Bumped contrast on the primary button gradient (`--gradient-primary-button`) in both light and dark modes — lighter highlight stop and darker shadow stop so the gradient feels less flat. Middle brand-orange stop is unchanged.
+
 ## 1.1.2
 
 ### Patch Changes
