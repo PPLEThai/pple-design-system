@@ -87,6 +87,47 @@ describe("@pplethai/components", () => {
     expect(screen.getByRole("link", { name: /tokens/i })).toHaveAttribute("aria-current", "page");
   });
 
+  it("renders Navbar home link around logo and title", () => {
+    render(
+      <Navbar
+        title="Design system"
+        items={[{ href: "/tokens", label: "Tokens" }]}
+        pathname="/tokens"
+      />,
+    );
+    const homeLink = screen.getByRole("link", { name: /design system/i });
+    expect(homeLink).toHaveAttribute("href", "/");
+    expect(homeLink).toContainElement(screen.getByRole("heading", { name: /design system/i }));
+  });
+
+  it("supports custom Navbar home href and renderer", () => {
+    render(
+      <Navbar
+        title="App"
+        home={{ href: "/dashboard", end: true }}
+        items={[]}
+        pathname="/dashboard"
+        renderHomeLink={({ home, className: linkClassName, children, onNavigate }) => (
+          <a
+            href={home.href}
+            className={linkClassName(true)}
+            onClick={onNavigate}
+            data-testid="home"
+          >
+            {children}
+          </a>
+        )}
+      />,
+    );
+    expect(screen.getByTestId("home")).toHaveAttribute("href", "/dashboard");
+  });
+
+  it("can disable Navbar home link", () => {
+    render(<Navbar title="App" home={false} items={[]} pathname="/" />);
+    expect(screen.queryByRole("link", { name: /app/i })).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /app/i })).toBeInTheDocument();
+  });
+
   it("renders Spinner as indeterminate by default", () => {
     render(<Spinner data-testid="spinner" />);
     const spinner = screen.getByTestId("spinner");

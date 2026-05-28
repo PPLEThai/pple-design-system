@@ -20,6 +20,16 @@ export default function NavbarPage() {
             title="ระบบดีไซน์ตัวอย่าง"
             items={demoItems}
             pathname="/components"
+            renderHomeLink={({ home, className, children, onNavigate }) => (
+              <NavLink
+                to={home.href}
+                className={({ isActive }) => className(isActive)}
+                end={home.end}
+                onClick={onNavigate}
+              >
+                {children}
+              </NavLink>
+            )}
             renderLink={({ item, className, onNavigate }) => (
               <NavLink
                 to={item.href}
@@ -48,6 +58,16 @@ function MyLayout() {
       title="ระบบดีไซน์"
       items={navItems}
       pathname={pathname}
+      renderHomeLink={({ home, className, children, onNavigate }) => (
+        <NavLink
+          to={home.href}
+          className={({ isActive }) => className(isActive)}
+          end={home.end}
+          onClick={onNavigate}
+        >
+          {children}
+        </NavLink>
+      )}
       renderLink={({ item, className, onNavigate }) => (
         <NavLink
           to={item.href}
@@ -85,9 +105,20 @@ function MyLayout() {
         },
       ]}
       props={[
-        { prop: "title", type: "string", required: true, description: "ชื่อระบบที่แสดงข้างโลโก้" },
+        { prop: "title", type: "string", required: true, description: "ชื่อระบบที่แสดงข้างโลโก้ (คลิกได้ร่วมกับโลโก้เมื่อเปิด home link)" },
         { prop: "items", type: "NavbarItem[]", required: true, description: "รายการลิงก์ในเมนู" },
+        {
+          prop: "home",
+          type: "NavbarHome | false",
+          default: '{ href: "/", end: true }',
+          description: "ลิงก์หน้าแรกสำหรับโลโก้+ชื่อ — ส่ง false เพื่อปิด",
+        },
         { prop: "pathname", type: "string", default: '""', description: "ใช้ระบุ active state และปิดเมนูมือถือเมื่อย้าย route" },
+        {
+          prop: "renderHomeLink",
+          type: "(props: NavbarHomeLinkRenderProps) => ReactNode",
+          description: "custom renderer สำหรับโลโก้+ชื่อ (เช่น NavLink) — default เป็น <a href>",
+        },
         {
           prop: "renderLink",
           type: "(props: NavbarLinkRenderProps) => ReactNode",
@@ -114,6 +145,13 @@ function MyLayout() {
         },
       ]}
       extraPropTables={[
+        {
+          title: "NavbarHome",
+          rows: [
+            { prop: "href", type: "string", required: true, description: "URL หน้าแรก" },
+            { prop: "end", type: "boolean", default: "false", description: "เปิดเฉพาะเมื่อ pathname ตรงเป๊ะ (default ของ home คือ true)" },
+          ],
+        },
         {
           title: "NavbarItem",
           rows: [

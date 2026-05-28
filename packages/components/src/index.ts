@@ -15,6 +15,8 @@ export {
   Navbar,
   getNavbarVariant,
   isInMiniAppUserAgent,
+  type NavbarHome,
+  type NavbarHomeLinkRenderProps,
   type NavbarItem,
   type NavbarLinkRenderProps,
   type NavbarProps,

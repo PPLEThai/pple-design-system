@@ -33,6 +33,16 @@ export function Layout() {
         title="ระบบดีไซน์ พรรคประชาชน"
         items={navItems}
         pathname={pathname}
+        renderHomeLink={({ home, className, children, onNavigate }) => (
+          <NavLink
+            to={home.href}
+            className={({ isActive }) => className(isActive)}
+            end={home.end}
+            onClick={onNavigate}
+          >
+            {children}
+          </NavLink>
+        )}
         renderLink={({ item, className, onNavigate }) => (
           <NavLink
             to={item.href}

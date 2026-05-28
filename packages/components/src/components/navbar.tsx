@@ -36,7 +36,13 @@ export type NavbarItem = {
   end?: boolean;
 };
 
-function isNavbarItemActive(item: NavbarItem, pathname: string): boolean {
+export type NavbarHome = {
+  href: string;
+  /** When true, only mark active on exact href match (e.g. home "/"). */
+  end?: boolean;
+};
+
+function isNavbarItemActive(item: Pick<NavbarItem, "href" | "end">, pathname: string): boolean {
   if (item.end) {
     return pathname === item.href;
   }
@@ -52,13 +58,27 @@ export interface NavbarLinkRenderProps {
   onNavigate: () => void;
 }
 
+export interface NavbarHomeLinkRenderProps {
+  home: NavbarHome;
+  className: (isActive: boolean) => string;
+  children: React.ReactNode;
+  onNavigate: () => void;
+}
+
 export interface NavbarProps extends React.HTMLAttributes<HTMLElement> {
   title: string;
   items: NavbarItem[];
+  /**
+   * Logo + title link target. Defaults to `{ href: "/", end: true }`.
+   * Pass `false` to render a non-interactive brand area.
+   */
+  home?: NavbarHome | false;
   /** Current path for default anchor links and closing the mobile menu on navigation. */
   pathname?: string;
   /** Custom link renderer (e.g. React Router `NavLink`). Defaults to `<a href>`. */
   renderLink?: (props: NavbarLinkRenderProps) => React.ReactNode;
+  /** Custom home/brand link renderer. Defaults to `<a href>`. */
+  renderHomeLink?: (props: NavbarHomeLinkRenderProps) => React.ReactNode;
   logo?: React.ReactNode;
   mobileMenuAriaLabel?: { open: string; close: string };
   navAriaLabel?: string;
@@ -70,11 +90,23 @@ export interface NavbarProps extends React.HTMLAttributes<HTMLElement> {
   variant?: NavbarVariant;
 }
 
+function homeLinkClassName(isLight: boolean) {
+  return cn(
+    "inline-flex min-w-0 max-w-full items-center gap-1 rounded-md outline-none transition-opacity md:gap-2",
+    "focus-visible:ring-2 focus-visible:ring-offset-2",
+    isLight
+      ? "text-foreground hover:opacity-80 focus-visible:ring-ring focus-visible:ring-offset-background"
+      : "text-secondary-foreground hover:opacity-90 focus-visible:ring-white/50 focus-visible:ring-offset-transparent",
+  );
+}
+
 export function Navbar({
   title,
   items,
+  home: homeProp,
   pathname = "",
   renderLink,
+  renderHomeLink,
   logo = <Logo size="sm" className="shrink-0 text-primary" />,
   mobileMenuAriaLabel = { open: "เปิดเมนู", close: "ปิดเมนู" },
   navAriaLabel = "เมนูหลัก",
@@ -112,6 +144,50 @@ export function Navbar({
 
   const linkRenderer = renderLink ?? defaultRenderLink;
 
+  const resolvedHome: NavbarHome | false = homeProp === false ? false : (homeProp ?? { href: "/", end: true });
+
+  const brand = (
+    <>
+      {logo}
+      <h1 className="min-w-0 truncate font-heading text-base font-medium md:text-xl">{title}</h1>
+    </>
+  );
+
+  const defaultRenderHomeLink = ({
+    home,
+    className: homeClassName,
+    children,
+    onNavigate,
+  }: NavbarHomeLinkRenderProps) => {
+    const active = isNavbarItemActive(home, pathname);
+    return (
+      <a
+        href={home.href}
+        className={homeClassName(active)}
+        onClick={onNavigate}
+        aria-current={active ? "page" : undefined}
+      >
+        {children}
+      </a>
+    );
+  };
+
+  const homeLinkRenderer = renderHomeLink ?? defaultRenderHomeLink;
+
+  const brandBlock =
+    resolvedHome === false ? (
+      <Stack gap="xs" className="min-w-0 flex-row items-center md:gap-2">
+        {brand}
+      </Stack>
+    ) : (
+      homeLinkRenderer({
+        home: resolvedHome,
+        className: () => homeLinkClassName(isLight),
+        children: brand,
+        onNavigate: closeMenu,
+      })
+    );
+
   const renderNavItem = (item: NavbarItem, mobile: boolean) =>
     linkRenderer({
       item,
@@ -135,12 +211,7 @@ export function Navbar({
         className={isLight ? "max-md:py-2 md:py-4" : "max-md:py-4 md:py-6"}
       >
         <Inline justify="between" align="center" className="w-full">
-          <Stack gap="xs" className="min-w-0 flex-row items-center md:gap-2">
-            {logo}
-            <div className="min-w-0">
-              <h1 className="truncate font-heading text-base font-medium md:text-xl">{title}</h1>
-            </div>
-          </Stack>
+          {brandBlock}
           <button
             type="button"
             className={cn(

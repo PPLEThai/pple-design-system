@@ -225,6 +225,16 @@ function AppLayout() {
       title="ระบบดีไซน์"
       items={items}
       pathname={pathname}
+      renderHomeLink={({ home, className, children, onNavigate }) => (
+        <NavLink
+          to={home.href}
+          end={home.end}
+          onClick={onNavigate}
+          className={({ isActive }) => className(isActive)}
+        >
+          {children}
+        </NavLink>
+      )}
       renderLink={({ item, className, onNavigate }) => (
         <NavLink
           to={item.href}
@@ -252,10 +262,12 @@ function AppLayout() {
 
 | Prop | Type | Required | Notes |
 |---|---|---|---|
-| `title` | `string` | ✓ | Shown beside logo |
+| `title` | `string` | ✓ | Shown beside logo (clickable with logo when home link is enabled) |
 | `items` | `NavbarItem[]` | ✓ | `{ href, label, end? }` |
+| `home` | `NavbarHome \| false` | — | Logo + title link; default `{ href: "/", end: true }`; `false` disables |
 | `pathname` | `string` | — | Drives active state + closes mobile menu on nav |
-| `renderLink` | `(props: NavbarLinkRenderProps) => ReactNode` | — | Custom link renderer (router) |
+| `renderHomeLink` | `(props: NavbarHomeLinkRenderProps) => ReactNode` | — | Custom home/brand link renderer (router) |
+| `renderLink` | `(props: NavbarLinkRenderProps) => ReactNode` | — | Custom menu link renderer (router) |
 | `logo` | `ReactNode` | — | Defaults to `<Logo size="sm" className="text-primary" />` |
 | `mobileMenuAriaLabel` | `{ open: string; close: string }` | — | Defaults to Thai labels |
 | `navAriaLabel` | `string` | — | Defaults to `"เมนูหลัก"` |
@@ -1379,7 +1391,8 @@ type GapVariants, type ContainerVariants, type GradientToken
 // Icon & branding
 Icon, iconVariants, type IconProps
 Logo, logoVariants, type LogoProps
-Navbar, navLinkClassName, type NavbarItem, type NavbarLinkRenderProps, type NavbarProps
+Navbar, navLinkClassName, type NavbarHome, type NavbarHomeLinkRenderProps,
+ type NavbarItem, type NavbarLinkRenderProps, type NavbarProps
 
 // Layout
 Stack, type StackProps
