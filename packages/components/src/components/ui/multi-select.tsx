@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Check, ChevronDown, X } from "lucide-react";
 import { dropdownFieldStyles } from "../../lib/dropdown-field-styles";
+import { POPOVER_ANCHOR_ATTR, usePopoverOpenState } from "../../lib/radix-outside-pointer";
 import { cn } from "../../lib/utils";
 import { Checkbox } from "./checkbox";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
@@ -30,7 +31,7 @@ export function MultiSelect({
   disabled,
 }: MultiSelectProps) {
   const listboxId = React.useId();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = usePopoverOpenState();
 
   const selectedOptions = options.filter((option) => value.includes(option.value));
 
@@ -48,7 +49,7 @@ export function MultiSelect({
   };
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen} modal={false}>
       <PopoverTrigger asChild>
         <button
           id={id}
@@ -57,6 +58,7 @@ export function MultiSelect({
           aria-controls={listboxId}
           aria-expanded={open}
           disabled={disabled}
+          {...{ [POPOVER_ANCHOR_ATTR]: "" }}
           className={cn(dropdownFieldStyles.trigger, className)}
         >
           <span className="flex flex-1 flex-wrap gap-1 text-left">
@@ -81,7 +83,12 @@ export function MultiSelect({
           <ChevronDown className={dropdownFieldStyles.chevron} />
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0" align="start">
+      <PopoverContent
+        className="w-[var(--radix-popover-trigger-width)] p-0"
+        align="start"
+        onOpenAutoFocus={(event) => event.preventDefault()}
+        onCloseAutoFocus={(event) => event.preventDefault()}
+      >
         <div
           id={listboxId}
           className="max-h-60 overflow-y-auto p-1"

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Check, ChevronDown, X } from "lucide-react";
 import { dropdownFieldStyles } from "../../lib/dropdown-field-styles";
+import { POPOVER_ANCHOR_ATTR, usePopoverOpenState } from "../../lib/radix-outside-pointer";
 import { cn } from "../../lib/utils";
 import { Checkbox } from "./checkbox";
 import { Input } from "./input";
@@ -35,6 +36,12 @@ export type AutocompleteMultipleProps = AutocompleteBaseProps & {
 
 export type AutocompleteProps = AutocompleteSingleProps | AutocompleteMultipleProps;
 
+const autocompletePopoverContentProps = {
+  align: "start" as const,
+  onOpenAutoFocus: (event: Event) => event.preventDefault(),
+  onCloseAutoFocus: (event: Event) => event.preventDefault(),
+};
+
 export function Autocomplete(props: AutocompleteProps) {
   const {
     options,
@@ -50,7 +57,7 @@ export function Autocomplete(props: AutocompleteProps) {
   const value = props.value;
 
   const listboxId = React.useId();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = usePopoverOpenState();
   const [search, setSearch] = React.useState("");
 
   const filteredOptions = React.useMemo(() => {
@@ -62,6 +69,10 @@ export function Autocomplete(props: AutocompleteProps) {
   const selectedOptions = options.filter((option) =>
     isMultiple ? (value as string[]).includes(option.value) : option.value === value,
   );
+
+  const openPopover = React.useCallback(() => {
+    if (!disabled) setOpen(true);
+  }, [disabled, setOpen]);
 
   const selectOption = (optionValue: string) => {
     if (isMultiple) {
@@ -100,7 +111,7 @@ export function Autocomplete(props: AutocompleteProps) {
 
   if (isMultiple) {
     return (
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover open={open} onOpenChange={setOpen} modal={false}>
         <PopoverTriggerButton
           id={id}
           disabled={disabled}
@@ -113,8 +124,7 @@ export function Autocomplete(props: AutocompleteProps) {
         />
         <PopoverContent
           className="w-[var(--radix-popover-trigger-width)] p-0"
-          align="start"
-          onOpenAutoFocus={(event) => event.preventDefault()}
+          {...autocompletePopoverContentProps}
         >
           <div className="border-b p-2">
             <Input
@@ -137,9 +147,12 @@ export function Autocomplete(props: AutocompleteProps) {
   }
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen} modal={false}>
       <PopoverAnchor asChild>
-        <div className={cn("relative w-full", className)}>
+        <div
+          {...{ [POPOVER_ANCHOR_ATTR]: "" }}
+          className={cn("relative w-full", className)}
+        >
           <Input
             id={id}
             role="combobox"
@@ -150,22 +163,27 @@ export function Autocomplete(props: AutocompleteProps) {
             value={singleDisplayValue}
             placeholder={placeholder}
             className="pr-9 focus-visible:ring-ring"
-            onFocus={() => setOpen(true)}
+            onPointerDown={openPopover}
+            onFocus={openPopover}
             onChange={(event) => {
               setSearch(event.target.value);
-              if (!open) setOpen(true);
+              openPopover();
               if (event.target.value === "") {
                 (props as AutocompleteSingleProps).onValueChange("");
               }
             }}
           />
-          <ChevronDown className={cn("pointer-events-none absolute right-3 top-1/2 -translate-y-1/2", dropdownFieldStyles.chevron)} />
+          <ChevronDown
+            className={cn(
+              "pointer-events-none absolute right-3 top-1/2 -translate-y-1/2",
+              dropdownFieldStyles.chevron,
+            )}
+          />
         </div>
       </PopoverAnchor>
       <PopoverContent
         className="w-[var(--radix-popover-trigger-width)] p-0"
-        align="start"
-        onOpenAutoFocus={(event) => event.preventDefault()}
+        {...autocompletePopoverContentProps}
       >
         <OptionList
           listboxId={listboxId}
@@ -208,6 +226,7 @@ function PopoverTriggerButton({
         aria-controls={listboxId}
         aria-expanded={open}
         disabled={disabled}
+        {...{ [POPOVER_ANCHOR_ATTR]: "" }}
         className={cn(dropdownFieldStyles.trigger, className)}
       >
         <span className="flex flex-1 flex-wrap gap-1 text-left">
