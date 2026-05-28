@@ -1,5 +1,12 @@
 # @pplethai/components
 
+## 1.1.1
+
+### Patch Changes
+
+- 5e363b1: Fix Select and popover dropdowns closing immediately on React 19 and in mobile WebViews by upgrading Radix Select, aligning shared Radix layers, ignoring spurious empty value sync in forms, and using controlled values in FormSelectField.
+- e806701: Add Navbar home navigation: logo and title share one clickable brand link with customizable `home` target and `renderHomeLink` (mirrors menu `renderLink` for routers). Pass `home={false}` to disable.
+
 ## 1.1.0
 
 ### Minor Changes
