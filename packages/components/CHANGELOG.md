@@ -1,5 +1,12 @@
 # @pplethai/components
 
+## 1.1.2
+
+### Patch Changes
+
+- Fix Select, Autocomplete, MultiSelect, and other popover dropdowns closing immediately on React 19 and in mobile WebViews by upgrading Radix Select, guarding all Popover dismiss handlers (pointer, interact, focus), marking popover anchors, and using controlled values in FormSelectField.
+- 5e363b1: Fix Select, Autocomplete, MultiSelect, and other popover dropdowns closing immediately on React 19 and in mobile WebViews by upgrading Radix Select, guarding all Popover dismiss handlers (pointer, interact, focus), marking popover anchors, and using controlled values in FormSelectField.
+
 ## 1.1.1
 
 ### Patch Changes
