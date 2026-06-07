@@ -77,7 +77,7 @@ export function MultiSelect({
                 </span>
               ))
             ) : (
-              <span className="text-muted-foreground">{placeholder}</span>
+              <span className="text-muted-foreground/60">{placeholder}</span>
             )}
           </span>
           <ChevronDown className={dropdownFieldStyles.chevron} />
