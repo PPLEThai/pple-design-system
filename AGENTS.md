@@ -13,7 +13,7 @@ A complete, self-contained reference for AI agents working with the People's Par
 3. [Utility — `cn()`](#3-utility--cn)
 4. [Layout primitives](#4-layout-primitives) — Stack, Inline, Container
 5. [Icon, Logo, Navbar](#5-icon-logo-navbar)
-6. [Form inputs](#6-form-inputs) — Button, Input, Label, Textarea, Checkbox, RadioGroup, Switch, Select, MultiSelect, Autocomplete, Slider
+6. [Form inputs](#6-form-inputs) — Button, Input, Label, Textarea, Checkbox, RadioGroup, Switch, Select, MultiSelect, Autocomplete, Slider, DatePicker, MonthPicker
 7. [Overlays](#7-overlays) — Dialog, Sheet, Popover, DropdownMenu
 8. [Navigation](#8-navigation) — Tabs, Accordion, Breadcrumb, NavigationMenu, Stepper
 9. [Feedback](#9-feedback) — Alert, Badge, Progress, Spinner, Skeleton, Toast (Sonner)
@@ -503,6 +503,64 @@ const [range, setRange] = useState([20, 80]);
 ```
 
 `value` is always `number[]`. Keyboard: ←→/↑↓ step, PageUp/PageDown big step, Home/End to bounds.
+
+### 6.12 DatePicker / Calendar
+
+`DatePicker` is a trigger + popover convenience built on `Calendar` (react-day-picker v10). Use `Calendar` directly when you want an inline calendar.
+
+```tsx
+import { DatePicker } from "@pplethai/components";
+
+// Single date
+const [date, setDate] = useState<Date>();
+<DatePicker value={date} onValueChange={setDate} />
+
+// Range
+import { DatePicker, type DateRange } from "@pplethai/components";
+const [range, setRange] = useState<DateRange>();
+<DatePicker mode="range" value={range} onValueChange={setRange} />
+
+// Inline calendar (no trigger)
+import { Calendar } from "@pplethai/components";
+<Calendar mode="single" selected={date} onSelect={setDate} className="rounded-md border" />
+```
+
+| `DatePicker` prop | Type | Default | Notes |
+|---|---|---|---|
+| `mode` | `"single" \| "range"` | `"single"` | Selection mode |
+| `value` / `onValueChange` | `Date` or `DateRange` | — | Controlled value (type follows `mode`) |
+| `defaultValue` | `Date` or `DateRange` | — | Uncontrolled initial value |
+| `placeholder` | `string` | `"เลือกวันที่"` | Trigger label when empty |
+| `dateFormat` | `string` | `"d MMM yyyy"` | date-fns format for the label |
+| `locale` | date-fns `Locale` | `th` | Calendar + label locale |
+| `calendarProps` | `Partial<CalendarProps>` | — | Pass-through to `Calendar` (e.g. `disabled`, `captionLayout`, `startMonth`/`endMonth`) |
+| `align` | `"start" \| "center" \| "end"` | `"start"` | Popover alignment |
+
+`Calendar` forwards all react-day-picker props (`mode`, `selected`, `onSelect`, `disabled`, `captionLayout`, `numberOfMonths`, …) and defaults `locale` to Thai and `showOutsideDays` to `true`.
+
+### 6.13 MonthPicker / MonthCalendar
+
+For selecting a month + year (e.g. monthly reports). `MonthPicker` is the trigger + popover; `MonthCalendar` is the inline grid. Years display in CE.
+
+```tsx
+import { MonthPicker } from "@pplethai/components";
+
+const [month, setMonth] = useState<Date>();
+<MonthPicker value={month} onValueChange={setMonth} />
+
+// Inline
+import { MonthCalendar } from "@pplethai/components";
+<MonthCalendar value={month} onValueChange={setMonth} />
+```
+
+| Prop | Type | Default | Notes |
+|---|---|---|---|
+| `value` / `onValueChange` | `Date` / `(date: Date) => void` | — | Selected month (day is set to `1`) |
+| `defaultValue` | `Date` | — | Uncontrolled initial value |
+| `minDate` / `maxDate` | `Date` | — | Limit selectable months (day ignored) |
+| `locale` | `string` (BCP-47) | `"th-TH"` | Locale for month names |
+| `formatLabel` | `(date: Date) => string` | `"<long month> <year>"` | `MonthPicker` trigger label only |
+| `placeholder` | `string` | `"เลือกเดือน"` | `MonthPicker` trigger when empty |
 
 ---
 
@@ -1429,6 +1487,9 @@ MultiSelect, type MultiSelectOption, type MultiSelectProps
 Autocomplete, type AutocompleteOption, type AutocompleteProps,
   type AutocompleteSingleProps, type AutocompleteMultipleProps
 Popover, PopoverAnchor, PopoverContent, PopoverTrigger
+Calendar, type CalendarProps, type DateRange
+DatePicker, type DatePickerProps, type DatePickerSingleProps, type DatePickerRangeProps
+MonthCalendar, MonthPicker, type MonthCalendarProps, type MonthPickerProps
 Slider
 Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle
 Separator

@@ -24,6 +24,8 @@ export const componentCatalog: ComponentGroup[] = [
       { slug: "multi-select", label: "MultiSelect", summary: "ดรอปดาวน์เลือกได้หลายค่า" },
       { slug: "autocomplete", label: "Autocomplete", summary: "ค้นหาพร้อมเลือกค่า" },
       { slug: "slider", label: "Slider", summary: "เลื่อนปรับค่าตัวเลข" },
+      { slug: "date-picker", label: "DatePicker", summary: "เลือกวันที่หรือช่วงวันที่" },
+      { slug: "month-picker", label: "MonthPicker", summary: "เลือกเดือนและปี" },
     ],
   },
   {

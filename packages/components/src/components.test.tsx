@@ -16,6 +16,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./components/ui/dialog";
+import { Calendar } from "./components/ui/calendar";
+import { DatePicker } from "./components/ui/date-picker";
+import { MonthCalendar, MonthPicker } from "./components/ui/month-picker";
 import { Logo } from "./components/logo";
 import { getNavbarVariant, Navbar } from "./components/navbar";
 import { Stack } from "./components/layout/stack";
@@ -181,6 +184,34 @@ describe("@pplethai/components", () => {
       "vertical",
     );
     expect(screen.getByText("desc")).toBeInTheDocument();
+  });
+
+  it("renders Calendar with a selected day", () => {
+    const selected = new Date(2026, 5, 15);
+    render(<Calendar mode="single" selected={selected} defaultMonth={selected} />);
+    expect(screen.getByRole("grid")).toBeInTheDocument();
+    expect(screen.getByRole("gridcell", { name: "15" })).toBeInTheDocument();
+  });
+
+  it("renders DatePicker trigger with placeholder", () => {
+    render(<DatePicker placeholder="Pick a date" />);
+    expect(screen.getByRole("button", { name: /pick a date/i })).toBeInTheDocument();
+  });
+
+  it("renders DatePicker label from value", () => {
+    render(<DatePicker value={new Date(2026, 0, 9)} dateFormat="yyyy-MM-dd" />);
+    expect(screen.getByRole("button", { name: /2026-01-09/ })).toBeInTheDocument();
+  });
+
+  it("renders MonthCalendar with twelve months", () => {
+    render(<MonthCalendar value={new Date(2026, 2, 1)} locale="en-US" />);
+    expect(screen.getByRole("button", { name: "Mar" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: "Jan" })).toHaveAttribute("aria-pressed", "false");
+  });
+
+  it("renders MonthPicker trigger with formatted value", () => {
+    render(<MonthPicker value={new Date(2026, 5, 1)} locale="en-US" />);
+    expect(screen.getByRole("button", { name: /June 2026/ })).toBeInTheDocument();
   });
 
   it("renders Stack layout", () => {
