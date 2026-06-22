@@ -1,5 +1,11 @@
 # @pplethai/components
 
+## 1.3.1
+
+### Patch Changes
+
+- 4eff042: fix modal issue
+
 ## 1.3.0
 
 ### Minor Changes
