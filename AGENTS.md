@@ -13,7 +13,7 @@ A complete, self-contained reference for AI agents working with the People's Par
 3. [Utility — `cn()`](#3-utility--cn)
 4. [Layout primitives](#4-layout-primitives) — Stack, Inline, Container
 5. [Icon, Logo, Navbar](#5-icon-logo-navbar)
-6. [Form inputs](#6-form-inputs) — Button, Input, Label, Textarea, Checkbox, RadioGroup, Switch, Select, MultiSelect, Autocomplete, Slider, DatePicker, MonthPicker
+6. [Form inputs](#6-form-inputs) — Button, Input, Label, Textarea, Checkbox, RadioGroup, Switch, Select, MultiSelect, Autocomplete, Slider, DatePicker, MonthPicker, TimePicker, DateTimePicker
 7. [Overlays](#7-overlays) — Dialog, Sheet, Popover, DropdownMenu
 8. [Navigation](#8-navigation) — Tabs, Accordion, Breadcrumb, NavigationMenu, Stepper
 9. [Feedback](#9-feedback) — Alert, Badge, Progress, Spinner, Skeleton, Toast (Sonner)
@@ -535,8 +535,14 @@ import { Calendar } from "@pplethai/components";
 | `locale` | date-fns `Locale` | `th` | Calendar + label locale |
 | `calendarProps` | `Partial<CalendarProps>` | — | Pass-through to `Calendar` (e.g. `disabled`, `captionLayout`, `startMonth`/`endMonth`) |
 | `align` | `"start" \| "center" \| "end"` | `"start"` | Popover alignment |
+| `className` | `string` | — | Applied to the trigger wrapper — use it to size the control, e.g. `className="w-full"` |
+| `native` | `boolean` | auto | Force/disable the OS-native input. Auto-on for touch-first mobile (single mode only) |
 
 `Calendar` forwards all react-day-picker props (`mode`, `selected`, `onSelect`, `disabled`, `captionLayout`, `numberOfMonths`, …) and defaults `locale` to Thai and `showOutsideDays` to `true`.
+
+> **Sizing all picker triggers (DatePicker / MonthPicker / TimePicker / DateTimePicker):** `className` lands on the trigger wrapper, which has a sensible fixed default width. Pass a width utility to override it — `className="w-full"` stretches the trigger to fill its container, `className="w-[220px]"` sets a fixed width.
+
+> **Native mobile inputs:** on touch-first mobile these pickers render the OS-native date/time input (still showing the same Thai-formatted label) instead of the popover. Pass `native={false}` to always use the popover, or `native` to force the native control where supported. `DatePicker mode="range"` always uses the popover (native inputs have no range variant).
 
 ### 6.13 MonthPicker / MonthCalendar
 
@@ -561,6 +567,71 @@ import { MonthCalendar } from "@pplethai/components";
 | `locale` | `string` (BCP-47) | `"th-TH"` | Locale for month names |
 | `formatLabel` | `(date: Date) => string` | `"<long month> <year>"` | `MonthPicker` trigger label only |
 | `placeholder` | `string` | `"เลือกเดือน"` | `MonthPicker` trigger when empty |
+| `className` | `string` | — | Applied to the `MonthPicker` trigger wrapper (sizing, e.g. `w-full`) |
+
+### 6.14 TimePicker / TimeScroller
+
+24-hour time picker. `TimePicker` is the trigger + popover; `TimeScroller` is the inline hour / minute (/ second) column selector. The value is a `Date` — only its time portion is meaningful.
+
+```tsx
+import { TimePicker } from "@pplethai/components";
+
+const [time, setTime] = useState<Date>();
+<TimePicker value={time} onValueChange={setTime} />
+
+// With seconds + minute step
+<TimePicker showSeconds step={15} value={time} onValueChange={setTime} />
+
+// Compact: no icon, no clear button, sized to content (dense layouts / table cells)
+<TimePicker compact value={time} onValueChange={setTime} />
+
+// Inline column selector (no trigger)
+import { TimeScroller } from "@pplethai/components";
+<TimeScroller value={time} onValueChange={setTime} className="rounded-md border p-2" />
+```
+
+| Prop | Type | Default | Notes |
+|---|---|---|---|
+| `value` / `onValueChange` | `Date` / `(date: Date \| undefined) => void` | — | Controlled value; fires `undefined` when cleared |
+| `defaultValue` | `Date` | — | Uncontrolled initial value |
+| `showSeconds` | `boolean` | `false` | Add the seconds column / label (`HH:mm:ss`) |
+| `step` | `number` | `1` | Step between selectable minutes (and seconds) |
+| `compact` | `boolean` | `false` | Drop the clock icon and × clear button, size to content. Clear via `onValueChange` |
+| `placeholder` | `string` | `"เลือกเวลา"` | Trigger label when empty |
+| `align` | `"start" \| "center" \| "end"` | `"start"` | Popover alignment |
+| `className` | `string` | — | Applied to the trigger wrapper (sizing, e.g. `w-full`) |
+| `native` | `boolean` | auto | Force/disable the OS-native time input |
+
+`formatTime(date, showSeconds?)` is exported for formatting the time portion as `HH:mm` / `HH:mm:ss`.
+
+### 6.15 DateTimePicker
+
+Combined date + time in a single trigger + popover (a `Calendar` plus an inline `TimeScroller`). The value is one `Date` carrying both the day and the 24-hour time.
+
+```tsx
+import { DateTimePicker } from "@pplethai/components";
+
+const [when, setWhen] = useState<Date>();
+<DateTimePicker value={when} onValueChange={setWhen} />
+
+// With seconds + 5-minute step
+<DateTimePicker showSeconds step={5} value={when} onValueChange={setWhen} />
+```
+
+| Prop | Type | Default | Notes |
+|---|---|---|---|
+| `value` / `onValueChange` | `Date` / `(date: Date \| undefined) => void` | — | Controlled value; fires `undefined` when cleared |
+| `defaultValue` | `Date` | — | Uncontrolled initial value |
+| `showSeconds` | `boolean` | `false` | Add the seconds column / label (`HH:mm:ss`) |
+| `step` | `number` | `1` | Step between selectable minutes (and seconds) |
+| `dateFormat` | `string` | `"d MMM yyyy"` | date-fns format for the date portion of the label |
+| `locale` | date-fns `Locale` | `th` | Calendar + label locale |
+| `calendarProps` | `Partial<CalendarProps>` | — | Pass-through to the underlying `Calendar` |
+| `align` | `"start" \| "center" \| "end"` | `"start"` | Popover alignment |
+| `className` | `string` | — | Applied to the trigger wrapper (sizing, e.g. `w-full`) |
+| `native` | `boolean` | auto | Force/disable the OS-native `datetime-local` input |
+
+Picking a day keeps the existing time (or `00:00` when none was set yet).
 
 ---
 
@@ -1490,6 +1561,8 @@ Popover, PopoverAnchor, PopoverContent, PopoverTrigger
 Calendar, type CalendarProps, type DateRange
 DatePicker, type DatePickerProps, type DatePickerSingleProps, type DatePickerRangeProps
 MonthCalendar, MonthPicker, type MonthCalendarProps, type MonthPickerProps
+TimePicker, TimeScroller, formatTime, type TimePickerProps, type TimeScrollerProps
+DateTimePicker, type DateTimePickerProps
 Slider
 Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle
 Separator

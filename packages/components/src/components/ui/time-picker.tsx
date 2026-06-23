@@ -5,27 +5,8 @@ import { inputBaseClassName } from "./input";
 import { NativePickerInput } from "./native-picker-input";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { useNativePicker } from "../../lib/native-picker";
+import { useControllableState } from "../../lib/use-controllable-state";
 import { cn } from "../../lib/utils";
-
-function useControllableState<T>(
-  value: T | undefined,
-  defaultValue: T | undefined,
-  onChange?: (value: T) => void,
-): [T | undefined, (next: T) => void] {
-  const isControlled = value !== undefined;
-  const [internal, setInternal] = React.useState<T | undefined>(defaultValue);
-  const current = isControlled ? value : internal;
-
-  const setValue = React.useCallback(
-    (next: T) => {
-      if (!isControlled) setInternal(next);
-      onChange?.(next);
-    },
-    [isControlled, onChange],
-  );
-
-  return [current, setValue];
-}
 
 const pad2 = (n: number) => n.toString().padStart(2, "0");
 
@@ -174,9 +155,15 @@ export interface TimePickerProps {
   placeholder?: string;
   disabled?: boolean;
   id?: string;
-  /** Class applied to the trigger button. */
+  /** Class applied to the trigger. */
   className?: string;
   align?: "start" | "center" | "end";
+  /**
+   * Compact trigger: drops the leading clock icon and the × clear button, and
+   * sizes the trigger to its content. Useful in dense layouts (table cells,
+   * toolbars). Clear the value programmatically via `onValueChange`.
+   */
+  compact?: boolean;
   /**
    * Override the native-input decision. By default the OS-native time input is
    * used on touch-first mobile; `false` always renders the popover.
@@ -196,6 +183,7 @@ export function TimePicker({
   id,
   className,
   align = "start",
+  compact = false,
   native,
 }: TimePickerProps) {
   const [open, setOpen] = React.useState(false);
@@ -209,7 +197,9 @@ export function TimePicker({
 
   const label = selected ? `${formatTime(selected, showSeconds)} น.` : undefined;
 
-  const showClear = !disabled && !!label;
+  // Compact mode sizes to content; otherwise use the fixed default width.
+  const triggerWidth = compact ? "w-fit" : "w-[160px]";
+  const showClear = !compact && !disabled && !!label;
   // Clear on pointer-down (not click): when the popover is open, Radix's
   // dismissable layer swallows the first click, so an onClick handler would
   // require a second press. onPointerDown fires on that first interaction.
@@ -222,7 +212,8 @@ export function TimePicker({
     return (
       <NativePickerInput
         type="time"
-        icon={Clock}
+        icon={compact ? undefined : Clock}
+        hideClear={compact}
         value={selected}
         onValueChange={setSelected}
         showSeconds={showSeconds}
@@ -231,14 +222,14 @@ export function TimePicker({
         placeholder={placeholder}
         disabled={disabled}
         id={id}
-        className={cn("w-[160px]", className)}
+        className={cn(triggerWidth, className)}
       />
     );
   }
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <div className="relative inline-flex w-fit">
+      <div className={cn("relative inline-flex", triggerWidth, className)}>
         <PopoverTrigger asChild>
           <button
             id={id}
@@ -247,14 +238,13 @@ export function TimePicker({
             data-empty={label ? undefined : ""}
             className={cn(
               inputBaseClassName,
-              "w-[160px] items-center justify-start gap-2 text-left font-normal tabular-nums",
+              "items-center justify-start gap-2 text-left font-normal tabular-nums",
               "[&_svg]:size-4 [&_svg]:shrink-0",
               "data-[empty]:text-muted-foreground/60",
               showClear && "pr-9",
-              className,
             )}
           >
-            <Clock className="text-muted-foreground" />
+            {!compact && <Clock className="text-muted-foreground" />}
             <span className="truncate">{label ?? placeholder}</span>
           </button>
         </PopoverTrigger>

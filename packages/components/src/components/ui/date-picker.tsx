@@ -8,29 +8,10 @@ import { inputBaseClassName } from "./input";
 import { NativePickerInput } from "./native-picker-input";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { useNativePicker } from "../../lib/native-picker";
+import { useControllableState } from "../../lib/use-controllable-state";
 import { cn } from "../../lib/utils";
 
 type CalendarLocale = CalendarProps["locale"];
-
-function useControllableState<T>(
-  value: T | undefined,
-  defaultValue: T | undefined,
-  onChange?: (value: T) => void,
-): [T | undefined, (next: T) => void] {
-  const isControlled = value !== undefined;
-  const [internal, setInternal] = React.useState<T | undefined>(defaultValue);
-  const current = isControlled ? value : internal;
-
-  const setValue = React.useCallback(
-    (next: T) => {
-      if (!isControlled) setInternal(next);
-      onChange?.(next);
-    },
-    [isControlled, onChange],
-  );
-
-  return [current, setValue];
-}
 
 interface DatePickerBaseProps {
   /** Placeholder shown on the trigger when no date is selected. */
@@ -161,7 +142,7 @@ export function DatePicker(props: DatePickerProps) {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <div className="relative inline-flex w-fit">
+      <div className={cn("relative inline-flex w-[260px]", className)}>
         <PopoverTrigger asChild>
           <button
             id={id}
@@ -170,11 +151,10 @@ export function DatePicker(props: DatePickerProps) {
             data-empty={label ? undefined : ""}
             className={cn(
               inputBaseClassName,
-              "w-[260px] items-center justify-start gap-2 text-left font-normal",
+              "items-center justify-start gap-2 text-left font-normal",
               "[&_svg]:size-4 [&_svg]:shrink-0",
               "data-[empty]:text-muted-foreground/60",
               showClear && "pr-9",
-              className,
             )}
           >
             <CalendarIcon className="text-muted-foreground" />

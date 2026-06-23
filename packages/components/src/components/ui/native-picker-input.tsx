@@ -19,12 +19,14 @@ export interface NativePickerInputProps {
   step?: number;
   min?: Date;
   max?: Date;
-  /** Leading icon, matching the popover trigger. */
-  icon: LucideIcon;
+  /** Leading icon, matching the popover trigger. Omit for a compact control. */
+  icon?: LucideIcon;
   /** Pre-formatted (e.g. Thai) label shown when a value is selected. */
   label?: string;
   placeholder?: string;
   disabled?: boolean;
+  /** Suppress the × clear button (e.g. compact mode). */
+  hideClear?: boolean;
   id?: string;
   className?: string;
 }
@@ -52,6 +54,7 @@ export function NativePickerInput({
   label,
   placeholder,
   disabled,
+  hideClear,
   id,
   className,
 }: NativePickerInputProps) {
@@ -70,7 +73,7 @@ export function NativePickerInput({
 
   // Native date/time inputs offer no reliable clear affordance (notably iOS
   // Safari), so we provide the same × button as the popover trigger.
-  const showClear = !disabled && !!value;
+  const showClear = !hideClear && !disabled && !!value;
   const handleClear = (event: React.PointerEvent | React.MouseEvent) => {
     event.stopPropagation();
     onValueChange(undefined);
@@ -81,6 +84,7 @@ export function NativePickerInput({
       className={cn(
         "relative inline-flex w-fit",
         disabled && "cursor-not-allowed opacity-50",
+        className,
       )}
     >
       {/* Visual presentation: same icon + formatted label as the popover trigger. */}
@@ -91,10 +95,9 @@ export function NativePickerInput({
           "items-center gap-2 tabular-nums [&_svg]:size-4 [&_svg]:shrink-0",
           !label && "text-muted-foreground/60",
           showClear && "pr-9",
-          className,
         )}
       >
-        <Icon className="text-muted-foreground" />
+        {Icon && <Icon className="text-muted-foreground" />}
         <span className="truncate">{label ?? placeholder}</span>
       </div>
       {/* Transparent native input on top captures the tap and opens the OS picker. */}

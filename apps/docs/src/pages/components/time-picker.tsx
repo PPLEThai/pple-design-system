@@ -43,6 +43,26 @@ const [time, setTime] = useState<Date>();
           code: `<TimePicker step={15} />`,
         },
         {
+          title: "โหมดกะทัดรัด (compact)",
+          description: "ซ่อนไอคอนนาฬิกาและปุ่มล้างค่า และย่อขนาดปุ่มให้พอดีเนื้อหา เหมาะกับตารางหรือแถบเครื่องมือ",
+          demo: (
+            <Stack gap="md" className="max-w-sm">
+              <TimePicker compact defaultValue={new Date(2026, 0, 1, 9, 30)} />
+            </Stack>
+          ),
+          code: `<TimePicker compact value={time} onValueChange={setTime} />`,
+        },
+        {
+          title: "เต็มความกว้าง (w-full)",
+          description: "ส่ง className เช่น w-full เพื่อให้ปุ่มยืดเต็มความกว้างของ container",
+          demo: (
+            <Stack gap="md" className="max-w-sm">
+              <TimePicker className="w-full" placeholder="เต็มความกว้าง" />
+            </Stack>
+          ),
+          code: `<TimePicker className="w-full" value={time} onValueChange={setTime} />`,
+        },
+        {
           title: "ตัวเลือกเวลาแบบฝังในหน้า",
           description: "ใช้ TimeScroller โดยตรงเมื่อไม่ต้องการ trigger/ป๊อปโอเวอร์",
           demo: (
@@ -93,6 +113,12 @@ const [time, setTime] = useState<Date>();
           type: "string",
           default: '"เลือกเวลา"',
           description: "ข้อความบนปุ่มเมื่อยังไม่เลือก",
+        },
+        {
+          prop: "compact",
+          type: "boolean",
+          default: "false",
+          description: "โหมดกะทัดรัด: ซ่อนไอคอนและปุ่มล้างค่า และย่อขนาดให้พอดีเนื้อหา",
         },
         {
           prop: "disabled",
