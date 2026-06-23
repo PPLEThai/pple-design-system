@@ -26,6 +26,12 @@ export const componentCatalog: ComponentGroup[] = [
       { slug: "slider", label: "Slider", summary: "เลื่อนปรับค่าตัวเลข" },
       { slug: "date-picker", label: "DatePicker", summary: "เลือกวันที่หรือช่วงวันที่" },
       { slug: "month-picker", label: "MonthPicker", summary: "เลือกเดือนและปี" },
+      { slug: "time-picker", label: "TimePicker", summary: "เลือกเวลาแบบ 24 ชั่วโมง" },
+      {
+        slug: "date-time-picker",
+        label: "DateTimePicker",
+        summary: "เลือกวันและเวลาในกล่องเดียว",
+      },
     ],
   },
   {

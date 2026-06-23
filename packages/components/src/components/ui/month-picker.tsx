@@ -1,7 +1,10 @@
 import * as React from "react";
-import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { CalendarIcon, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Button } from "./button";
+import { inputBaseClassName } from "./input";
+import { NativePickerInput } from "./native-picker-input";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
+import { useNativePicker } from "../../lib/native-picker";
 import { cn } from "../../lib/utils";
 
 function useControllableState<T>(
@@ -144,13 +147,21 @@ export function MonthCalendar({
 }
 MonthCalendar.displayName = "MonthCalendar";
 
-export interface MonthPickerProps extends Omit<MonthCalendarProps, "className"> {
+export interface MonthPickerProps
+  extends Omit<MonthCalendarProps, "className" | "onValueChange"> {
+  /** Fires with the selected month, or `undefined` when the value is cleared. */
+  onValueChange?: (date: Date | undefined) => void;
   placeholder?: string;
   disabled?: boolean;
   id?: string;
   /** Class applied to the trigger button. */
   className?: string;
   align?: "start" | "center" | "end";
+  /**
+   * Override the native-input decision. By default the OS-native month input is
+   * used on touch-first mobile; `false` always renders the popover.
+   */
+  native?: boolean;
   /** Custom trigger label formatter. Defaults to `"<long month> <year>"`. */
   formatLabel?: (date: Date) => string;
 }
@@ -168,6 +179,7 @@ export function MonthPicker({
   id,
   className,
   align = "start",
+  native,
   formatLabel,
 }: MonthPickerProps) {
   const [open, setOpen] = React.useState(false);
@@ -176,6 +188,8 @@ export function MonthPicker({
     defaultValue,
     onValueChange as ((next: Date | undefined) => void) | undefined,
   );
+
+  const useNative = useNativePicker("month", native);
 
   const longFormatter = React.useMemo(
     () => new Intl.DateTimeFormat(locale, { month: "long" }),
@@ -189,25 +203,67 @@ export function MonthPicker({
 
   const label = selected ? (formatLabel ?? defaultFormat)(selected) : undefined;
 
+  const showClear = !disabled && !!label;
+  // Clear on pointer-down (not click): when the popover is open, Radix's
+  // dismissable layer swallows the first click, so an onClick handler would
+  // require a second press. onPointerDown fires on that first interaction.
+  const handleClear = (event: React.SyntheticEvent) => {
+    event.stopPropagation();
+    setSelected(undefined);
+  };
+
+  if (useNative) {
+    return (
+      <NativePickerInput
+        type="month"
+        icon={CalendarIcon}
+        value={selected}
+        onValueChange={setSelected}
+        min={minDate}
+        max={maxDate}
+        label={label}
+        placeholder={placeholder}
+        disabled={disabled}
+        id={id}
+        className={cn("w-[200px]", className)}
+      />
+    );
+  }
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          id={id}
-          type="button"
-          variant="outline"
-          disabled={disabled}
-          data-empty={label ? undefined : ""}
-          className={cn(
-            "w-[200px] justify-start text-left font-normal data-[empty]:text-muted-foreground/70",
-            "[&:hover_svg]:text-secondary-foreground data-[empty]:hover:text-secondary-foreground",
-            className,
-          )}
-        >
-          <CalendarIcon className="text-muted-foreground" />
-          {label ?? placeholder}
-        </Button>
-      </PopoverTrigger>
+      <div className="relative inline-flex w-fit">
+        <PopoverTrigger asChild>
+          <button
+            id={id}
+            type="button"
+            disabled={disabled}
+            data-empty={label ? undefined : ""}
+            className={cn(
+              inputBaseClassName,
+              "w-[200px] items-center justify-start gap-2 text-left font-normal",
+              "[&_svg]:size-4 [&_svg]:shrink-0",
+              "data-[empty]:text-muted-foreground/60",
+              showClear && "pr-9",
+              className,
+            )}
+          >
+            <CalendarIcon className="text-muted-foreground" />
+            <span className="truncate">{label ?? placeholder}</span>
+          </button>
+        </PopoverTrigger>
+        {showClear && (
+          <button
+            type="button"
+            onPointerDown={handleClear}
+            onClick={handleClear}
+            aria-label="ล้างค่า"
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            <X className="size-4" />
+          </button>
+        )}
+      </div>
       <PopoverContent className="w-auto p-0" align={align}>
         <MonthCalendar
           value={selected}
