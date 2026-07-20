@@ -1,5 +1,11 @@
 # @pplethai/components
 
+## 1.4.3
+
+### Patch Changes
+
+- 6aee0c2: Fix `TabsList` overflowing narrow containers. The tab list now uses `w-max max-w-full flex-wrap` with `min-h-10` / `h-auto` so triggers stay on one row when space allows and wrap onto additional rows only when the container is narrower than the tabs.
+
 ## 1.4.2
 
 ### Patch Changes
