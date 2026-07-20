@@ -7,7 +7,7 @@ export default function TabsPage() {
       title="Tabs"
       description="สลับเนื้อหาในพื้นที่เดียว — trigger ใช้ gradient เมื่อ active"
       demo={
-        <Tabs defaultValue="account" className="max-w-md">
+        <Tabs defaultValue="account" className="max-w-[16rem]">
           <TabsList>
             <TabsTrigger value="account">บัญชี</TabsTrigger>
             <TabsTrigger value="security">ความปลอดภัย</TabsTrigger>

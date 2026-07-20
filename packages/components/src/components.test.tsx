@@ -27,6 +27,7 @@ import { getNavbarVariant, Navbar } from "./components/navbar";
 import { Stack } from "./components/layout/stack";
 import { Spinner } from "./components/ui/spinner";
 import { Stepper, StepperItem } from "./components/ui/stepper";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 
 describe("@pplethai/components", () => {
   it("renders Button", () => {
@@ -301,5 +302,22 @@ describe("@pplethai/components", () => {
     );
     expect(screen.getByTestId("stack")).toBeInTheDocument();
     expect(screen.getByText("One")).toBeInTheDocument();
+  });
+
+  it("TabsList reflows with flex-wrap when constrained", () => {
+    render(
+      <Tabs defaultValue="a">
+        <TabsList>
+          <TabsTrigger value="a">Account</TabsTrigger>
+          <TabsTrigger value="b">Security</TabsTrigger>
+        </TabsList>
+        <TabsContent value="a">A</TabsContent>
+        <TabsContent value="b">B</TabsContent>
+      </Tabs>,
+    );
+    const list = screen.getByRole("tablist");
+    expect(list.className).toMatch(/flex-wrap/);
+    expect(list.className).toMatch(/max-w-full/);
+    expect(list.className).toMatch(/min-h-10/);
   });
 });
