@@ -7,7 +7,7 @@ export default function TabsPage() {
       title="Tabs"
       description="สลับเนื้อหาในพื้นที่เดียว — trigger ใช้ gradient เมื่อ active"
       demo={
-        <Tabs defaultValue="account" className="max-w-[16rem]">
+        <Tabs defaultValue="account">
           <TabsList>
             <TabsTrigger value="account">บัญชี</TabsTrigger>
             <TabsTrigger value="security">ความปลอดภัย</TabsTrigger>
@@ -28,6 +28,31 @@ export default function TabsPage() {
   <TabsContent value="account">...</TabsContent>
   <TabsContent value="security">...</TabsContent>
 </Tabs>`}
+      examples={[
+        {
+          title: "แคบแล้วขึ้นบรรทัดใหม่",
+          description: "เมื่อความกว้างของ container น้อยกว่าความกว้างรวมของแท็บ TabsList จะห่อ (wrap) ให้อัตโนมัติ",
+          demo: (
+            <div className="w-48 resize-x overflow-auto">
+              <Tabs defaultValue="account">
+                <TabsList>
+                  <TabsTrigger value="account">บัญชี</TabsTrigger>
+                  <TabsTrigger value="security">ความปลอดภัย</TabsTrigger>
+                  <TabsTrigger value="billing">การชำระเงิน</TabsTrigger>
+                </TabsList>
+                <TabsContent value="account">เนื้อหาแท็บบัญชี</TabsContent>
+                <TabsContent value="security">เนื้อหาแท็บความปลอดภัย</TabsContent>
+                <TabsContent value="billing">เนื้อหาแท็บการชำระเงิน</TabsContent>
+              </Tabs>
+            </div>
+          ),
+          code: `<div className="w-48">
+  <Tabs defaultValue="account">
+    <TabsList>…</TabsList>
+  </Tabs>
+</div>`,
+        },
+      ]}
       props={[
         {
           prop: "value / defaultValue",

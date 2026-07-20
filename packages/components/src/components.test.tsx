@@ -317,6 +317,7 @@ describe("@pplethai/components", () => {
     );
     const list = screen.getByRole("tablist");
     expect(list.className).toMatch(/flex-wrap/);
+    expect(list.className).toMatch(/w-max/);
     expect(list.className).toMatch(/max-w-full/);
     expect(list.className).toMatch(/min-h-10/);
   });
