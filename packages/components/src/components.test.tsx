@@ -64,6 +64,27 @@ describe("@pplethai/components", () => {
     expect(screen.getByRole("button", { name: /open/i })).toBeInTheDocument();
   });
 
+  it("caps DialogContent height so a tall body can scroll", () => {
+    render(
+      <Dialog defaultOpen>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Review</DialogTitle>
+            <DialogDescription>Many rows</DialogDescription>
+          </DialogHeader>
+          {Array.from({ length: 40 }, (_, i) => (
+            <p key={i}>Row {i + 1}</p>
+          ))}
+        </DialogContent>
+      </Dialog>,
+    );
+
+    const content = screen.getByRole("dialog");
+    expect(content.className).toMatch(/max-h-\[calc\(100dvh-2rem\)\]/);
+    expect(content.className).toMatch(/overflow-y-auto/);
+    expect(content.className).toMatch(/overscroll-contain/);
+  });
+
   it("renders Logo", () => {
     render(<Logo data-testid="logo" className="text-primary" />);
     const logo = screen.getByTestId("logo");

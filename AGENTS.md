@@ -673,6 +673,8 @@ import {
 
 `DialogTitle` is required for accessibility — Radix logs a console warning if missing. Close via Esc, overlay click, or the auto-rendered X button.
 
+`DialogContent` is capped to `max-h-[calc(100dvh-2rem)]` with `overflow-y-auto` so tall forms stay reachable. Opt out for a full-viewport surface with `className="max-h-none h-[100dvh] overflow-visible"`.
+
 ### 7.2 Sheet (slide from edge)
 
 ```tsx
