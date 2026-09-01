@@ -77,12 +77,65 @@ export default function DialogPage() {
         { prop: "onOpenChange", type: "(open: boolean) => void", description: "callback เมื่อเปิด/ปิด" },
         { prop: "modal", type: "boolean", default: "true", description: "บล็อก interaction นอก dialog เมื่อ true" },
       ]}
+      examples={[
+        {
+          title: "เนื้อหายาว — เลื่อนภายใน dialog",
+          description:
+            "DialogContent จำกัดความสูงที่ calc(100dvh - 2rem) และ overflow-y-auto ดังนั้นฟอร์มหรือรายการที่ยาวจะเลื่อนได้แทนที่จะถูกตัดที่ขอบจอ",
+          demo: (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline">เปิดรายการยาว</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>หมวดบัญชี</DialogTitle>
+                  <DialogDescription>
+                    รายการด้านล่างยาวเกินจอ — เลื่อนภายใน dialog เพื่อดูรายการท้ายและปุ่มยืนยัน
+                  </DialogDescription>
+                </DialogHeader>
+                <Stack gap="sm">
+                  {Array.from({ length: 24 }, (_, i) => (
+                    <div key={i} className="rounded-md border px-3 py-2 text-sm">
+                      หมวดที่ {i + 1}
+                    </div>
+                  ))}
+                </Stack>
+                <DialogFooter>
+                  <DialogClose asChild>
+                    <Button variant="outline">ยกเลิก</Button>
+                  </DialogClose>
+                  <Button type="submit">ยืนยัน</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          ),
+          code: `<Dialog>
+  <DialogTrigger asChild>
+    <Button>เปิดรายการยาว</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>หมวดบัญชี</DialogTitle>
+      <DialogDescription>เลื่อนภายใน dialog เพื่อดูรายการท้าย</DialogDescription>
+    </DialogHeader>
+    {/* many rows */}
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="outline">ยกเลิก</Button>
+      </DialogClose>
+      <Button>ยืนยัน</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>`,
+        },
+      ]}
       extraPropTables={[
         {
           title: "Sub-components",
           rows: [
             { prop: "DialogTrigger", type: "Slot/button", description: "ใช้ asChild เพื่อให้ปุ่มเป็น trigger" },
-            { prop: "DialogContent", type: "Radix Content", description: "เนื้อหา dialog (จัดกลาง + animation)" },
+            { prop: "DialogContent", type: "Radix Content", description: "เนื้อหา dialog (จัดกลาง + max-h viewport + overflow-y-auto)" },
             { prop: "DialogHeader / DialogFooter", type: "div", description: "wrapper สำหรับ layout ส่วนหัว/ท้าย" },
             { prop: "DialogTitle", type: "h2", description: "หัวข้อ (required สำหรับ a11y)" },
             { prop: "DialogDescription", type: "p", description: "คำอธิบายใต้หัวข้อ" },
