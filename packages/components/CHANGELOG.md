@@ -1,5 +1,11 @@
 # @pplethai/components
 
+## 1.4.4
+
+### Patch Changes
+
+- 291f7f5: Cap `DialogContent` to the viewport (`max-h-[calc(100dvh-2rem)]`) and enable `overflow-y-auto` so tall dialogs can scroll instead of clipping.
+
 ## 1.4.3
 
 ### Patch Changes
