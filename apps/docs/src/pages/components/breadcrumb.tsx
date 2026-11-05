@@ -79,10 +79,26 @@ export default function BreadcrumbPage_() {
             { prop: "Breadcrumb", type: "nav", description: "wrapper มี aria-label='breadcrumb'" },
             { prop: "BreadcrumbList", type: "ol", description: "รายการลิงก์ flex wrap" },
             { prop: "BreadcrumbItem", type: "li", description: "หน่วยภายใน list" },
-            { prop: "BreadcrumbLink", type: "a (asChild)", description: "ลิงก์ คลิกได้ — รองรับ asChild สำหรับ Router Link" },
-            { prop: "BreadcrumbPage", type: "span", description: "ตำแหน่งปัจจุบัน (aria-current=page, disabled)" },
-            { prop: "BreadcrumbSeparator", type: "li (presentation)", description: "ChevronRight โดย default; ส่ง children เพื่อแทน" },
-            { prop: "BreadcrumbEllipsis", type: "span", description: "แสดง MoreHorizontal สำหรับเส้นทางยาว" },
+            {
+              prop: "BreadcrumbLink",
+              type: "a (asChild)",
+              description: "ลิงก์ คลิกได้ — รองรับ asChild สำหรับ Router Link",
+            },
+            {
+              prop: "BreadcrumbPage",
+              type: "span",
+              description: "ตำแหน่งปัจจุบัน (aria-current=page, disabled)",
+            },
+            {
+              prop: "BreadcrumbSeparator",
+              type: "li (presentation)",
+              description: "ChevronRight โดย default; ส่ง children เพื่อแทน",
+            },
+            {
+              prop: "BreadcrumbEllipsis",
+              type: "span",
+              description: "แสดง MoreHorizontal สำหรับเส้นทางยาว",
+            },
           ],
         },
       ]}
@@ -94,7 +110,10 @@ export default function BreadcrumbPage_() {
       }
       notes={
         <p>
-          สำหรับ React Router ใช้ <code>&lt;BreadcrumbLink asChild&gt;&lt;Link to=&quot;...&quot; /&gt;&lt;/BreadcrumbLink&gt;</code>
+          สำหรับ React Router ใช้{" "}
+          <code>
+            &lt;BreadcrumbLink asChild&gt;&lt;Link to=&quot;...&quot; /&gt;&lt;/BreadcrumbLink&gt;
+          </code>
         </p>
       }
     />

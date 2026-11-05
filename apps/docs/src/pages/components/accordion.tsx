@@ -64,7 +64,9 @@ export default function AccordionPage() {
         <ul>
           <li>Space/Enter บน trigger เพื่อสลับ</li>
           <li>ลูกศร ↑↓ เลื่อนระหว่าง trigger</li>
-          <li>แอนิเมชันใช้ <code>accordion-down/up</code> keyframes</li>
+          <li>
+            แอนิเมชันใช้ <code>accordion-down/up</code> keyframes
+          </li>
         </ul>
       }
     />

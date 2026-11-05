@@ -144,7 +144,9 @@ export default function ButtonPage() {
       ]}
       accessibility={
         <ul>
-          <li>ใช้ <code>aria-label</code> เสมอเมื่อเป็น <code>size=&quot;icon&quot;</code></li>
+          <li>
+            ใช้ <code>aria-label</code> เสมอเมื่อเป็น <code>size=&quot;icon&quot;</code>
+          </li>
           <li>โฟกัสเห็นได้ผ่าน ring สีหลัก (focus-visible:ring-ring)</li>
           <li>เมื่อ disabled ปุ่มจะ pointer-events: none และไม่รับโฟกัส</li>
         </ul>

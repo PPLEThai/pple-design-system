@@ -1,13 +1,19 @@
-import { Card, CardContent, CardHeader, CardTitle, Container, Inline, Stack } from "@pplethai/components";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Container,
+  Inline,
+  Stack,
+} from "@pplethai/components";
 
 export function LayoutPage() {
   return (
     <Stack gap="lg">
       <div>
         <h1 className="text-3xl font-semibold">เลย์เอาต์</h1>
-        <p className="mt-2 text-muted-foreground">
-          คอมโพเนนต์จัดวาง: Stack, Inline และ Container
-        </p>
+        <p className="mt-2 text-muted-foreground">คอมโพเนนต์จัดวาง: Stack, Inline และ Container</p>
       </div>
 
       <Card>

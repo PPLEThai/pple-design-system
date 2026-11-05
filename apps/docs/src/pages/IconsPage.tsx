@@ -48,8 +48,8 @@ export function IconsPage() {
           </Inline>
           <p className="mt-4 text-sm text-muted-foreground">
             ตราสัญลักษณ์จาก <code className="rounded bg-muted px-1">logo.svg</code> ใช้{" "}
-            <code className="rounded bg-muted px-1">className=&quot;text-primary&quot;</code> เพื่อสีส้มแบรนด์ผ่าน{" "}
-            <code className="rounded bg-muted px-1">currentColor</code>
+            <code className="rounded bg-muted px-1">className=&quot;text-primary&quot;</code>{" "}
+            เพื่อสีส้มแบรนด์ผ่าน <code className="rounded bg-muted px-1">currentColor</code>
           </p>
         </CardContent>
       </Card>
@@ -77,7 +77,9 @@ export function IconsPage() {
                 {sizeReference.map((row) => (
                   <tr key={row.size} className="border-t">
                     <td className="px-3 py-2 font-mono text-xs font-semibold">{row.size}</td>
-                    <td className="px-3 py-2 font-mono text-xs text-muted-foreground">{row.pixels}</td>
+                    <td className="px-3 py-2 font-mono text-xs text-muted-foreground">
+                      {row.pixels}
+                    </td>
                     <td className="px-3 py-2 text-muted-foreground">{row.usage}</td>
                   </tr>
                 ))}
@@ -105,7 +107,9 @@ export function IconsPage() {
                 {colorReference.map((row) => (
                   <tr key={row.color} className="border-t">
                     <td className="px-3 py-2 font-mono text-xs font-semibold">{row.color}</td>
-                    <td className="px-3 py-2 font-mono text-xs text-muted-foreground">{row.className}</td>
+                    <td className="px-3 py-2 font-mono text-xs text-muted-foreground">
+                      {row.className}
+                    </td>
                     <td className="px-3 py-2 text-muted-foreground">{row.usage}</td>
                   </tr>
                 ))}
@@ -134,8 +138,8 @@ export function IconsPage() {
 
       <p className="text-sm text-muted-foreground">
         สำหรับไอคอนเฉพาะจุด สามารถ import จาก{" "}
-        <code className="rounded bg-muted px-1">lucide-react</code> โดยตรง — ขนาดถูกปรับให้พอดีกับ
-        Button อัตโนมัติผ่าน CSS <code className="rounded bg-muted px-1">[&_svg]:size-4</code>
+        <code className="rounded bg-muted px-1">lucide-react</code> โดยตรง — ขนาดถูกปรับให้พอดีกับ Button
+        อัตโนมัติผ่าน CSS <code className="rounded bg-muted px-1">[&_svg]:size-4</code>
       </p>
     </Stack>
   );

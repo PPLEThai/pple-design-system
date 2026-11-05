@@ -28,7 +28,7 @@ const [date, setDate] = useState<Date>();
       examples={[
         {
           title: "ช่วงวันที่ (range)",
-          description: "ตั้ง mode=\"range\" — ค่าจะเป็น { from, to }",
+          description: 'ตั้ง mode="range" — ค่าจะเป็น { from, to }',
           demo: (
             <Stack gap="md" className="max-w-md">
               <DatePicker
@@ -146,8 +146,8 @@ const [date, setDate] = useState<Date>();
       ]}
       notes={
         <p>
-          DatePicker เป็น component สำเร็จรูปที่ห่อ Calendar ไว้ใน Popover; หากต้องการปฏิทินฝังในหน้า
-          ให้ใช้ <code>Calendar</code> โดยตรง ซึ่งรับ props ทั้งหมดของ react-day-picker
+          DatePicker เป็น component สำเร็จรูปที่ห่อ Calendar ไว้ใน Popover; หากต้องการปฏิทินฝังในหน้า ให้ใช้{" "}
+          <code>Calendar</code> โดยตรง ซึ่งรับ props ทั้งหมดของ react-day-picker
         </p>
       }
     />

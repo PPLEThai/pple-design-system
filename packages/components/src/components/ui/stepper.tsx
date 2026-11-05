@@ -64,8 +64,7 @@ export const Stepper = React.forwardRef<HTMLOListElement, StepperProps>(
 );
 Stepper.displayName = "Stepper";
 
-export interface StepperItemProps
-  extends Omit<React.LiHTMLAttributes<HTMLLIElement>, "title"> {
+export interface StepperItemProps extends Omit<React.LiHTMLAttributes<HTMLLIElement>, "title"> {
   title: React.ReactNode;
   description?: React.ReactNode;
 }
@@ -90,9 +89,7 @@ export const StepperItem = React.forwardRef<HTMLLIElement, StepperItemProps>(
           "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 font-heading text-sm font-medium transition-colors",
           isCompleted && "border-primary bg-primary text-primary-foreground",
           isCurrent && "border-primary bg-background text-primary",
-          !isCompleted &&
-            !isCurrent &&
-            "border-border bg-background text-muted-foreground",
+          !isCompleted && !isCurrent && "border-border bg-background text-muted-foreground",
         )}
       >
         {isCompleted ? <Check className="h-4 w-4" strokeWidth={3} /> : index + 1}
@@ -120,9 +117,7 @@ export const StepperItem = React.forwardRef<HTMLLIElement, StepperItemProps>(
         >
           {title}
         </p>
-        {description ? (
-          <p className="mt-0.5 text-xs text-muted-foreground">{description}</p>
-        ) : null}
+        {description ? <p className="mt-0.5 text-xs text-muted-foreground">{description}</p> : null}
       </div>
     );
 

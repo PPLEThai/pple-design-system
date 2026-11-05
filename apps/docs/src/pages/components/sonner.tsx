@@ -59,9 +59,7 @@ export default function SonnerPage() {
                         ? "กำลังโหลด..."
                         : "บันทึกข้อมูลเรียบร้อยแล้ว",
                   description:
-                    variant === "loading"
-                      ? undefined
-                      : "การเปลี่ยนแปลงของคุณถูกบันทึกในระบบแล้ว",
+                    variant === "loading" ? undefined : "การเปลี่ยนแปลงของคุณถูกบันทึกในระบบแล้ว",
                 })
               }
             >

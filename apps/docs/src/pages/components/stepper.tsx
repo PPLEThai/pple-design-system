@@ -60,13 +60,10 @@ function MultiStepFormDemo() {
           ) : null}
           {step === 2 ? (
             <p className="text-sm text-muted-foreground">
-              ตรวจสอบข้อมูลแล้วกด <strong className="text-foreground">เสร็จสิ้น</strong>{" "}
-              เพื่อสร้างบัญชี
+              ตรวจสอบข้อมูลแล้วกด <strong className="text-foreground">เสร็จสิ้น</strong> เพื่อสร้างบัญชี
             </p>
           ) : null}
-          {isDone ? (
-            <p className="text-sm text-foreground">สร้างบัญชีเรียบร้อยแล้ว ✨</p>
-          ) : null}
+          {isDone ? <p className="text-sm text-foreground">สร้างบัญชีเรียบร้อยแล้ว ✨</p> : null}
         </CardContent>
       </Card>
 
@@ -83,9 +80,7 @@ function MultiStepFormDemo() {
             เริ่มใหม่
           </Button>
         ) : (
-          <Button onClick={() => setStep((s) => s + 1)}>
-            {isLast ? "เสร็จสิ้น" : "ถัดไป"}
-          </Button>
+          <Button onClick={() => setStep((s) => s + 1)}>{isLast ? "เสร็จสิ้น" : "ถัดไป"}</Button>
         )}
       </Inline>
     </Stack>
@@ -132,7 +127,7 @@ export default function StepperPage() {
         },
         {
           title: "แนวตั้ง",
-          description: "เหมาะกับ sidebar หรือพื้นที่แคบ — กำหนด orientation=\"vertical\"",
+          description: 'เหมาะกับ sidebar หรือพื้นที่แคบ — กำหนด orientation="vertical"',
           demo: (
             <div className="max-w-xs">
               <Stepper value={1} orientation="vertical">
@@ -152,8 +147,7 @@ export default function StepperPage() {
         },
         {
           title: "เสร็จทั้งหมด",
-          description:
-            "ส่ง value ที่เท่ากับจำนวน step เพื่อทำเครื่องหมายว่าทุกขั้นเสร็จแล้ว",
+          description: "ส่ง value ที่เท่ากับจำนวน step เพื่อทำเครื่องหมายว่าทุกขั้นเสร็จแล้ว",
           demo: (
             <Stepper value={3}>
               <StepperItem title="บัญชี" />
@@ -258,8 +252,7 @@ function MultiStepForm() {
             Root เป็น <code>&lt;ol&gt;</code> พร้อม <code>aria-orientation</code> ตาม prop
           </li>
           <li>
-            Step ปัจจุบันมี <code>aria-current=&quot;step&quot;</code> ให้ screen reader
-            ระบุตำแหน่งได้
+            Step ปัจจุบันมี <code>aria-current=&quot;step&quot;</code> ให้ screen reader ระบุตำแหน่งได้
           </li>
           <li>
             ตัวเลข / เครื่องหมายถูกในวงกลมมี <code>aria-hidden</code> เพราะข้อความ title
@@ -269,9 +262,8 @@ function MultiStepForm() {
       }
       notes={
         <p>
-          Stepper เป็นองค์ประกอบสำหรับ <em>แสดงสถานะ</em> เท่านั้น —
-          การจัดการ step state, การ validate, และการนำทาง (next/back)
-          อยู่ที่ component ฝั่งคุณ
+          Stepper เป็นองค์ประกอบสำหรับ <em>แสดงสถานะ</em> เท่านั้น — การจัดการ step state, การ validate,
+          และการนำทาง (next/back) อยู่ที่ component ฝั่งคุณ
         </p>
       }
     />

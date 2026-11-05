@@ -70,10 +70,24 @@ export default function NavigationMenuPage() {
   </NavigationMenuList>
 </NavigationMenu>`}
       props={[
-        { prop: "value / defaultValue", type: "string", description: "controlled / uncontrolled item ที่เปิด" },
+        {
+          prop: "value / defaultValue",
+          type: "string",
+          description: "controlled / uncontrolled item ที่เปิด",
+        },
         { prop: "onValueChange", type: "(value: string) => void", description: "callback เมื่อสลับ" },
-        { prop: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "ทิศทาง" },
-        { prop: "delayDuration", type: "number", default: "200", description: "หน่วงเวลาก่อนเปิด (ms)" },
+        {
+          prop: "orientation",
+          type: '"horizontal" | "vertical"',
+          default: '"horizontal"',
+          description: "ทิศทาง",
+        },
+        {
+          prop: "delayDuration",
+          type: "number",
+          default: "200",
+          description: "หน่วงเวลาก่อนเปิด (ms)",
+        },
       ]}
       accessibility={
         <ul>

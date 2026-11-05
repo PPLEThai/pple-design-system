@@ -46,8 +46,8 @@ export function MonthCalendar({
     onValueChange as ((next: Date | undefined) => void) | undefined,
   );
 
-  const [displayYear, setDisplayYear] = React.useState(
-    () => (selected ?? new Date()).getFullYear(),
+  const [displayYear, setDisplayYear] = React.useState(() =>
+    (selected ?? new Date()).getFullYear(),
   );
 
   const shortFormatter = React.useMemo(
@@ -128,8 +128,7 @@ export function MonthCalendar({
 }
 MonthCalendar.displayName = "MonthCalendar";
 
-export interface MonthPickerProps
-  extends Omit<MonthCalendarProps, "className" | "onValueChange"> {
+export interface MonthPickerProps extends Omit<MonthCalendarProps, "className" | "onValueChange"> {
   /** Fires with the selected month, or `undefined` when the value is cleared. */
   onValueChange?: (date: Date | undefined) => void;
   placeholder?: string;

@@ -43,9 +43,13 @@ export default function InputPage() {
       ]}
       accessibility={
         <ul>
-          <li>จับคู่กับ <code>&lt;Label htmlFor=...&gt;</code> เสมอ เพื่อ screen reader</li>
+          <li>
+            จับคู่กับ <code>&lt;Label htmlFor=...&gt;</code> เสมอ เพื่อ screen reader
+          </li>
           <li>โฟกัสเห็นได้ผ่าน ring</li>
-          <li>ใน react-hook-form ใช้ <code>FormTextField</code> แทนเพื่อรับ error อัตโนมัติ</li>
+          <li>
+            ใน react-hook-form ใช้ <code>FormTextField</code> แทนเพื่อรับ error อัตโนมัติ
+          </li>
         </ul>
       }
     />

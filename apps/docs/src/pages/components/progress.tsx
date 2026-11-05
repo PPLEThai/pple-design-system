@@ -34,8 +34,8 @@ export default function ProgressPage() {
       ]}
       notes={
         <p>
-          เมื่อ <code>value &lt; max</code> หรือ value ว่าง: ใช้ <code>.progress-shimmer</code>{" "}
-          แอนิเมชัน — ปิดอัตโนมัติเมื่อ prefers-reduced-motion
+          เมื่อ <code>value &lt; max</code> หรือ value ว่าง: ใช้ <code>.progress-shimmer</code> แอนิเมชัน —
+          ปิดอัตโนมัติเมื่อ prefers-reduced-motion
         </p>
       }
     />

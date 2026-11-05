@@ -27,11 +27,15 @@ export default function PopoverPage() {
               </div>
               <Stack gap="sm">
                 <div>
-                  <Label htmlFor="p-width" className="text-xs">กว้าง</Label>
+                  <Label htmlFor="p-width" className="text-xs">
+                    กว้าง
+                  </Label>
                   <Input id="p-width" defaultValue="100%" className="mt-1 h-8" />
                 </div>
                 <div>
-                  <Label htmlFor="p-height" className="text-xs">สูง</Label>
+                  <Label htmlFor="p-height" className="text-xs">
+                    สูง
+                  </Label>
                   <Input id="p-height" defaultValue="25px" className="mt-1 h-8" />
                 </div>
               </Stack>
@@ -50,23 +54,47 @@ export default function PopoverPage() {
   </PopoverContent>
 </Popover>`}
       props={[
-        { prop: "open / defaultOpen / onOpenChange", type: "Radix Popover API", description: "จัดการสถานะเปิด/ปิด" },
-        { prop: "modal", type: "boolean", default: "false", description: "เมื่อ true จะบล็อก interaction นอก popover" },
+        {
+          prop: "open / defaultOpen / onOpenChange",
+          type: "Radix Popover API",
+          description: "จัดการสถานะเปิด/ปิด",
+        },
+        {
+          prop: "modal",
+          type: "boolean",
+          default: "false",
+          description: "เมื่อ true จะบล็อก interaction นอก popover",
+        },
       ]}
       extraPropTables={[
         {
           title: "PopoverContent props",
           rows: [
-            { prop: "align", type: '"start" | "center" | "end"', default: '"center"', description: "การจัดวางอ้างอิง trigger" },
-            { prop: "side", type: '"top" | "right" | "bottom" | "left"', default: '"bottom"', description: "ทิศทาง" },
-            { prop: "sideOffset", type: "number", default: "4", description: "ระยะห่างจาก trigger (px)" },
+            {
+              prop: "align",
+              type: '"start" | "center" | "end"',
+              default: '"center"',
+              description: "การจัดวางอ้างอิง trigger",
+            },
+            {
+              prop: "side",
+              type: '"top" | "right" | "bottom" | "left"',
+              default: '"bottom"',
+              description: "ทิศทาง",
+            },
+            {
+              prop: "sideOffset",
+              type: "number",
+              default: "4",
+              description: "ระยะห่างจาก trigger (px)",
+            },
           ],
         },
       ]}
       notes={
         <p>
-          ใช้ Popover เมื่อต้องการให้ผู้ใช้แก้ค่าโดยไม่ทิ้งบริบทหน้าจอ; ใช้ Dialog เมื่อต้อง
-          interrupt; ใช้ DropdownMenu สำหรับรายการคำสั่ง
+          ใช้ Popover เมื่อต้องการให้ผู้ใช้แก้ค่าโดยไม่ทิ้งบริบทหน้าจอ; ใช้ Dialog เมื่อต้อง interrupt; ใช้ DropdownMenu
+          สำหรับรายการคำสั่ง
         </p>
       }
     />

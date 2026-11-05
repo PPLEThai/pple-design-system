@@ -66,7 +66,11 @@ export default function SheetPage() {
   </SheetContent>
 </Sheet>`}
       props={[
-        { prop: "open / defaultOpen / onOpenChange", type: "Dialog API", description: "เหมือน Dialog — ใช้ @radix-ui/react-dialog เป็นฐาน" },
+        {
+          prop: "open / defaultOpen / onOpenChange",
+          type: "Dialog API",
+          description: "เหมือน Dialog — ใช้ @radix-ui/react-dialog เป็นฐาน",
+        },
       ]}
       extraPropTables={[
         {
@@ -84,7 +88,9 @@ export default function SheetPage() {
       accessibility={
         <ul>
           <li>Esc ปิด; focus trap; ปุ่ม X อัตโนมัติที่มุมขวาบน</li>
-          <li>ต้องมี <code>SheetTitle</code> เพื่อ screen reader</li>
+          <li>
+            ต้องมี <code>SheetTitle</code> เพื่อ screen reader
+          </li>
         </ul>
       }
     />

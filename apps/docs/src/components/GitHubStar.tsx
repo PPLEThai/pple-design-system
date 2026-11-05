@@ -36,9 +36,7 @@ export function GitHubStar() {
         target="_blank"
         rel="noreferrer"
         aria-label={
-          stars !== null
-            ? `Star ${REPO} on GitHub — ${stars} stars`
-            : `Star ${REPO} on GitHub`
+          stars !== null ? `Star ${REPO} on GitHub — ${stars} stars` : `Star ${REPO} on GitHub`
         }
       >
         <Github />

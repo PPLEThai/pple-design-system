@@ -21,8 +21,7 @@ const RadioGroupContext = React.createContext<RadioGroupContextValue | null>(nul
 
 function prefersReducedMotion() {
   return (
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
 }
 
@@ -116,10 +115,7 @@ export const RadioGroupItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
 >(({ className, value: itemValue, ...props }, ref) => {
   const context = React.useContext(RadioGroupContext);
-  const phase =
-    context && itemValue !== undefined
-      ? context.getItemPhase(itemValue)
-      : undefined;
+  const phase = context && itemValue !== undefined ? context.getItemPhase(itemValue) : undefined;
 
   const animated = phase === "exit" || phase === "enter" || phase === "settled";
   const useAnimation = context !== null && phase !== undefined;
@@ -139,8 +135,14 @@ export const RadioGroupItem = React.forwardRef<
     >
       {useAnimation ? (
         animated && (
-          <RadioGroupPrimitive.Indicator forceMount className="flex h-full w-full items-center justify-center">
-            <span className="radio-dot block h-2.5 w-2.5 shrink-0 rounded-full bg-primary" aria-hidden />
+          <RadioGroupPrimitive.Indicator
+            forceMount
+            className="flex h-full w-full items-center justify-center"
+          >
+            <span
+              className="radio-dot block h-2.5 w-2.5 shrink-0 rounded-full bg-primary"
+              aria-hidden
+            />
           </RadioGroupPrimitive.Indicator>
         )
       ) : (

@@ -1,4 +1,11 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, Stack } from "@pplethai/components";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Stack,
+} from "@pplethai/components";
 import { Link } from "react-router-dom";
 import { componentCatalog } from "./catalog";
 

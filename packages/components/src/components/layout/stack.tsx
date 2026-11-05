@@ -25,7 +25,8 @@ const stackVariants = cva("flex flex-col", {
 });
 
 export interface StackProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof stackVariants>,
     VariantProps<typeof gapVariants> {
   as?: React.ElementType;

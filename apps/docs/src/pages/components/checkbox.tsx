@@ -51,7 +51,9 @@ export default function CheckboxPage() {
       ]}
       accessibility={
         <ul>
-          <li>จับคู่กับ Label ผ่าน <code>htmlFor</code></li>
+          <li>
+            จับคู่กับ Label ผ่าน <code>htmlFor</code>
+          </li>
           <li>กด Space เพื่อสลับสถานะ</li>
           <li>แอนิเมชันถูกย่อเป็น 0.01ms เมื่อระบบตั้ง prefers-reduced-motion</li>
         </ul>

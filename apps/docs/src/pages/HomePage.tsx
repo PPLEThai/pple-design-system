@@ -22,8 +22,8 @@ export function HomePage() {
       <div>
         <h1 className="text-3xl font-semibold">@pplethai/components</h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">
-          ระบบดีไซน์พรรคประชาชน — คอมโพเนนต์ React บน shadcn/ui ใช้ฟอนต์ Anakotmai สำหรับหัวข้อ
-          IBM Plex Sans Thai Looped สำหรับเนื้อหา และโทเคนสีแบรนด์
+          ระบบดีไซน์พรรคประชาชน — คอมโพเนนต์ React บน shadcn/ui ใช้ฟอนต์ Anakotmai สำหรับหัวข้อ IBM Plex
+          Sans Thai Looped สำหรับเนื้อหา และโทเคนสีแบรนด์
         </p>
       </div>
 
@@ -45,9 +45,7 @@ import "@pplethai/components/styles.css";`}</CodeBlock>
       <Card>
         <CardHeader>
           <CardTitle>ตัวอย่างสั้นๆ</CardTitle>
-          <CardDescription>
-            การ์ดอยู่กลางจอบนพื้นไล่สีแบรนด์ — สำหรับหน้า login/signup
-          </CardDescription>
+          <CardDescription>การ์ดอยู่กลางจอบนพื้นไล่สีแบรนด์ — สำหรับหน้า login/signup</CardDescription>
         </CardHeader>
         <CardContent>
           <div className={cn("overflow-hidden rounded-md border bg-gradient-brand p-8")}>

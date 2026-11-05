@@ -20,9 +20,11 @@ export function CodeBlock({ children, language, className }: CodeBlockProps) {
   useEffect(() => {
     let active = true;
     setHtml(null);
-    import("../lib/shiki").then(({ highlightCode }) => highlightCode(code, language)).then((result) => {
-      if (active) setHtml(result);
-    });
+    import("../lib/shiki")
+      .then(({ highlightCode }) => highlightCode(code, language))
+      .then((result) => {
+        if (active) setHtml(result);
+      });
     return () => {
       active = false;
     };

@@ -4,8 +4,7 @@ import { containerVariants } from "../../lib/variants";
 import { cn } from "../../lib/utils";
 
 export interface ContainerProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof containerVariants> {
+  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof containerVariants> {
   as?: React.ElementType;
 }
 

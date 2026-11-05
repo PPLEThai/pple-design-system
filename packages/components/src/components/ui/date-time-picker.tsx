@@ -38,10 +38,7 @@ export interface DateTimePickerProps {
    */
   native?: boolean;
   /** Extra props forwarded to the underlying {@link Calendar}. */
-  calendarProps?: Omit<
-    CalendarProps,
-    "mode" | "selected" | "onSelect" | "locale" | "defaultMonth"
-  >;
+  calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect" | "locale" | "defaultMonth">;
 }
 
 const DEFAULT_DATE_FORMAT = "d MMM yyyy";
@@ -90,12 +87,7 @@ export function DateTimePicker({
     }
     const next = new Date(date);
     if (selected) {
-      next.setHours(
-        selected.getHours(),
-        selected.getMinutes(),
-        selected.getSeconds(),
-        0,
-      );
+      next.setHours(selected.getHours(), selected.getMinutes(), selected.getSeconds(), 0);
     } else {
       next.setHours(0, 0, 0, 0);
     }

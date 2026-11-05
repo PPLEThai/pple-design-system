@@ -7,18 +7,14 @@
     "type": "git",
     "url": "git+https://github.com/PPLEThai/pple-design-system.git"
   },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
-  "type": "module",
-  "sideEffects": [
-    "**/*.css"
-  ],
   "files": [
     "dist",
     "tailwind.preset.ts",
     "README.md"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
   ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -39,6 +35,10 @@
     "./styles.css": "./dist/styles.css",
     "./tailwind-preset": "./tailwind.preset.ts"
   },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "scripts": {
     "build": "tsup && pnpm build:css",
     "build:css": "tailwindcss -i ./src/styles/globals.css -o ./dist/styles.css --minify",
@@ -46,12 +46,6 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
-  },
-  "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18",
-    "react-hook-form": ">=7",
-    "zod": ">=3"
   },
   "dependencies": {
     "@fontsource/ibm-plex-sans-thai-looped": "^5.1.0",
@@ -96,5 +90,11 @@
     "typescript": "^5.7.2",
     "vitest": "^2.1.8",
     "zod": "^3.24.1"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18",
+    "react-hook-form": ">=7",
+    "zod": ">=3"
   }
 }

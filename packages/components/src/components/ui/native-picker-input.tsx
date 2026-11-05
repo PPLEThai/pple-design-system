@@ -110,9 +110,7 @@ export function NativePickerInput({
         min={min ? dateToNativeValue(min, type, showSeconds) : undefined}
         max={max ? dateToNativeValue(max, type, showSeconds) : undefined}
         step={nativeStep}
-        onChange={(event) =>
-          onValueChange(nativeValueToDate(event.target.value, type, value))
-        }
+        onChange={(event) => onValueChange(nativeValueToDate(event.target.value, type, value))}
         className="absolute inset-0 h-full w-full cursor-pointer opacity-0 disabled:cursor-not-allowed"
       />
       {/* Sits above the input so the tap clears instead of opening the picker. */}

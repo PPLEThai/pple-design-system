@@ -88,11 +88,7 @@ function MyLayout() {
           description: "ไม่ต้องส่ง renderLink — ใช้ default ที่ render เป็น <a href=...>",
           demo: (
             <div className="overflow-hidden rounded-md border">
-              <Navbar
-                title="แบบเรียบง่าย"
-                items={demoItems}
-                pathname="/forms"
-              />
+              <Navbar title="แบบเรียบง่าย" items={demoItems} pathname="/forms" />
             </div>
           ),
           code: `<Navbar
@@ -110,11 +106,7 @@ function MyLayout() {
             "ส่ง children เพื่อแสดงคอนเทนต์ใด ๆ ทางขวาของลิงก์บนเดสก์ท็อป — บนมือถือจะแสดงด้านบนของเมนูดรอปดาวน์",
           demo: (
             <div className="overflow-hidden rounded-md border">
-              <Navbar
-                title="พร้อม actions"
-                items={demoItems}
-                pathname="/components"
-              >
+              <Navbar title="พร้อม actions" items={demoItems} pathname="/components">
                 <Inline gap="xs" align="center">
                   <Button variant="ghost" size="icon" aria-label="แจ้งเตือน">
                     <Bell />
@@ -145,7 +137,12 @@ function MyLayout() {
         },
       ]}
       props={[
-        { prop: "title", type: "string", required: true, description: "ชื่อระบบที่แสดงข้างโลโก้ (คลิกได้ร่วมกับโลโก้เมื่อเปิด home link)" },
+        {
+          prop: "title",
+          type: "string",
+          required: true,
+          description: "ชื่อระบบที่แสดงข้างโลโก้ (คลิกได้ร่วมกับโลโก้เมื่อเปิด home link)",
+        },
         { prop: "items", type: "NavbarItem[]", required: true, description: "รายการลิงก์ในเมนู" },
         {
           prop: "children",
@@ -159,7 +156,12 @@ function MyLayout() {
           default: '{ href: "/", end: true }',
           description: "ลิงก์หน้าแรกสำหรับโลโก้+ชื่อ — ส่ง false เพื่อปิด",
         },
-        { prop: "pathname", type: "string", default: '""', description: "ใช้ระบุ active state และปิดเมนูมือถือเมื่อย้าย route" },
+        {
+          prop: "pathname",
+          type: "string",
+          default: '""',
+          description: "ใช้ระบุ active state และปิดเมนูมือถือเมื่อย้าย route",
+        },
         {
           prop: "renderHomeLink",
           type: "(props: NavbarHomeLinkRenderProps) => ReactNode",
@@ -170,7 +172,12 @@ function MyLayout() {
           type: "(props: NavbarLinkRenderProps) => ReactNode",
           description: "custom renderer (เช่น NavLink ของ Router) — default เป็น <a href>",
         },
-        { prop: "logo", type: "ReactNode", default: "<Logo size='sm' />", description: "โลโก้ที่ใช้แทน Logo เริ่มต้น" },
+        {
+          prop: "logo",
+          type: "ReactNode",
+          default: "<Logo size='sm' />",
+          description: "โลโก้ที่ใช้แทน Logo เริ่มต้น",
+        },
         {
           prop: "mobileMenuAriaLabel",
           type: "{ open: string; close: string }",
@@ -187,7 +194,7 @@ function MyLayout() {
           prop: "variant",
           type: '"light" | "dark"',
           description:
-            'สไตล์แถบนำทาง — light = พื้นขาว padding กะทัดรัด, dark = gradient น้ำเงิน padding สูงขึ้น; ถ้าระบุจะ override การตรวจ mini-app จาก user agent',
+            "สไตล์แถบนำทาง — light = พื้นขาว padding กะทัดรัด, dark = gradient น้ำเงิน padding สูงขึ้น; ถ้าระบุจะ override การตรวจ mini-app จาก user agent",
         },
       ]}
       extraPropTables={[
@@ -195,7 +202,12 @@ function MyLayout() {
           title: "NavbarHome",
           rows: [
             { prop: "href", type: "string", required: true, description: "URL หน้าแรก" },
-            { prop: "end", type: "boolean", default: "false", description: "เปิดเฉพาะเมื่อ pathname ตรงเป๊ะ (default ของ home คือ true)" },
+            {
+              prop: "end",
+              type: "boolean",
+              default: "false",
+              description: "เปิดเฉพาะเมื่อ pathname ตรงเป๊ะ (default ของ home คือ true)",
+            },
           ],
         },
         {
@@ -203,7 +215,12 @@ function MyLayout() {
           rows: [
             { prop: "href", type: "string", required: true, description: "URL ของลิงก์" },
             { prop: "label", type: "string", required: true, description: "ข้อความแสดง" },
-            { prop: "end", type: "boolean", default: "false", description: "เปิดเฉพาะเมื่อ pathname ตรงเป๊ะ (เหมาะกับหน้าแรก)" },
+            {
+              prop: "end",
+              type: "boolean",
+              default: "false",
+              description: "เปิดเฉพาะเมื่อ pathname ตรงเป๊ะ (เหมาะกับหน้าแรก)",
+            },
           ],
         },
       ]}

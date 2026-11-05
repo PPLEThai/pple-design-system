@@ -5,8 +5,7 @@ export const dropdownFieldStyles = {
   option:
     "flex w-full cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm text-foreground outline-none transition-colors hover:bg-primary/10 focus:bg-primary/10 focus-visible:bg-primary/10",
   optionSelected: "font-medium text-foreground hover:bg-primary/10 focus:bg-primary/10",
-  chip:
-    "inline-flex items-center gap-1 rounded-sm border border-primary/20 bg-primary/10 px-2 py-0.5 text-xs font-medium text-foreground",
+  chip: "inline-flex items-center gap-1 rounded-sm border border-primary/20 bg-primary/10 px-2 py-0.5 text-xs font-medium text-foreground",
   chipRemove:
     "rounded-sm text-foreground/70 outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
   checkIcon: "h-4 w-4 shrink-0 text-foreground",

@@ -17,8 +17,7 @@ export const logoVariants = cva("shrink-0", {
 });
 
 export interface LogoProps
-  extends React.SVGAttributes<SVGSVGElement>,
-  VariantProps<typeof logoVariants> {
+  extends React.SVGAttributes<SVGSVGElement>, VariantProps<typeof logoVariants> {
   /** Accessible label when the logo is meaningful (e.g. link home). Defaults to "People's Party". */
   title?: string;
 }
@@ -44,9 +43,18 @@ export function Logo({
       {...props}
     >
       {title ? <title>{title}</title> : null}
-      <polygon points="4.04 0 45.39 0 119.52 128.41 94.81 171.21 0 6.99 4.04 0" fill="currentColor" />
-      <polygon points="123.74 221.32 103.06 185.51 177.19 57.11 226.62 57.11 131.8 221.32 123.74 221.32" fill="currentColor" />
-      <polygon points="255.53 7.01 234.85 42.82 86.58 42.82 61.87 .02 251.5 .02 255.53 7.01" fill="currentColor" />
+      <polygon
+        points="4.04 0 45.39 0 119.52 128.41 94.81 171.21 0 6.99 4.04 0"
+        fill="currentColor"
+      />
+      <polygon
+        points="123.74 221.32 103.06 185.51 177.19 57.11 226.62 57.11 131.8 221.32 123.74 221.32"
+        fill="currentColor"
+      />
+      <polygon
+        points="255.53 7.01 234.85 42.82 86.58 42.82 61.87 .02 251.5 .02 255.53 7.01"
+        fill="currentColor"
+      />
     </svg>
   );
 }
