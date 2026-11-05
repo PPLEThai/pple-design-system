@@ -41,7 +41,7 @@ export const Checkbox = React.forwardRef<
         onCheckedChange?.(value);
         return;
       }
-      const isChecked = value === true;
+      const isChecked = value;
       if (isChecked) {
         setSettledChecked(false);
         setAnimation("check");
@@ -61,7 +61,7 @@ export const Checkbox = React.forwardRef<
       defaultChecked={defaultChecked}
       onCheckedChange={handleCheckedChange}
       className={cn(
-        "checkbox-root peer relative inline-flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden rounded-sm border border-primary bg-background text-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        "peer relative inline-flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden rounded-sm border border-primary checkbox-root bg-background text-primary ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
         settledChecked && "checkbox-settled",
         animation === "check" && "checkbox-animate-check",
         animation === "uncheck" && "checkbox-animate-uncheck",
@@ -77,7 +77,7 @@ export const Checkbox = React.forwardRef<
           <path
             d={CHECK_PATH}
             pathLength={1}
-            className="checkbox-check-path fill-none stroke-current [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:2] [stroke-dasharray:1]"
+            className="checkbox-check-path fill-none stroke-current stroke-2 [stroke-dasharray:1] [stroke-linecap:round] [stroke-linejoin:round]"
           />
         </svg>
       </CheckboxPrimitive.Indicator>

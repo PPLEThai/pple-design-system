@@ -80,11 +80,11 @@ export function Autocomplete(props: AutocompleteProps) {
       const next = current.includes(optionValue)
         ? current.filter((item) => item !== optionValue)
         : [...current, optionValue];
-      (props as AutocompleteMultipleProps).onValueChange(next);
+      props.onValueChange(next);
       return;
     }
 
-    (props as AutocompleteSingleProps).onValueChange(optionValue);
+    props.onValueChange(optionValue);
     setSearch(options.find((option) => option.value === optionValue)?.label ?? "");
     setOpen(false);
   };
@@ -92,9 +92,7 @@ export function Autocomplete(props: AutocompleteProps) {
   const removeValue = (optionValue: string, event: React.MouseEvent) => {
     event.stopPropagation();
     if (!isMultiple) return;
-    (props as AutocompleteMultipleProps).onValueChange(
-      (value as string[]).filter((item) => item !== optionValue),
-    );
+    props.onValueChange((value as string[]).filter((item) => item !== optionValue));
   };
 
   const singleDisplayValue = React.useMemo(() => {
@@ -123,7 +121,7 @@ export function Autocomplete(props: AutocompleteProps) {
           onRemove={removeValue}
         />
         <PopoverContent
-          className="w-[var(--radix-popover-trigger-width)] p-0"
+          className="w-(--radix-popover-trigger-width) p-0"
           {...autocompletePopoverContentProps}
         >
           <div className="border-b p-2">
@@ -138,7 +136,7 @@ export function Autocomplete(props: AutocompleteProps) {
             options={filteredOptions}
             emptyMessage={emptyMessage}
             isMultiple
-            value={value as string[]}
+            value={value}
             onSelect={selectOption}
           />
         </PopoverContent>
@@ -166,20 +164,20 @@ export function Autocomplete(props: AutocompleteProps) {
               setSearch(event.target.value);
               openPopover();
               if (event.target.value === "") {
-                (props as AutocompleteSingleProps).onValueChange("");
+                props.onValueChange("");
               }
             }}
           />
           <ChevronDown
             className={cn(
-              "pointer-events-none absolute right-3 top-1/2 -translate-y-1/2",
+              "pointer-events-none absolute top-1/2 right-3 -translate-y-1/2",
               dropdownFieldStyles.chevron,
             )}
           />
         </div>
       </PopoverAnchor>
       <PopoverContent
-        className="w-[var(--radix-popover-trigger-width)] p-0"
+        className="w-(--radix-popover-trigger-width) p-0"
         {...autocompletePopoverContentProps}
       >
         <OptionList
@@ -187,7 +185,7 @@ export function Autocomplete(props: AutocompleteProps) {
           options={filteredOptions}
           emptyMessage={emptyMessage}
           isMultiple={false}
-          value={value as string}
+          value={value}
           onSelect={selectOption}
         />
       </PopoverContent>

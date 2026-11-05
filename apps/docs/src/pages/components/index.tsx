@@ -29,7 +29,7 @@ export function ComponentsIndex() {
               <Link
                 key={entry.slug}
                 to={`/components/${entry.slug}`}
-                className="rounded-lg outline-none transition-shadow focus-visible:ring-2 focus-visible:ring-ring"
+                className="rounded-lg transition-shadow outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Card className="h-full transition-colors hover:bg-muted/40">
                   <CardHeader className="pb-2">

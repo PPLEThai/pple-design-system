@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as LabelPrimitive from "@radix-ui/react-label";
+import type * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
 import {
   Controller,
@@ -71,7 +71,8 @@ export const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
 
     return (
       <FormItemContext.Provider value={{ id }}>
-        <div ref={ref} className={cn("space-y-2", className)} {...props} />
+        {/* v3 `space-y-2` semantics (margin-top on later siblings) keep the inline label's line box. */}
+        <div ref={ref} className={cn("[&>*+*]:mt-2", className)} {...props} />
       </FormItemContext.Provider>
     );
   },
@@ -105,7 +106,7 @@ export const FormControl = React.forwardRef<
     <Slot
       ref={ref}
       id={formItemId}
-      aria-describedby={!error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`}
+      aria-describedby={!error ? formDescriptionId : `${formDescriptionId} ${formMessageId}`}
       aria-invalid={!!error}
       {...props}
     />

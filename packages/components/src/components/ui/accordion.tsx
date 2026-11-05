@@ -10,7 +10,7 @@ export const Accordion = React.forwardRef<
   <AccordionPrimitive.Root
     ref={ref}
     className={cn(
-      "overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-sm",
+      "overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-xs",
       className,
     )}
     {...props}
@@ -45,7 +45,7 @@ export const AccordionTrigger = React.forwardRef<
     >
       {children}
       <ChevronDown
-        className="h-5 w-5 shrink-0 text-foreground stroke-[2.5] transition-transform duration-200"
+        className="h-5 w-5 shrink-0 stroke-[2.5] text-foreground transition-transform duration-200"
         aria-hidden
       />
     </AccordionPrimitive.Trigger>
@@ -64,7 +64,7 @@ export const AccordionContent = React.forwardRef<
   >
     <div
       className={cn(
-        "border-t border-border bg-muted/30 px-4 pb-4 pt-3 text-muted-foreground",
+        "border-t border-border bg-muted/30 px-4 pt-3 pb-4 text-muted-foreground",
         className,
       )}
     >

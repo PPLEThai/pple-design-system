@@ -6,7 +6,7 @@
 2. Use `cn()` and export `*Variants` for variant-driven components.
 3. Export from `packages/components/src/index.ts`.
 4. Add a docs example in `apps/docs/src/pages/`.
-5. Run `pnpm changeset` for user-facing changes.
+5. Run `bun run changeset` for user-facing changes.
 
 ## Conventions
 

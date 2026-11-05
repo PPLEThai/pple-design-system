@@ -35,7 +35,7 @@ export function HomePage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <CodeBlock>{`pnpm add @pplethai/components react react-dom react-hook-form zod
+          <CodeBlock>{`bun add @pplethai/components react react-dom react-hook-form zod
 
 // ใน entry ของแอป:
 import "@pplethai/components/styles.css";`}</CodeBlock>

@@ -28,7 +28,7 @@ A complete, self-contained reference for AI agents working with the People's Par
 ## 1. Install & setup
 
 ```bash
-pnpm add @pplethai/components react react-dom react-hook-form zod
+bun add @pplethai/components react react-dom react-hook-form zod
 ```
 
 **Peer deps:** `react >=18`, `react-dom >=18`, `react-hook-form >=7`, `zod >=3`. Forms work only if both are present.
@@ -40,22 +40,19 @@ pnpm add @pplethai/components react react-dom react-hook-form zod
 import "@pplethai/components/styles.css";
 ```
 
-### 1.2 Tailwind preset (required)
+### 1.2 Tailwind CSS v4 theme (required)
 
-```ts
-// tailwind.config.ts
-import type { Config } from "tailwindcss";
-import preset from "@pplethai/components/tailwind-preset";
-
-export default {
-  presets: [preset],
-  content: [
-    "./src/**/*.{ts,tsx}",
-    // include compiled library so utility classes survive purge
-    "./node_modules/@pplethai/components/dist/**/*.js",
-  ],
-} satisfies Config;
+```css
+/* your app's main stylesheet (Tailwind CSS v4) */
+@import "tailwindcss";
+@import "@pplethai/components/theme.css";
+@source "../node_modules/@pplethai/components/dist";
 ```
+
+`theme.css` carries the design tokens (colors, type scale, radius, animations, dark variant) and
+base styles. The `@source` path is relative to the stylesheet; point it at the installed package
+so Tailwind keeps the classes the components use. Tailwind CSS v3 and `tailwind-preset` are no
+longer supported (removed in 2.0.0).
 
 ### 1.3 Mount the `<Toaster />` once
 
@@ -79,11 +76,11 @@ export default function App() {
 | `@pplethai/components` | All UI + layout + utilities (Button, Card, Stack, cn, …) |
 | `@pplethai/components/form` | `Form`, `FormField`, `FormTextField`, `FormSelectField`, `FormCheckboxField`, `useFormField` (needs `react-hook-form` + `zod`) |
 | `@pplethai/components/styles.css` | Compiled CSS — import once |
-| `@pplethai/components/tailwind-preset` | Tailwind preset re-exporting theme + plugins |
+| `@pplethai/components/theme.css` | Tailwind CSS v4 theme — import after `tailwindcss` |
 
 ### 1.5 Typography
 
-Headings use **Anakotmai** (from party CDN, medium only). Body uses **IBM Plex Sans Thai Looped** via `@fontsource` (auto-bundled). Apply with `font-heading` / `font-body` (preset provides). All `h1`–`h6` get `font-heading` automatically via `@layer base`.
+Headings use **Anakotmai** (from party CDN, medium only). Body uses **IBM Plex Sans Thai Looped** via `@fontsource` (auto-bundled). Apply with `font-heading` / `font-body` (`theme.css` provides). All `h1`–`h6` get `font-heading` automatically via `@layer base`.
 
 ---
 

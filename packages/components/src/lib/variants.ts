@@ -20,9 +20,9 @@ export type GapVariants = VariantProps<typeof gapVariants>;
 export const containerVariants = cva("mx-auto w-full px-4 md:px-6", {
   variants: {
     size: {
-      sm: "max-w-screen-sm",
-      md: "max-w-screen-md",
-      lg: "max-w-screen-xl",
+      sm: "max-w-(--breakpoint-sm)",
+      md: "max-w-(--breakpoint-md)",
+      lg: "max-w-(--breakpoint-xl)",
       full: "max-w-full",
     },
   },

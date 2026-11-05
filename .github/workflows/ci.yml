@@ -15,21 +15,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: 20
-          cache: pnpm
+          bun-version-file: .bun-version
 
-      - run: pnpm install --frozen-lockfile
+      - run: bun install --frozen-lockfile
 
-      - run: pnpm lint
+      - run: bun run format:check
 
-      - run: pnpm typecheck
+      - run: bun run lint
 
-      - run: pnpm test
+      - run: bun run typecheck
 
-      - run: pnpm --filter @pplethai/components build
+      - run: bun run test
 
-      - run: pnpm --filter docs build
+      - run: bun run --filter @pplethai/components build
+
+      - run: bun run --filter docs build

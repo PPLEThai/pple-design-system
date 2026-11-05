@@ -15,7 +15,7 @@ function DeterminateDemo() {
   return (
     <Inline gap="md" align="center">
       <Spinner value={value} size="lg" />
-      <span className="text-sm tabular-nums text-muted-foreground">{value}%</span>
+      <span className="text-sm text-muted-foreground tabular-nums">{value}%</span>
     </Inline>
   );
 }

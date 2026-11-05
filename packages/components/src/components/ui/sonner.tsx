@@ -15,10 +15,10 @@ const toastTitle = "font-heading text-sm font-medium leading-snug text-foregroun
 const toastDescription = "text-sm text-muted-foreground leading-body";
 
 const toastAction =
-  "font-heading !inline-flex h-9 shrink-0 items-center justify-center rounded-md bg-gradient-primary px-3 text-sm font-medium text-primary-foreground shadow-sm hover:brightness-95";
+  "font-heading inline-flex! h-9 shrink-0 items-center justify-center rounded-md bg-gradient-primary px-3 text-sm font-medium text-primary-foreground shadow-xs hover:brightness-95";
 
 const toastCancel =
-  "font-heading !inline-flex h-9 shrink-0 items-center justify-center rounded-md border border-input bg-background px-3 text-sm font-medium text-foreground hover:bg-muted";
+  "font-heading inline-flex! h-9 shrink-0 items-center justify-center rounded-md border border-input bg-background px-3 text-sm font-medium text-foreground hover:bg-muted";
 
 const Toaster = ({ className, ...props }: ToasterProps) => {
   return (
@@ -42,7 +42,7 @@ const Toaster = ({ className, ...props }: ToasterProps) => {
           description: toastDescription,
           actionButton: toastAction,
           cancelButton: toastCancel,
-          closeButton: "!border-solid",
+          closeButton: "border-solid!",
         },
       }}
       {...props}

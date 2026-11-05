@@ -68,7 +68,7 @@ export function PatternsPage() {
             <div className="flex">
               <aside className="hidden w-48 shrink-0 border-r bg-background p-4 md:block">
                 <Stack gap="xs">
-                  <p className="mb-2 px-2 text-xs font-semibold uppercase text-muted-foreground">
+                  <p className="mb-2 px-2 text-xs font-semibold text-muted-foreground uppercase">
                     บัญชี
                   </p>
                   <button className="rounded-md bg-muted px-2 py-1 text-left text-sm font-medium">

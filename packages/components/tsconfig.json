@@ -16,6 +16,5 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["src"],
-  "exclude": ["**/*.test.tsx", "**/*.test.ts"]
+  "include": ["src"]
 }

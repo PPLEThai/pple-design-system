@@ -15,7 +15,7 @@ describe("useControllableState", () => {
     const onChange = vi.fn();
     const { result, rerender } = renderHook(
       ({ value }) => useControllableState<number>(value, undefined, onChange),
-      { initialProps: { value: 1 as number | undefined } },
+      { initialProps: { value: 1 } },
     );
 
     expect(result.current[0]).toBe(1);

@@ -50,9 +50,11 @@ export function FormsPage() {
         <CardContent>
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit((data) => {
-                alert(JSON.stringify(data, null, 2));
-              })}
+              onSubmit={(event) => {
+                void form.handleSubmit((data) => {
+                  alert(JSON.stringify(data, null, 2));
+                })(event);
+              }}
               className="space-y-4"
             >
               <FormTextField control={form.control} name="name" label="ชื่อ" placeholder="ชื่อของคุณ" />
