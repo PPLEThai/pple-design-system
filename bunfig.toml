@@ -1,0 +1,3 @@
+[install]
+# Pin exact versions on `bun add` so the lockfile and package.json never drift.
+exact = true

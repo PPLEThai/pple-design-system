@@ -125,7 +125,7 @@ export const RadioGroupItem = React.forwardRef<
       ref={ref}
       value={itemValue}
       className={cn(
-        "radio-root relative inline-flex aspect-square h-4 w-4 shrink-0 items-center justify-center overflow-hidden rounded-full border border-primary bg-background text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        "relative inline-flex aspect-square h-4 w-4 shrink-0 radio-root items-center justify-center overflow-hidden rounded-full border border-primary bg-background text-primary ring-offset-background focus:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
         phase === "settled" && "radio-settled",
         phase === "enter" && "radio-animate-enter",
         phase === "exit" && "radio-animate-exit",
@@ -140,7 +140,7 @@ export const RadioGroupItem = React.forwardRef<
             className="flex h-full w-full items-center justify-center"
           >
             <span
-              className="radio-dot block h-2.5 w-2.5 shrink-0 rounded-full bg-primary"
+              className="block h-2.5 w-2.5 shrink-0 radio-dot rounded-full bg-primary"
               aria-hidden
             />
           </RadioGroupPrimitive.Indicator>

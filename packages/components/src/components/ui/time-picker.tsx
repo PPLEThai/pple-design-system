@@ -58,7 +58,7 @@ function TimeColumn({ label, values, selected, onSelect }: TimeColumnProps) {
       <div className="pb-1 text-center text-xs font-medium text-muted-foreground">{label}</div>
       <div
         ref={listRef}
-        className="flex max-h-56 flex-col gap-1 overflow-y-auto px-1 pb-1 [scrollbar-width:thin]"
+        className="flex max-h-56 scrollbar-thin flex-col gap-1 overflow-y-auto px-1 pb-1"
       >
         {values.map((value) => {
           const isSelected = value === selected;
@@ -190,7 +190,7 @@ export function TimePicker({
   const [selected, setSelected] = useControllableState<Date | undefined>(
     value,
     defaultValue,
-    onValueChange as ((next: Date | undefined) => void) | undefined,
+    onValueChange,
   );
 
   const useNative = useNativePicker("time", native);
@@ -240,7 +240,7 @@ export function TimePicker({
               inputBaseClassName,
               "items-center justify-start gap-2 text-left font-normal tabular-nums",
               "[&_svg]:size-4 [&_svg]:shrink-0",
-              "data-[empty]:text-muted-foreground/60",
+              "data-empty:text-muted-foreground/60",
               showClear && "pr-9",
             )}
           >
@@ -254,7 +254,7 @@ export function TimePicker({
             onPointerDown={handleClear}
             onClick={handleClear}
             aria-label="ล้างค่า"
-            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="absolute top-1/2 right-2 -translate-y-1/2 rounded-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-hidden"
           >
             <X className="size-4" />
           </button>

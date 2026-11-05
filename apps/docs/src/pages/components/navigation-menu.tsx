@@ -44,7 +44,7 @@ export default function NavigationMenuPage() {
             <NavigationMenuItem>
               <NavigationMenuLink
                 href="/guidelines"
-                className="font-heading inline-flex h-10 items-center rounded-md px-4 text-sm font-medium hover:bg-muted"
+                className="inline-flex h-10 items-center rounded-md px-4 font-heading text-sm font-medium hover:bg-muted"
               >
                 แนวทาง
               </NavigationMenuLink>

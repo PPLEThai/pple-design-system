@@ -109,11 +109,11 @@ export function FormCheckboxField<T extends FieldValues>({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+        <FormItem className="flex flex-row items-start gap-3 [&>*+*]:mt-0">
           <FormControl>
             <Checkbox checked={field.value} onCheckedChange={field.onChange} />
           </FormControl>
-          <div className="space-y-1 leading-none">
+          <div className="leading-none [&>*+*]:mt-1">
             <FormLabel>{label}</FormLabel>
             {description ? <FormDescription>{description}</FormDescription> : null}
           </div>

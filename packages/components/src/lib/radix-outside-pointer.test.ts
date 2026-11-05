@@ -84,7 +84,7 @@ describe("composePopoverDismissHandlers", () => {
 
     const { onInteractOutside } = composePopoverDismissHandlers();
     const event = new CustomEvent("interactOutside", {
-      detail: { originalEvent: { target: input } as PointerEvent },
+      detail: { originalEvent: { target: input } as unknown as PointerEvent },
     });
     Object.defineProperty(event, "target", { value: input });
     const preventDefault = vi.spyOn(event, "preventDefault");

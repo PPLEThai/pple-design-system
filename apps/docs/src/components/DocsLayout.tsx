@@ -22,7 +22,7 @@ export function DocsLayout() {
             </NavLink>
             {componentCatalog.map((group) => (
               <div key={group.title}>
-                <p className="mb-1 px-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                <p className="mb-1 px-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
                   {group.title}
                 </p>
                 <Stack gap="none" as="ul">

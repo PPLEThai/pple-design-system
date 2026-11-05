@@ -111,7 +111,7 @@ export const StepperItem = React.forwardRef<HTMLLIElement, StepperItemProps>(
       <div className={cn("min-w-0", isHorizontal ? "mt-2" : "pt-1")}>
         <p
           className={cn(
-            "font-heading text-sm font-medium leading-tight",
+            "font-heading text-sm leading-tight font-medium",
             isCompleted || isCurrent ? "text-foreground" : "text-muted-foreground",
           )}
         >

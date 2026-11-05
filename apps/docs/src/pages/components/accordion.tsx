@@ -21,7 +21,7 @@ export default function AccordionPage() {
           <AccordionItem value="q3">
             <AccordionTrigger>ต้องตั้งค่า Tailwind ไหม?</AccordionTrigger>
             <AccordionContent>
-              ต้อง — import preset จาก <code>@pplethai/components/tailwind-preset</code>
+              ต้อง — ใช้ Tailwind CSS v4 แล้ว import <code>@pplethai/components/theme.css</code>
             </AccordionContent>
           </AccordionItem>
         </Accordion>

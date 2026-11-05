@@ -14,16 +14,17 @@ Monorepo for **@pplethai/components** — the People's Party React design system
 ## Development
 
 ```bash
-pnpm install
-pnpm dev          # docs site at http://localhost:5173
-pnpm build        # build library + docs
-pnpm test         # vitest in packages/components
+bun install       # Bun version is pinned in .bun-version
+bun run dev       # docs site at http://localhost:5173
+bun run build     # build library + docs
+bun run test      # vitest in packages/components
+bun run check     # format check + lint + typecheck + test + build (what CI runs)
 ```
 
 ## Consumer setup
 
 ```bash
-pnpm add @pplethai/components react react-dom react-hook-form zod
+bun add @pplethai/components react react-dom react-hook-form zod
 ```
 
 ```tsx
@@ -32,17 +33,19 @@ import { Button, Card, cn } from "@pplethai/components";
 import { Form, FormTextField } from "@pplethai/components/form";
 ```
 
-### Tailwind preset
+### Tailwind CSS v4 theme
 
-```ts
-import type { Config } from "tailwindcss";
-import preset from "@pplethai/components/tailwind-preset";
-
-export default {
-  presets: [preset],
-  content: ["./src/**/*.{ts,tsx}", "./node_modules/@pplethai/components/dist/**/*.js"],
-} satisfies Config;
+```css
+/* your app's main stylesheet (Tailwind CSS v4) */
+@import "tailwindcss";
+@import "@pplethai/components/theme.css";
+@source "../node_modules/@pplethai/components/dist";
 ```
+
+`theme.css` carries the design tokens (colors, type scale, radius, animations, dark variant) and
+base styles. The `@source` path is relative to the stylesheet; point it at the installed package
+so Tailwind keeps the classes the components use. Tailwind CSS v3 and `tailwind-preset` are no
+longer supported (removed in 2.0.0).
 
 ### Fonts
 

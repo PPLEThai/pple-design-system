@@ -5,23 +5,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-pnpm install          # install all workspace dependencies
-pnpm dev              # build components then start docs site at http://localhost:5173
-pnpm build            # build @pplethai/components + docs
-pnpm test             # run Vitest in packages/components (jsdom, single run)
-pnpm lint             # ESLint across the whole monorepo
-pnpm typecheck        # tsc -b from root (covers all packages)
-pnpm changeset        # open Changesets CLI to record a user-facing change
+bun install           # install all workspace dependencies (Bun pinned in .bun-version)
+bun run dev           # build components then start docs site at http://localhost:5173
+bun run build         # build @pplethai/components + docs
+bun run test          # run Vitest in packages/components (jsdom, single run)
+bun run lint          # oxlint (type-aware + TypeScript diagnostics) across the repo
+bun run format        # oxfmt (also sorts Tailwind classes)
+bun run typecheck     # tsc -b from root (covers all packages)
+bun run check         # everything CI runs; must be green before a PR
+bun run changeset     # open Changesets CLI to record a user-facing change
 
 # scoped commands
-pnpm --filter @pplethai/components test:watch   # vitest in watch mode
-pnpm --filter @pplethai/components build        # tsup ESM+CJS + CSS
-pnpm --filter docs dev                          # docs Vite dev server only
+bun run --filter @pplethai/components test:watch   # vitest in watch mode
+bun run --filter @pplethai/components build        # tsdown ESM+CJS + CSS
+bun run --filter docs dev                          # docs Vite dev server only
 ```
 
 ## Architecture
 
-This is a **pnpm monorepo** with two workspaces:
+This is a **Bun workspace monorepo** with two workspaces:
 
 | Path | Package | Role |
 |---|---|---|
@@ -30,17 +32,17 @@ This is a **pnpm monorepo** with two workspaces:
 
 ### `packages/components`
 
-**Build** — `tsup` produces two entry points:
+**Build** — `tsdown` produces two entry points (`.d.ts` via the TypeScript 7 `tsgo` backend):
 - `dist/index.{js,cjs,d.ts}` — all UI and layout exports
 - `dist/form.{js,cjs,d.ts}` — react-hook-form integration (`Form*` components)
 
-CSS is built separately via `tailwindcss -i src/styles/globals.css -o dist/styles.css`.
+CSS is built separately via `tailwindcss -i src/styles/globals.css -o dist/styles.css` (Tailwind CSS v4).
 
 **Exports**
 - `@pplethai/components` → `src/index.ts` (Button, Card, Navbar, Icon, layout primitives, etc.)
 - `@pplethai/components/form` → `src/form/index.ts` (FormTextField, FormSelectField, FormCheckboxField + raw shadcn form primitives)
 - `@pplethai/components/styles.css` → compiled CSS consumers must import
-- `@pplethai/components/tailwind-preset` → `tailwind.preset.ts` (re-exports theme + plugins from `tailwind.config.ts`)
+- `@pplethai/components/theme.css` → `src/styles/theme.css` (Tailwind v4 `@theme` tokens + base styles for consumers)
 
 **Source layout**
 - `src/components/ui/` — shadcn/ui-based primitives (one file per component)
@@ -50,11 +52,12 @@ CSS is built separately via `tailwindcss -i src/styles/globals.css -o dist/style
 - `src/lib/utils.ts` — `cn()` (clsx + tailwind-merge)
 - `src/lib/variants.ts` — shared CVA variant sets (`gapVariants`, `containerVariants`)
 - `src/lib/gradients.ts` — gradient token map
-- `src/styles/globals.css` — CSS variables, dark mode, custom animations, Sonner overrides
+- `src/styles/theme.css` — Tailwind v4 theme: `@theme` tokens, CSS variables, dark mode, custom utilities/animations, Sonner overrides
+- `src/styles/globals.css` — entry for the standalone `dist/styles.css` (`@import "tailwindcss"` + `theme.css`)
 
-**Design tokens** — all colors are CSS custom properties (`--primary`, `--secondary`, etc.) defined in `globals.css`; never hardcode hex values in components. Dark mode is class-based (`darkMode: ["class"]`).
+**Design tokens** — all colors are CSS custom properties (`--primary`, `--secondary`, etc.) defined in `theme.css`; never hardcode hex values in components. Dark mode is class-based (`@custom-variant dark` in `theme.css`).
 
-**Typography** — headings use `font-heading` (Anakotmai from CDN), body uses `font-body` (IBM Plex Sans Thai Looped via `@fontsource`). Font size scale is multiplied by `1.2` in `tailwind.config.ts`.
+**Typography** — headings use `font-heading` (Anakotmai from CDN), body uses `font-body` (IBM Plex Sans Thai Looped via `@fontsource`). Font size scale is Tailwind's default multiplied by `1.2` (`--text-*` in `theme.css`).
 
 ### `apps/docs`
 
@@ -67,7 +70,8 @@ Vite + React Router v7 SPA. Imports `@pplethai/components` via `workspace:*` (us
 - Multi-part components use compound APIs (e.g. `Card.Header` pattern via named exports like `CardHeader`).
 - Icons: use `lucide-react` via the `Icon` wrapper or direct import.
 - Tests: Vitest + `@testing-library/react` with jsdom. Add smoke tests in `packages/components/src/`.
-- Run `pnpm changeset` for any user-facing change before opening a PR.
+- Prefer `gap-*` on flex/grid containers over `space-x/y-*`: Tailwind v4 moved `space-*` to margin-bottom, which inline children ignore.
+- Run `bun run changeset` for any user-facing change before opening a PR.
 
 ## Publishing & CI
 

@@ -18,7 +18,7 @@ export const BreadcrumbList = React.forwardRef<
   <ol
     ref={ref}
     className={cn(
-      "font-heading flex flex-wrap items-center gap-1.5 break-words text-sm font-medium text-muted-foreground sm:gap-2.5",
+      "flex flex-wrap items-center gap-1.5 font-heading text-sm font-medium wrap-break-word text-muted-foreground sm:gap-2.5",
       className,
     )}
     {...props}
@@ -73,7 +73,7 @@ export const BreadcrumbSeparator = ({
   <li
     role="presentation"
     aria-hidden="true"
-    className={cn("[&>svg]:w-3.5 [&>svg]:h-3.5", className)}
+    className={cn("[&>svg]:h-3.5 [&>svg]:w-3.5", className)}
     {...props}
   >
     {children ?? <ChevronRight />}

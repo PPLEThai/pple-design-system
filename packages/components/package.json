@@ -9,7 +9,7 @@
   },
   "files": [
     "dist",
-    "tailwind.preset.ts",
+    "src/styles",
     "README.md"
   ],
   "type": "module",
@@ -22,27 +22,38 @@
   "exports": {
     ".": {
       "development": "./src/index.ts",
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./form": {
       "development": "./src/form/index.ts",
-      "types": "./dist/form.d.ts",
-      "import": "./dist/form.js",
-      "require": "./dist/form.cjs"
+      "import": {
+        "types": "./dist/form.d.ts",
+        "default": "./dist/form.js"
+      },
+      "require": {
+        "types": "./dist/form.d.cts",
+        "default": "./dist/form.cjs"
+      }
     },
     "./styles.css": "./dist/styles.css",
-    "./tailwind-preset": "./tailwind.preset.ts"
+    "./theme.css": "./src/styles/theme.css",
+    "./package.json": "./package.json"
   },
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
   "scripts": {
-    "build": "tsup && pnpm build:css",
+    "build": "tsdown && bun run build:css",
     "build:css": "tailwindcss -i ./src/styles/globals.css -o ./dist/styles.css --minify",
-    "dev": "tsup --watch",
+    "dev": "tsdown --watch",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
@@ -71,23 +82,22 @@
     "lucide-react": "^0.469.0",
     "react-day-picker": "^10.0.1",
     "sonner": "^1.7.1",
-    "tailwind-merge": "^2.6.0"
+    "tailwind-merge": "^3.7.0",
+    "tw-animate-css": "^1.4.0"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "autoprefixer": "^10.4.20",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "jsdom": "^25.0.1",
-    "postcss": "^8.4.49",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "react-hook-form": "^7.54.2",
-    "tailwindcss": "^3.4.17",
-    "tailwindcss-animate": "^1.0.7",
-    "tsup": "^8.3.5",
-    "typescript": "^5.7.2",
+    "tailwindcss": "catalog:",
+    "tsdown": "0.23.4",
+    "typescript": "catalog:",
     "vitest": "^2.1.8",
     "zod": "^3.24.1"
   },
@@ -95,6 +105,12 @@
     "react": ">=18",
     "react-dom": ">=18",
     "react-hook-form": ">=7",
+    "tailwindcss": ">=4",
     "zod": ">=3"
+  },
+  "peerDependenciesMeta": {
+    "tailwindcss": {
+      "optional": true
+    }
   }
 }

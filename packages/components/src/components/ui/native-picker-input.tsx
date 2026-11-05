@@ -120,7 +120,7 @@ export function NativePickerInput({
           onPointerDown={handleClear}
           onClick={handleClear}
           aria-label="ล้างค่า"
-          className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="absolute top-1/2 right-2 z-10 -translate-y-1/2 rounded-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-hidden"
         >
           <X className="size-4" />
         </button>

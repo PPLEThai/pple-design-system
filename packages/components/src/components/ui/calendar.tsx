@@ -44,7 +44,8 @@ export function Calendar({
         years_dropdown: "",
         month_grid: "w-full border-collapse",
         weekdays: "flex",
-        weekday: "w-9 text-[0.8rem] font-normal text-muted-foreground",
+        // `p-px` keeps the 1px cell padding browsers gave <th> under Tailwind v3 preflight.
+        weekday: "w-9 p-px text-[0.8rem] font-normal text-muted-foreground",
         week: "mt-1 flex w-full",
         day: "relative size-9 p-0 text-center text-sm",
         day_button: cn(
@@ -52,11 +53,11 @@ export function Calendar({
           "size-9 rounded-md p-0 font-normal text-foreground",
         ),
         selected:
-          "[&>button]:bg-primary [&>button]:font-medium [&>button]:text-primary-foreground [&>button]:hover:bg-primary [&>button]:hover:text-primary-foreground",
+          "[&>button]:bg-primary [&>button]:font-medium [&>button]:text-primary-foreground hover:[&>button]:bg-primary hover:[&>button]:text-primary-foreground",
         range_start: "[&>button]:rounded-r-none",
         range_end: "[&>button]:rounded-l-none",
         range_middle:
-          "[&>button]:!rounded-none [&>button]:!bg-primary/10 [&>button]:!text-foreground [&>button]:hover:!bg-primary/20",
+          "[&>button]:rounded-none! [&>button]:bg-primary/10! [&>button]:text-foreground! hover:[&>button]:bg-primary/20!",
         today: "[&>button]:border [&>button]:border-primary/50",
         outside: "[&>button]:text-muted-foreground/40",
         disabled: "[&>button]:pointer-events-none [&>button]:text-muted-foreground/30",

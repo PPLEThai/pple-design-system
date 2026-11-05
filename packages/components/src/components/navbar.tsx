@@ -95,7 +95,7 @@ export interface NavbarProps extends React.HTMLAttributes<HTMLElement> {
 
 function homeLinkClassName(isLight: boolean) {
   return cn(
-    "inline-flex min-w-0 max-w-full items-center gap-1 rounded-md outline-none transition-opacity md:gap-2",
+    "inline-flex max-w-full min-w-0 items-center gap-1 rounded-md outline-hidden transition-opacity md:gap-2",
     "focus-visible:ring-2 focus-visible:ring-offset-2",
     isLight
       ? "text-foreground hover:opacity-80 focus-visible:ring-ring focus-visible:ring-offset-background"
@@ -222,7 +222,7 @@ export function Navbar({
           <button
             type="button"
             className={cn(
-              "inline-flex shrink-0 items-center justify-center rounded-md p-0 focus-visible:outline-none focus-visible:ring-2 md:hidden",
+              "inline-flex shrink-0 items-center justify-center rounded-md p-0 focus-visible:ring-2 focus-visible:outline-hidden md:hidden",
               isLight
                 ? "text-foreground hover:bg-muted focus-visible:ring-ring"
                 : "text-white hover:bg-white/10 focus-visible:ring-white/50",
@@ -255,13 +255,13 @@ export function Navbar({
         aria-label={navAriaLabel}
         aria-hidden={!menuOpen}
         className={cn(
-          "absolute left-0 right-0 top-full grid border-t shadow-lg transition-[grid-template-rows] duration-300 ease-in-out md:hidden",
+          "absolute top-full right-0 left-0 grid border-t shadow-lg transition-[grid-template-rows] duration-300 ease-in-out md:hidden",
           isLight ? "border-border bg-background" : "border-white/10 bg-gradient-secondary",
           menuOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
         )}
       >
         <div className="overflow-hidden">
-          <Container className="max-md:py-4 md:pb-4 md:pt-2">
+          <Container className="max-md:py-4 md:pt-2 md:pb-4">
             <Stack gap="xs">
               {children ? <div className={cn(!isLight && "dark")}>{children}</div> : null}
               {items.map((item) => (
