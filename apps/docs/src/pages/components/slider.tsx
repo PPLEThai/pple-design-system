@@ -14,16 +14,12 @@ export default function SliderPage() {
         <Stack gap="lg" className="max-w-md">
           <div>
             <Label>ค่าเดี่ยว — {single[0]}</Label>
-            <Slider
-              className="mt-3"
-              value={single}
-              onValueChange={setSingle}
-              max={100}
-              step={1}
-            />
+            <Slider className="mt-3" value={single} onValueChange={setSingle} max={100} step={1} />
           </div>
           <div>
-            <Label>ช่วง — {range[0]} ถึง {range[1]}</Label>
+            <Label>
+              ช่วง — {range[0]} ถึง {range[1]}
+            </Label>
             <Slider
               className="mt-3"
               value={range}
@@ -49,15 +45,32 @@ const [value, setValue] = useState([50]);
 const [range, setRange] = useState([20, 80]);
 <Slider value={range} onValueChange={setRange} max={100} step={5} />`}
       props={[
-        { prop: "value", type: "number[]", description: "ค่าที่เลือก (1 รายการสำหรับค่าเดี่ยว, 2 สำหรับช่วง)" },
+        {
+          prop: "value",
+          type: "number[]",
+          description: "ค่าที่เลือก (1 รายการสำหรับค่าเดี่ยว, 2 สำหรับช่วง)",
+        },
         { prop: "defaultValue", type: "number[]", description: "ค่าเริ่มต้น (uncontrolled)" },
-        { prop: "onValueChange", type: "(value: number[]) => void", description: "callback ทุกครั้งที่เลื่อน" },
-        { prop: "onValueCommit", type: "(value: number[]) => void", description: "callback เมื่อปล่อยเมาส์/คีย์" },
+        {
+          prop: "onValueChange",
+          type: "(value: number[]) => void",
+          description: "callback ทุกครั้งที่เลื่อน",
+        },
+        {
+          prop: "onValueCommit",
+          type: "(value: number[]) => void",
+          description: "callback เมื่อปล่อยเมาส์/คีย์",
+        },
         { prop: "min", type: "number", default: "0", description: "ค่าต่ำสุด" },
         { prop: "max", type: "number", default: "100", description: "ค่าสูงสุด" },
         { prop: "step", type: "number", default: "1", description: "ขนาดขั้นการเลื่อน" },
         { prop: "disabled", type: "boolean", default: "false", description: "ปิดการเลื่อน" },
-        { prop: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "ทิศทาง" },
+        {
+          prop: "orientation",
+          type: '"horizontal" | "vertical"',
+          default: '"horizontal"',
+          description: "ทิศทาง",
+        },
       ]}
       accessibility={
         <ul>

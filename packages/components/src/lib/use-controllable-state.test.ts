@@ -4,9 +4,7 @@ import { useControllableState } from "./use-controllable-state";
 
 describe("useControllableState", () => {
   it("manages its own state when used uncontrolled", () => {
-    const { result } = renderHook(() =>
-      useControllableState<number>(undefined, undefined),
-    );
+    const { result } = renderHook(() => useControllableState<number>(undefined, undefined));
 
     expect(result.current[0]).toBeUndefined();
     act(() => result.current[1](5));

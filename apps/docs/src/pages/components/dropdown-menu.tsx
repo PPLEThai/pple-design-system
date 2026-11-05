@@ -54,10 +54,7 @@ export default function DropdownMenuPage() {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuLabel>แสดงผล</DropdownMenuLabel>
-            <DropdownMenuCheckboxItem
-              checked={showStatusBar}
-              onCheckedChange={setShowStatusBar}
-            >
+            <DropdownMenuCheckboxItem checked={showStatusBar} onCheckedChange={setShowStatusBar}>
               Status Bar
             </DropdownMenuCheckboxItem>
             <DropdownMenuCheckboxItem
@@ -101,18 +98,47 @@ export default function DropdownMenuPage() {
   </DropdownMenuContent>
 </DropdownMenu>`}
       props={[
-        { prop: "open / defaultOpen / onOpenChange", type: "Radix DropdownMenu API", description: "จัดการสถานะ" },
-        { prop: "modal", type: "boolean", default: "true", description: "บล็อก interaction นอกเมนูเมื่อเปิด" },
+        {
+          prop: "open / defaultOpen / onOpenChange",
+          type: "Radix DropdownMenu API",
+          description: "จัดการสถานะ",
+        },
+        {
+          prop: "modal",
+          type: "boolean",
+          default: "true",
+          description: "บล็อก interaction นอกเมนูเมื่อเปิด",
+        },
       ]}
       extraPropTables={[
         {
           title: "Item variants",
           rows: [
-            { prop: "DropdownMenuItem", type: "button-like", description: "รายการคำสั่งธรรมดา รับ onSelect" },
-            { prop: "DropdownMenuCheckboxItem", type: "with checked", description: "รับ checked + onCheckedChange" },
-            { prop: "DropdownMenuRadioItem", type: "in RadioGroup", description: "ต้องอยู่ใน DropdownMenuRadioGroup" },
-            { prop: "DropdownMenuSub*", type: "sub-menu", description: "Sub + SubTrigger + SubContent สำหรับเมนูซ้อน" },
-            { prop: "DropdownMenuShortcut", type: "span", description: "แสดง keyboard shortcut ทางขวา" },
+            {
+              prop: "DropdownMenuItem",
+              type: "button-like",
+              description: "รายการคำสั่งธรรมดา รับ onSelect",
+            },
+            {
+              prop: "DropdownMenuCheckboxItem",
+              type: "with checked",
+              description: "รับ checked + onCheckedChange",
+            },
+            {
+              prop: "DropdownMenuRadioItem",
+              type: "in RadioGroup",
+              description: "ต้องอยู่ใน DropdownMenuRadioGroup",
+            },
+            {
+              prop: "DropdownMenuSub*",
+              type: "sub-menu",
+              description: "Sub + SubTrigger + SubContent สำหรับเมนูซ้อน",
+            },
+            {
+              prop: "DropdownMenuShortcut",
+              type: "span",
+              description: "แสดง keyboard shortcut ทางขวา",
+            },
           ],
         },
       ]}

@@ -8,11 +8,7 @@ export const Slider = React.forwardRef<
 >(({ className, defaultValue, value, ...props }, ref) => {
   const thumbCount = React.useMemo(
     () =>
-      Array.isArray(value)
-        ? value.length
-        : Array.isArray(defaultValue)
-          ? defaultValue.length
-          : 1,
+      Array.isArray(value) ? value.length : Array.isArray(defaultValue) ? defaultValue.length : 1,
     [value, defaultValue],
   );
 

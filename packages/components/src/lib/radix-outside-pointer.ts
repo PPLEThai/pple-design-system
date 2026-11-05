@@ -34,9 +34,7 @@ export function isListboxTarget(target: EventTarget | null): boolean {
  */
 export function shouldPreventPopoverDismiss(target: EventTarget | null): boolean {
   return (
-    isComboboxTriggerTarget(target) ||
-    isPopoverAnchorTarget(target) ||
-    isListboxTarget(target)
+    isComboboxTriggerTarget(target) || isPopoverAnchorTarget(target) || isListboxTarget(target)
   );
 }
 

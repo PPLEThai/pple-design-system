@@ -113,8 +113,7 @@ export default function SpinnerPage() {
         {
           prop: "value",
           type: "number | null",
-          description:
-            "ค่าความคืบหน้า (0..max); ไม่กำหนดจะเป็น indeterminate หมุนวนต่อเนื่อง",
+          description: "ค่าความคืบหน้า (0..max); ไม่กำหนดจะเป็น indeterminate หมุนวนต่อเนื่อง",
         },
         {
           prop: "max",
@@ -156,8 +155,7 @@ export default function SpinnerPage() {
             เมื่อเป็น determinate จะมี <code>aria-valuemin/max/now</code> ครบ
           </li>
           <li>
-            ใช้ <code>label</code> อธิบายสิ่งที่กำลังโหลด เช่น{" "}
-            <code>&quot;กำลังโหลดรายการ&quot;</code>
+            ใช้ <code>label</code> อธิบายสิ่งที่กำลังโหลด เช่น <code>&quot;กำลังโหลดรายการ&quot;</code>
           </li>
         </ul>
       }

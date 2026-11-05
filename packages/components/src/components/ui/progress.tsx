@@ -6,8 +6,7 @@ export const Progress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>
 >(({ className, value, max = 100, ...props }, ref) => {
-  const isActive =
-    value == null || (typeof value === "number" && value < max);
+  const isActive = value == null || (typeof value === "number" && value < max);
 
   return (
     <ProgressPrimitive.Root
@@ -20,15 +19,11 @@ export const Progress = React.forwardRef<
       <ProgressPrimitive.Indicator
         className="h-full overflow-hidden transition-[width] duration-300 ease-out"
         style={{
-          width:
-            value != null ? `${(value / max) * 100}%` : "40%",
+          width: value != null ? `${(value / max) * 100}%` : "40%",
         }}
       >
         <div
-          className={cn(
-            "h-full w-full",
-            isActive ? "progress-shimmer" : "bg-gradient-primary",
-          )}
+          className={cn("h-full w-full", isActive ? "progress-shimmer" : "bg-gradient-primary")}
         />
       </ProgressPrimitive.Indicator>
     </ProgressPrimitive.Root>

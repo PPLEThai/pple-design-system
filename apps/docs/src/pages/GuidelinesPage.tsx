@@ -28,8 +28,7 @@ const conventions = [
     title: "Compound API แบบ flat export",
     body: (
       <>
-        คอมโพเนนต์หลายส่วน export เป็นชื่อแยก เช่น{" "}
-        <code className="rounded bg-muted px-1">Card</code>,{" "}
+        คอมโพเนนต์หลายส่วน export เป็นชื่อแยก เช่น <code className="rounded bg-muted px-1">Card</code>,{" "}
         <code className="rounded bg-muted px-1">CardHeader</code>,{" "}
         <code className="rounded bg-muted px-1">CardTitle</code> — ไม่ใช้ dot notation (
         <code className="rounded bg-muted px-1">Card.Header</code>)
@@ -40,10 +39,10 @@ const conventions = [
     title: "รูปแบบ asChild",
     body: (
       <>
-        ปุ่มและ Trigger ที่รองรับ Radix Slot ใช้{" "}
-        <code className="rounded bg-muted px-1">asChild</code> เพื่อห่อ router link (
-        <code className="rounded bg-muted px-1">NavLink</code>, <code className="rounded bg-muted px-1">Link</code>)
-        แทนการใช้ <code className="rounded bg-muted px-1">&lt;button&gt;</code> ดิบ
+        ปุ่มและ Trigger ที่รองรับ Radix Slot ใช้ <code className="rounded bg-muted px-1">asChild</code>{" "}
+        เพื่อห่อ router link (<code className="rounded bg-muted px-1">NavLink</code>,{" "}
+        <code className="rounded bg-muted px-1">Link</code>) แทนการใช้{" "}
+        <code className="rounded bg-muted px-1">&lt;button&gt;</code> ดิบ
       </>
     ),
   },
@@ -53,7 +52,8 @@ const conventions = [
       <>
         อย่า hardcode สี hex — ใช้คลาสเช่น <code className="rounded bg-muted px-1">bg-primary</code>,{" "}
         <code className="rounded bg-muted px-1">text-muted-foreground</code> ที่อ้างอิงตัวแปร{" "}
-        <code className="rounded bg-muted px-1">--primary</code>, <code className="rounded bg-muted px-1">--secondary</code> ฯลฯ
+        <code className="rounded bg-muted px-1">--primary</code>,{" "}
+        <code className="rounded bg-muted px-1">--secondary</code> ฯลฯ
       </>
     ),
   },
@@ -70,7 +70,8 @@ const conventions = [
     title: "โหมดมืด",
     body: (
       <>
-        ใช้ class บน root: <code className="rounded bg-muted px-1">&lt;html className=&quot;dark&quot;&gt;</code> —
+        ใช้ class บน root:{" "}
+        <code className="rounded bg-muted px-1">&lt;html className=&quot;dark&quot;&gt;</code> —
         โทเคนทุกตัวมีค่าในโหมดมืดใน <code className="rounded bg-muted px-1">styles.css</code>
       </>
     ),
@@ -79,8 +80,8 @@ const conventions = [
     title: "ภาษาไทย",
     body: (
       <>
-        ตั้ง <code className="rounded bg-muted px-1">lang=&quot;th&quot;</code> ที่ root ของเอกสาร
-        ใช้ <code className="rounded bg-muted px-1">font-heading</code> สำหรับหัวข้อ และ{" "}
+        ตั้ง <code className="rounded bg-muted px-1">lang=&quot;th&quot;</code> ที่ root ของเอกสาร ใช้{" "}
+        <code className="rounded bg-muted px-1">font-heading</code> สำหรับหัวข้อ และ{" "}
         <code className="rounded bg-muted px-1">font-body</code> สำหรับเนื้อหา (type scale 1.2×)
       </>
     ),
@@ -90,7 +91,7 @@ const conventions = [
 const antiPatterns = [
   {
     title: "อย่า hardcode สีแบรนด์เป็น hex",
-    example: 'bg-[#FF6A13]',
+    example: "bg-[#FF6A13]",
     fix: "bg-primary",
   },
   {
@@ -135,7 +136,7 @@ const antiPatterns = [
   },
   {
     title: "อย่าใช้ Label ทั้ง htmlFor และ child input",
-    example: "<Label htmlFor=\"x\"><Input id=\"x\" /></Label>",
+    example: '<Label htmlFor="x"><Input id="x" /></Label>',
     fix: "เลือกอย่างใดอย่างหนึ่ง — htmlFor + id หรือห่อ input เป็น child",
   },
   {
@@ -150,11 +151,7 @@ const antiPatterns = [
   },
 ];
 
-function GuidelineList({
-  items,
-}: {
-  items: { title: string; body: ReactNode }[];
-}) {
+function GuidelineList({ items }: { items: { title: string; body: ReactNode }[] }) {
   return (
     <ol className="list-decimal space-y-4 pl-5 text-sm">
       {items.map((item) => (
@@ -209,8 +206,8 @@ export function GuidelinesPage() {
       <section>
         <h2 className="mb-2 font-heading text-xl font-medium">ลำดับความสำคัญของปุ่ม</h2>
         <p className="text-sm text-muted-foreground">
-          ควรมีปุ่ม primary เพียงหนึ่งปุ่มต่อหน้า ใช้ secondary หรือ outline สำหรับทางเลือกอื่น
-          ใช้ destructive เฉพาะการกระทำที่ย้อนกลับไม่ได้
+          ควรมีปุ่ม primary เพียงหนึ่งปุ่มต่อหน้า ใช้ secondary หรือ outline สำหรับทางเลือกอื่น ใช้ destructive
+          เฉพาะการกระทำที่ย้อนกลับไม่ได้
         </p>
       </section>
 

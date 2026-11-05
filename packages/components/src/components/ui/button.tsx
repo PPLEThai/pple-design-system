@@ -10,10 +10,7 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: cn(
-          "bg-gradient-primary-button text-primary-foreground shadow-md",
-          gradientButton,
-        ),
+        default: cn("bg-gradient-primary-button text-primary-foreground shadow-md", gradientButton),
         destructive: cn(
           "bg-gradient-destructive text-destructive-foreground shadow-md",
           gradientButton,
@@ -52,8 +49,7 @@ export const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 

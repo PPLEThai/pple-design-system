@@ -75,19 +75,44 @@ const [value, setValue] = useState("");
         },
       ]}
       props={[
-        { prop: "options", type: "AutocompleteOption[]", required: true, description: "รายการตัวเลือก" },
-        { prop: "value", type: "string | string[]", required: true, description: "ค่าที่เลือก (string เมื่อ multiple=false)" },
-        { prop: "onValueChange", type: "(value: string | string[]) => void", required: true, description: "callback ตาม multiple" },
+        {
+          prop: "options",
+          type: "AutocompleteOption[]",
+          required: true,
+          description: "รายการตัวเลือก",
+        },
+        {
+          prop: "value",
+          type: "string | string[]",
+          required: true,
+          description: "ค่าที่เลือก (string เมื่อ multiple=false)",
+        },
+        {
+          prop: "onValueChange",
+          type: "(value: string | string[]) => void",
+          required: true,
+          description: "callback ตาม multiple",
+        },
         { prop: "multiple", type: "boolean", default: "false", description: "เปิดโหมดเลือกหลายค่า" },
         { prop: "placeholder", type: "string", description: "ข้อความเมื่อยังไม่เลือก" },
-        { prop: "searchPlaceholder", type: "string", default: '"พิมพ์เพื่อค้นหา..."', description: "placeholder ของช่องค้นหา" },
-        { prop: "emptyMessage", type: "string", default: '"ไม่พบรายการ"', description: "ข้อความเมื่อไม่พบผลลัพธ์" },
+        {
+          prop: "searchPlaceholder",
+          type: "string",
+          default: '"พิมพ์เพื่อค้นหา..."',
+          description: "placeholder ของช่องค้นหา",
+        },
+        {
+          prop: "emptyMessage",
+          type: "string",
+          default: '"ไม่พบรายการ"',
+          description: "ข้อความเมื่อไม่พบผลลัพธ์",
+        },
         { prop: "disabled", type: "boolean", default: "false", description: "ปิดการใช้งาน" },
       ]}
       notes={
         <p>
-          เมื่อ <code>multiple=false</code>: ช่อง input คือทั้งช่องค้นหาและที่แสดงค่าที่เลือก
-          เมื่อ <code>multiple=true</code>: แสดงเป็นปุ่ม chips ค้นหาใน popover แยก
+          เมื่อ <code>multiple=false</code>: ช่อง input คือทั้งช่องค้นหาและที่แสดงค่าที่เลือก เมื่อ{" "}
+          <code>multiple=true</code>: แสดงเป็นปุ่ม chips ค้นหาใน popover แยก
         </p>
       }
     />

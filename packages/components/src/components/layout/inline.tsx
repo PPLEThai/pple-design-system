@@ -25,7 +25,8 @@ const inlineVariants = cva("flex flex-row flex-wrap", {
 });
 
 export interface InlineProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof inlineVariants>,
     VariantProps<typeof gapVariants> {
   as?: React.ElementType;

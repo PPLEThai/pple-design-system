@@ -31,7 +31,8 @@ export default function TabsPage() {
       examples={[
         {
           title: "แคบแล้วขึ้นบรรทัดใหม่",
-          description: "เมื่อความกว้างของ container น้อยกว่าความกว้างรวมของแท็บ TabsList จะห่อ (wrap) ให้อัตโนมัติ",
+          description:
+            "เมื่อความกว้างของ container น้อยกว่าความกว้างรวมของแท็บ TabsList จะห่อ (wrap) ให้อัตโนมัติ",
           demo: (
             <div className="w-48 resize-x overflow-auto">
               <Tabs defaultValue="account">
@@ -75,7 +76,12 @@ export default function TabsPage() {
         {
           title: "TabsTrigger props",
           rows: [
-            { prop: "value", type: "string", required: true, description: "ต้องตรงกับ TabsContent value" },
+            {
+              prop: "value",
+              type: "string",
+              required: true,
+              description: "ต้องตรงกับ TabsContent value",
+            },
             { prop: "disabled", type: "boolean", default: "false", description: "ปิดการสลับ" },
           ],
         },

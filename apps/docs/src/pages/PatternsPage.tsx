@@ -45,9 +45,7 @@ function PatternSection({ title, description, preview, code }: PatternSectionPro
 
 function PreviewFrame({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn("overflow-hidden rounded-md border bg-muted/30", className)}>
-      {children}
-    </div>
+    <div className={cn("overflow-hidden rounded-md border bg-muted/30", className)}>{children}</div>
   );
 }
 
@@ -57,8 +55,8 @@ export function PatternsPage() {
       <header>
         <h1 className="font-heading text-3xl font-medium">แพทเทิร์น</h1>
         <p className="mt-2 text-muted-foreground">
-          ตัวอย่างเลย์เอาต์ที่ประกอบจาก Stack / Inline / Container และคอมโพเนนต์อื่น ๆ
-          — คัดลอกแล้วปรับใช้ในแอปได้ทันที
+          ตัวอย่างเลย์เอาต์ที่ประกอบจาก Stack / Inline / Container และคอมโพเนนต์อื่น ๆ —
+          คัดลอกแล้วปรับใช้ในแอปได้ทันที
         </p>
       </header>
 
@@ -88,9 +86,7 @@ export function PatternsPage() {
                 <Stack gap="lg">
                   <div>
                     <h3 className="font-heading text-lg font-medium">โปรไฟล์</h3>
-                    <p className="text-sm text-muted-foreground">
-                      จัดการข้อมูลที่แสดงต่อสาธารณะ
-                    </p>
+                    <p className="text-sm text-muted-foreground">จัดการข้อมูลที่แสดงต่อสาธารณะ</p>
                   </div>
                   <Stack gap="md" className="max-w-sm">
                     <div>
@@ -185,9 +181,7 @@ export function PatternsPage() {
             <Stack gap="md" className="max-w-md">
               <div>
                 <h3 className="font-heading text-base font-medium">ตั้งค่าการแจ้งเตือน</h3>
-                <p className="text-sm text-muted-foreground">
-                  เลือกช่องทางที่ต้องการรับการแจ้งเตือน
-                </p>
+                <p className="text-sm text-muted-foreground">เลือกช่องทางที่ต้องการรับการแจ้งเตือน</p>
               </div>
               <Stack gap="sm">
                 <Inline gap="sm">
@@ -241,9 +235,7 @@ export function PatternsPage() {
                       <User className="h-4 w-4" />
                       <p className="font-medium">โปรไฟล์สาธารณะ</p>
                     </Inline>
-                    <p className="text-sm text-muted-foreground">
-                      ให้คนอื่นค้นหาคุณด้วยชื่อหรืออีเมล
-                    </p>
+                    <p className="text-sm text-muted-foreground">ให้คนอื่นค้นหาคุณด้วยชื่อหรืออีเมล</p>
                   </Stack>
                   <Switch defaultChecked />
                 </Inline>
@@ -254,9 +246,7 @@ export function PatternsPage() {
                       <Activity className="h-4 w-4" />
                       <p className="font-medium">บันทึกการใช้งาน</p>
                     </Inline>
-                    <p className="text-sm text-muted-foreground">
-                      เก็บประวัติการเข้าระบบ 90 วัน
-                    </p>
+                    <p className="text-sm text-muted-foreground">เก็บประวัติการเข้าระบบ 90 วัน</p>
                   </Stack>
                   <Switch />
                 </Inline>

@@ -10,12 +10,7 @@ export default function TextareaPage() {
         <Stack gap="md" className="max-w-md">
           <div>
             <Label htmlFor="demo-bio">เกี่ยวกับคุณ</Label>
-            <Textarea
-              id="demo-bio"
-              className="mt-1"
-              rows={4}
-              placeholder="แนะนำตัวสั้นๆ"
-            />
+            <Textarea id="demo-bio" className="mt-1" rows={4} placeholder="แนะนำตัวสั้นๆ" />
           </div>
         </Stack>
       }

@@ -34,10 +34,7 @@ interface DatePickerBaseProps {
    */
   native?: boolean;
   /** Extra props forwarded to the underlying {@link Calendar}. */
-  calendarProps?: Omit<
-    CalendarProps,
-    "mode" | "selected" | "onSelect" | "locale" | "defaultMonth"
-  >;
+  calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect" | "locale" | "defaultMonth">;
 }
 
 export interface DatePickerSingleProps extends DatePickerBaseProps {

@@ -46,11 +46,7 @@ const [month, setMonth] = useState<Date>();
           title: "MonthCalendar แบบฝังในหน้า",
           description: "ใช้ตารางเดือนโดยตรงเมื่อไม่ต้องการ trigger/ป๊อปโอเวอร์",
           demo: (
-            <MonthCalendar
-              value={inline}
-              onValueChange={setInline}
-              className="rounded-md border"
-            />
+            <MonthCalendar value={inline} onValueChange={setInline} className="rounded-md border" />
           ),
           code: `import { MonthCalendar } from "@pplethai/components";
 

@@ -1,13 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { Button } from "./components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "./components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -257,9 +251,7 @@ describe("@pplethai/components", () => {
 
   it("renders DateTimePicker trigger combining date and time", () => {
     render(<DateTimePicker value={new Date(2026, 0, 9, 14, 5)} dateFormat="yyyy-MM-dd" />);
-    expect(
-      screen.getByRole("button", { name: /2026-01-09 เวลา 14:05 น\./ }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /2026-01-09 เวลา 14:05 น\./ })).toBeInTheDocument();
   });
 
   it("renders native inputs when native is forced", () => {
@@ -274,9 +266,7 @@ describe("@pplethai/components", () => {
     expect(container.querySelector('input[type="date"]')).toHaveValue("2026-01-09");
     expect(container.querySelector('input[type="month"]')).toHaveValue("2026-06");
     expect(container.querySelector('input[type="time"]')).toHaveValue("09:30");
-    expect(container.querySelector('input[type="datetime-local"]')).toHaveValue(
-      "2026-01-09T14:05",
-    );
+    expect(container.querySelector('input[type="datetime-local"]')).toHaveValue("2026-01-09T14:05");
     // The visible value is the Thai-formatted label, not the OS-locale native value.
     expect(container.textContent).toContain("9 ม.ค. 2026");
     expect(container.textContent).toContain("มิถุนายน 2026");

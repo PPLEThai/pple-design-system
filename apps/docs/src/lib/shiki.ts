@@ -9,7 +9,15 @@ import themeGithubLight from "@shikijs/themes/github-light";
 import { createHighlighterCore, type HighlighterCore } from "shiki/core";
 import { createOnigurumaEngine } from "shiki/engine/oniguruma";
 
-const langs = [langTsx, langTypescript, langJavascript, langBash, langJson, langCss, langHtml] as const;
+const langs = [
+  langTsx,
+  langTypescript,
+  langJavascript,
+  langBash,
+  langJson,
+  langCss,
+  langHtml,
+] as const;
 
 const supportedLanguages = new Set([
   "tsx",

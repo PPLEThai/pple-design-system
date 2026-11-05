@@ -39,8 +39,7 @@ export function Calendar({
         caption_label: "font-heading text-sm font-medium",
         dropdowns: "flex items-center gap-2",
         dropdown_root: "relative",
-        dropdown:
-          "absolute inset-0 z-20 cursor-pointer appearance-none opacity-0",
+        dropdown: "absolute inset-0 z-20 cursor-pointer appearance-none opacity-0",
         months_dropdown: "",
         years_dropdown: "",
         month_grid: "w-full border-collapse",

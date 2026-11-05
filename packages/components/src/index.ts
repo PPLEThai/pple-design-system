@@ -83,10 +83,7 @@ export {
   type TimePickerProps,
   type TimeScrollerProps,
 } from "./components/ui/time-picker";
-export {
-  DateTimePicker,
-  type DateTimePickerProps,
-} from "./components/ui/date-time-picker";
+export { DateTimePicker, type DateTimePickerProps } from "./components/ui/date-time-picker";
 export {
   NativePickerInput,
   type NativePickerInputProps,

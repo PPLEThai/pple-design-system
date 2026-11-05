@@ -28,7 +28,7 @@ const [time, setTime] = useState<Date>();
       examples={[
         {
           title: "แสดงวินาที (HH:MM:SS)",
-          description: 'ตั้ง showSeconds เพื่อเพิ่มช่องเลือกวินาที',
+          description: "ตั้ง showSeconds เพื่อเพิ่มช่องเลือกวินาที",
           demo: (
             <Stack gap="md" className="max-w-sm">
               <TimePicker showSeconds value={withSeconds} onValueChange={setWithSeconds} />

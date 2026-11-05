@@ -35,7 +35,9 @@ export default function SkeletonPage() {
         },
       ]}
       notes={
-        <p>ตั้งขนาดและ shape ผ่าน <code>className</code> เพื่อให้ตรงกับ layout จริงของ content</p>
+        <p>
+          ตั้งขนาดและ shape ผ่าน <code>className</code> เพื่อให้ตรงกับ layout จริงของ content
+        </p>
       }
     />
   );

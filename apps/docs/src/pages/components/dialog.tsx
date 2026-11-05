@@ -74,8 +74,17 @@ export default function DialogPage() {
       props={[
         { prop: "open", type: "boolean", description: "controlled state" },
         { prop: "defaultOpen", type: "boolean", description: "uncontrolled initial state" },
-        { prop: "onOpenChange", type: "(open: boolean) => void", description: "callback เมื่อเปิด/ปิด" },
-        { prop: "modal", type: "boolean", default: "true", description: "บล็อก interaction นอก dialog เมื่อ true" },
+        {
+          prop: "onOpenChange",
+          type: "(open: boolean) => void",
+          description: "callback เมื่อเปิด/ปิด",
+        },
+        {
+          prop: "modal",
+          type: "boolean",
+          default: "true",
+          description: "บล็อก interaction นอก dialog เมื่อ true",
+        },
       ]}
       examples={[
         {
@@ -134,9 +143,21 @@ export default function DialogPage() {
         {
           title: "Sub-components",
           rows: [
-            { prop: "DialogTrigger", type: "Slot/button", description: "ใช้ asChild เพื่อให้ปุ่มเป็น trigger" },
-            { prop: "DialogContent", type: "Radix Content", description: "เนื้อหา dialog (จัดกลาง + max-h viewport + overflow-y-auto)" },
-            { prop: "DialogHeader / DialogFooter", type: "div", description: "wrapper สำหรับ layout ส่วนหัว/ท้าย" },
+            {
+              prop: "DialogTrigger",
+              type: "Slot/button",
+              description: "ใช้ asChild เพื่อให้ปุ่มเป็น trigger",
+            },
+            {
+              prop: "DialogContent",
+              type: "Radix Content",
+              description: "เนื้อหา dialog (จัดกลาง + max-h viewport + overflow-y-auto)",
+            },
+            {
+              prop: "DialogHeader / DialogFooter",
+              type: "div",
+              description: "wrapper สำหรับ layout ส่วนหัว/ท้าย",
+            },
             { prop: "DialogTitle", type: "h2", description: "หัวข้อ (required สำหรับ a11y)" },
             { prop: "DialogDescription", type: "p", description: "คำอธิบายใต้หัวข้อ" },
             { prop: "DialogClose", type: "Slot/button", description: "ปุ่มสำหรับปิด dialog" },
@@ -147,7 +168,9 @@ export default function DialogPage() {
         <ul>
           <li>Esc เพื่อปิด; โฟกัสติดอยู่ภายใน dialog (focus trap)</li>
           <li>คลิก overlay หรือปุ่ม X (มุมขวาบน) เพื่อปิด</li>
-          <li>ต้องมี <code>DialogTitle</code> เสมอ — Radix จะเตือนใน console ถ้าไม่มี</li>
+          <li>
+            ต้องมี <code>DialogTitle</code> เสมอ — Radix จะเตือนใน console ถ้าไม่มี
+          </li>
         </ul>
       }
       notes={

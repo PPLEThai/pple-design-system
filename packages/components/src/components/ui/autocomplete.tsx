@@ -149,10 +149,7 @@ export function Autocomplete(props: AutocompleteProps) {
   return (
     <Popover open={open} onOpenChange={setOpen} modal={false}>
       <PopoverAnchor asChild>
-        <div
-          {...{ [POPOVER_ANCHOR_ATTR]: "" }}
-          className={cn("relative w-full", className)}
-        >
+        <div {...{ [POPOVER_ANCHOR_ATTR]: "" }} className={cn("relative w-full", className)}>
           <Input
             id={id}
             role="combobox"

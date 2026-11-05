@@ -17,7 +17,8 @@ const spinnerVariants = cva("inline-block shrink-0 text-primary", {
 });
 
 export interface SpinnerProps
-  extends Omit<React.HTMLAttributes<HTMLSpanElement>, "role">,
+  extends
+    Omit<React.HTMLAttributes<HTMLSpanElement>, "role">,
     VariantProps<typeof spinnerVariants> {
   /** Current progress (0..max). Omit for an indeterminate spinning loop. */
   value?: number | null;
@@ -33,18 +34,7 @@ const VIEWBOX = 24;
 const CENTER = VIEWBOX / 2;
 
 export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
-  (
-    {
-      className,
-      size,
-      value,
-      max = 100,
-      strokeWidth = 2.5,
-      label = "Loading",
-      ...props
-    },
-    ref,
-  ) => {
+  ({ className, size, value, max = 100, strokeWidth = 2.5, label = "Loading", ...props }, ref) => {
     const isDeterminate = typeof value === "number";
     const radius = CENTER - strokeWidth / 2;
     const circumference = 2 * Math.PI * radius;
@@ -81,23 +71,14 @@ export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
           className={cn("h-full w-full", !isDeterminate && "animate-spin")}
           aria-hidden="true"
         >
-          <circle
-            cx={CENTER}
-            cy={CENTER}
-            r={radius}
-            className="opacity-20"
-          />
+          <circle cx={CENTER} cy={CENTER} r={radius} className="opacity-20" />
           <circle
             cx={CENTER}
             cy={CENTER}
             r={radius}
             strokeDasharray={arcDash}
             transform={`rotate(-90 ${CENTER} ${CENTER})`}
-            style={
-              isDeterminate
-                ? { transition: "stroke-dasharray 300ms ease-out" }
-                : undefined
-            }
+            style={isDeterminate ? { transition: "stroke-dasharray 300ms ease-out" } : undefined}
           />
         </svg>
       </span>

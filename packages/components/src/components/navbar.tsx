@@ -23,9 +23,7 @@ export function getNavbarVariant(options?: {
   if (options?.variant !== undefined) {
     return options.variant;
   }
-  const ua =
-    options?.userAgent ??
-    (typeof navigator !== "undefined" ? navigator.userAgent : "");
+  const ua = options?.userAgent ?? (typeof navigator !== "undefined" ? navigator.userAgent : "");
   return isInMiniAppUserAgent(ua) ? "light" : "dark";
 }
 
@@ -134,7 +132,11 @@ export function Navbar({
 
   const closeMenu = () => setMenuOpen(false);
 
-  const defaultRenderLink = ({ item, className: linkClassName, onNavigate }: NavbarLinkRenderProps) => {
+  const defaultRenderLink = ({
+    item,
+    className: linkClassName,
+    onNavigate,
+  }: NavbarLinkRenderProps) => {
     const active = isNavbarItemActive(item, pathname);
     return (
       <a
@@ -150,7 +152,8 @@ export function Navbar({
 
   const linkRenderer = renderLink ?? defaultRenderLink;
 
-  const resolvedHome: NavbarHome | false = homeProp === false ? false : (homeProp ?? { href: "/", end: true });
+  const resolvedHome: NavbarHome | false =
+    homeProp === false ? false : (homeProp ?? { href: "/", end: true });
 
   const brand = (
     <>
@@ -213,9 +216,7 @@ export function Navbar({
       )}
       {...props}
     >
-      <Container
-        className={isLight ? "max-md:py-2 md:py-4" : "max-md:py-4 md:py-6"}
-      >
+      <Container className={isLight ? "max-md:py-2 md:py-4" : "max-md:py-4 md:py-6"}>
         <Inline justify="between" align="center" className="w-full">
           {brandBlock}
           <button
@@ -245,9 +246,7 @@ export function Navbar({
                 ))}
               </Inline>
             </nav>
-            {children ? (
-              <div className={cn("contents", !isLight && "dark")}>{children}</div>
-            ) : null}
+            {children ? <div className={cn("contents", !isLight && "dark")}>{children}</div> : null}
           </Inline>
         </Inline>
       </Container>
@@ -257,18 +256,14 @@ export function Navbar({
         aria-hidden={!menuOpen}
         className={cn(
           "absolute left-0 right-0 top-full grid border-t shadow-lg transition-[grid-template-rows] duration-300 ease-in-out md:hidden",
-          isLight
-            ? "border-border bg-background"
-            : "border-white/10 bg-gradient-secondary",
+          isLight ? "border-border bg-background" : "border-white/10 bg-gradient-secondary",
           menuOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
         )}
       >
         <div className="overflow-hidden">
           <Container className="max-md:py-4 md:pb-4 md:pt-2">
             <Stack gap="xs">
-              {children ? (
-                <div className={cn(!isLight && "dark")}>{children}</div>
-              ) : null}
+              {children ? <div className={cn(!isLight && "dark")}>{children}</div> : null}
               {items.map((item) => (
                 <React.Fragment key={item.href}>{renderNavItem(item, true)}</React.Fragment>
               ))}

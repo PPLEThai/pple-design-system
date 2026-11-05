@@ -62,7 +62,12 @@ export const AccordionContent = React.forwardRef<
     className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
     {...props}
   >
-    <div className={cn("border-t border-border bg-muted/30 px-4 pb-4 pt-3 text-muted-foreground", className)}>
+    <div
+      className={cn(
+        "border-t border-border bg-muted/30 px-4 pb-4 pt-3 text-muted-foreground",
+        className,
+      )}
+    >
       {children}
     </div>
   </AccordionPrimitive.Content>

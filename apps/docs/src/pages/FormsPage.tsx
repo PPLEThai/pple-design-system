@@ -38,8 +38,7 @@ export function FormsPage() {
       <div>
         <h1 className="text-3xl font-semibold">ฟอร์ม</h1>
         <p className="mt-2 text-muted-foreground">
-          ชุดฟอร์มจาก{" "}
-          <code className="rounded bg-muted px-1">@pplethai/components/form</code> ใช้ร่วมกับ
+          ชุดฟอร์มจาก <code className="rounded bg-muted px-1">@pplethai/components/form</code> ใช้ร่วมกับ
           react-hook-form และ zod — มี FormTextField, FormSelectField, FormCheckboxField
         </p>
       </div>
@@ -56,12 +55,7 @@ export function FormsPage() {
               })}
               className="space-y-4"
             >
-              <FormTextField
-                control={form.control}
-                name="name"
-                label="ชื่อ"
-                placeholder="ชื่อของคุณ"
-              />
+              <FormTextField control={form.control} name="name" label="ชื่อ" placeholder="ชื่อของคุณ" />
               <FormTextField
                 control={form.control}
                 name="email"

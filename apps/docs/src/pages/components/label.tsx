@@ -32,7 +32,9 @@ export default function LabelPage() {
       ]}
       accessibility={
         <ul>
-          <li>ใช้ <code>htmlFor</code> หรือซ้อนฟิลด์ไว้ข้างใน เพื่อให้คลิก label โฟกัสได้</li>
+          <li>
+            ใช้ <code>htmlFor</code> หรือซ้อนฟิลด์ไว้ข้างใน เพื่อให้คลิก label โฟกัสได้
+          </li>
           <li>เมื่อฟิลด์ peer disabled ตัว label จะลด opacity อัตโนมัติ</li>
         </ul>
       }

@@ -37,9 +37,7 @@ export function ComponentPage({
     <Stack gap="lg" className="max-w-4xl">
       <header>
         <h1 className="font-heading text-3xl font-medium">{title}</h1>
-        {description ? (
-          <div className="mt-2 text-muted-foreground">{description}</div>
-        ) : null}
+        {description ? <div className="mt-2 text-muted-foreground">{description}</div> : null}
       </header>
 
       <section>

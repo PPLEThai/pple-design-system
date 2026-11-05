@@ -45,8 +45,8 @@ export function TokensPage() {
               เนื้อหา — IBM Plex Sans Thai Looped 400 (~19px, text-base)
             </p>
             <p className="text-base">
-              เนื้อหาภาษาไทยใช้ line-height 1.65 เพื่อความอ่านง่าย ขนาด body ~19px และ ~14px สำหรับ
-              caption (type scale 1.2×)
+              เนื้อหาภาษาไทยใช้ line-height 1.65 เพื่อความอ่านง่าย ขนาด body ~19px และ ~14px สำหรับ caption
+              (type scale 1.2×)
             </p>
           </div>
           <div>
