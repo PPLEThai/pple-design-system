@@ -36,7 +36,9 @@ This is a **Bun workspace monorepo** with two workspaces:
 - `dist/index.{js,cjs,d.ts}` — all UI and layout exports
 - `dist/form.{js,cjs,d.ts}` — react-hook-form integration (`Form*` components)
 
-CSS is built separately via `tailwindcss -i src/styles/globals.css -o dist/styles.css` (Tailwind CSS v4).
+CSS is built separately via `tailwindcss -i src/styles/globals.css -o dist/styles.css` (Tailwind CSS v4), then
+`scripts/flatten-css-layers-cli.ts` removes the `@layer` blocks so `dist/styles.css` keeps the 1.x cascade: app CSS
+outside any layer must not override component utilities. `theme.css` keeps its layers (Tailwind v4 apps own the cascade).
 
 **Exports**
 - `@pplethai/components` → `src/index.ts` (Button, Card, Navbar, Icon, layout primitives, etc.)

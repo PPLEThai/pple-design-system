@@ -13,6 +13,10 @@ import "@pplethai/components/styles.css";
 import { Button, Logo, Navbar, Stack, cn, buttonVariants } from "@pplethai/components";
 ```
 
+`styles.css` has no cascade layers, the same as 1.x, so an app's own CSS keeps the precedence it had
+before 2.0. Apps on Tailwind CSS v4 import `theme.css` below instead; loading `styles.css` beside an
+app's own Tailwind v4 build lets its unlayered base styles override the app's layered utilities.
+
 ## Tailwind CSS v4
 
 ```css

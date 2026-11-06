@@ -76,6 +76,7 @@
         "@types/react": "catalog:",
         "@types/react-dom": "catalog:",
         "jsdom": "^25.0.1",
+        "postcss": "8.5.32",
         "react": "catalog:",
         "react-dom": "catalog:",
         "react-hook-form": "^7.54.2",
