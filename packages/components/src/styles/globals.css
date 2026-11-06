@@ -1,3 +1,7 @@
-/* Standalone stylesheet shipped as dist/styles.css (Tailwind compiled in). */
+/*
+ * Standalone stylesheet shipped as dist/styles.css (Tailwind compiled in). The build removes the
+ * cascade layers afterwards (scripts/flatten-css-layers-cli.ts), so the output ranks rules by
+ * specificity like 1.x did.
+ */
 @import "tailwindcss" source("../");
 @import "./theme.css";
