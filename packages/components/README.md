@@ -31,6 +31,11 @@ base styles. The `@source` path is relative to the stylesheet; point it at the i
 so Tailwind keeps the classes the components use. Tailwind CSS v3 and `tailwind-preset` are no
 longer supported (removed in 2.0.0).
 
+## Browser support
+
+Safari 16.4+ (iOS 16.4+), Chrome 111+, Firefox 128+: the Tailwind CSS v4 baseline. Older browsers,
+including iOS 15 WebViews, are not supported from 2.0.0.
+
 ## Form kit
 
 ```tsx

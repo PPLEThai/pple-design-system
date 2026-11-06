@@ -18,6 +18,7 @@
   "type": "module",
   "scripts": {
     "preinstall": "node scripts/check-toolchain.ts",
+    "check:manifest": "node scripts/check-publish-manifest.ts",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt",
@@ -26,7 +27,7 @@
     "test": "bun run --filter @pplethai/components test",
     "build": "bun run --filter @pplethai/components build && bun run --filter docs build",
     "dev": "bun run --filter @pplethai/components build && bun run --filter docs dev",
-    "check": "oxfmt --check && oxlint && tsc -b && bun run test && bun run build",
+    "check": "node scripts/check-publish-manifest.ts && oxfmt --check && oxlint && tsc -b && bun run test && bun run build",
     "changeset": "changeset",
     "ci:publish": "bun run --filter @pplethai/components build && changeset publish",
     "version-packages": "changeset version && bun install"

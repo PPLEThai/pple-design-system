@@ -63,7 +63,7 @@ outside any layer must not override component utilities. `theme.css` keeps its l
 
 ### `apps/docs`
 
-Vite + React Router v7 SPA. Imports `@pplethai/components` via `workspace:*` (uses the `development` export condition pointing directly at `src/index.ts`, so no rebuild needed during docs dev). Each page in `src/pages/` demonstrates one component category.
+Vite + React Router v7 SPA. Imports `@pplethai/components` via `workspace:*` (uses the custom `@pplethai/source` export condition pointing directly at `src/index.ts`, so no rebuild needed during docs dev; a custom name, because bundlers turn on `development` in consumer apps, where `src/` is not published). Each page in `src/pages/` demonstrates one component category.
 
 ## Conventions
 
