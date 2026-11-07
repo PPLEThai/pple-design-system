@@ -1,5 +1,37 @@
 # @pplethai/components
 
+## 2.0.0
+
+### Major Changes
+
+- 50ae088: Move to Tailwind CSS v4, React 19.3, and a Bun + oxc toolchain.
+
+  **Breaking:** `@pplethai/components/tailwind-preset` is removed; Tailwind CSS v3 is no longer supported.
+  Tailwind v4 apps import the theme instead:
+
+  ```css
+  @import "tailwindcss";
+  @import "@pplethai/components/theme.css";
+  @source "../node_modules/@pplethai/components/dist";
+  ```
+
+  Apps that only import `@pplethai/components/styles.css` need no change: the build removes Tailwind v4's
+  cascade layers from it, so app CSS beside it keeps the precedence it had in 1.x. Tailwind v4 apps import
+  `theme.css` instead of `styles.css`.
+
+  **Breaking:** browser support follows the Tailwind v4 baseline: Safari 16.4+ (iOS 16.4+), Chrome 111+,
+  Firefox 128+.
+
+  **Fix:** the `development` export condition is renamed to `@pplethai/source`. It pointed at `src/`, which
+  is not published, so bundlers that enable `development` in dev mode (Vite, webpack, Next.js) failed to
+  resolve the package. Apps can drop the aliases they added to work around it.
+
+  Component APIs and exports are unchanged, and the docs site renders the same as 1.4.3.
+
+### Patch Changes
+
+- 291f7f5: Cap `DialogContent` to the viewport (`max-h-[calc(100dvh-2rem)]`) and enable `overflow-y-auto` so tall dialogs can scroll instead of clipping.
+
 ## 1.4.3
 
 ### Patch Changes
@@ -40,6 +72,7 @@
 ### Minor Changes
 
 - 925464e: Add date and month picker components:
+
   - `Calendar` — day-grid calendar built on react-day-picker (v10), styled with design tokens and defaulting to the Thai locale. Supports `single`, `multiple`, and `range` modes.
   - `DatePicker` — trigger + popover date picker with `single` and `range` modes, controlled/uncontrolled value, configurable `dateFormat`, and pass-through `calendarProps`.
   - `MonthCalendar` / `MonthPicker` — inline month-grid primitive and a trigger + popover convenience for selecting a month and year, with `minDate`/`maxDate` support.
@@ -61,6 +94,7 @@
 ### Patch Changes
 
 - 12015f6: Fix `Button` rendering:
+
   - `variant="outline"`: border and text now use the foreground token in dark mode so the button is visible on dark navy surfaces (previously navy-on-navy).
   - `variant="ghost"`: hover background and text now use the foreground token in dark mode so hover stays legible against the dark surface (previously navy text blended into the dark background).
   - Gradient hover animation (`.gradient-hover-animate`): overshoot `background-position` by 1px on both rest (`-1px center`) and hover end (`calc(100% + 1px) center`) so the 200% gradient image extends past the container edges throughout the animation. Eliminates a subpixel sliver where the surface beneath would bleed through (showed up as a stray white edge on destructive buttons and a white outline on the right of outline buttons).
